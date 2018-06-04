@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, PureComponent } from "react";
+import React, { Component, PureComponent } from 'react';
 
 // keyCode constants
 const BACKSPACE = 8;
@@ -7,7 +7,8 @@ const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
 
 type Props = {
-  numberOfInputs: number
+  numberOfInputs: number,
+  onChange: Function,
 };
 
 class SingleOtpInput extends PureComponent {
@@ -28,7 +29,7 @@ class SingleOtpInput extends PureComponent {
     return (
       <div>
         <input
-          style={{ width: "1em" }}
+          style={{ width: '1em' }}
           type="tel"
           maxLength="1"
           ref={input => {
@@ -42,12 +43,15 @@ class SingleOtpInput extends PureComponent {
 }
 
 class OtpInput extends Component<Props> {
+  // TODO: onChange function should return number
   static defaultProps = {
-    numberOfInputs: 4
+    numberOfInputs: 4,
+    onChange: (otp: number): void => console.log(otp),
   };
 
   state = {
-    activeInput: 0
+    activeInput: 0,
+    code: [],
   };
 
   focusInput = (input: number) => {
@@ -55,7 +59,7 @@ class OtpInput extends Component<Props> {
     const activeInput = Math.max(Math.min(numberOfInputs - 1, input), 0);
 
     this.setState({
-      activeInput
+      activeInput,
     });
   };
 
@@ -69,15 +73,38 @@ class OtpInput extends Component<Props> {
     this.focusInput(activeInput - 1);
   };
 
-  handleOnChange = (e: Object) => {
+  changeCode = (i: number, value: number) => {
+    const { code } = this.state;
+    code[i] = value;
+
+    this.setState({
+      code,
+    });
+    this.props.onChange(code);
+  };
+
+  handleOnChange = (i: number, e: object) => {
+    this.changeCode(i, e.target.value);
     this.focusNextInput();
   };
 
-  handleOnKeyDown = (e: Object) => {
+  handleOnPaste = (e: Object) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text/plain');
+    const code = pastedData.slice(0, 4).split('');
+
+    this.setState({
+      code,
+    });
+    this.props.onChange(code);
+  };
+
+  // TODO: delete key
+  handleOnKeyDown = (i: number, e: Object) => {
     switch (e.keyCode) {
       case BACKSPACE:
         e.preventDefault();
-        e.target.value = "";
+        this.changeCode(i, '');
         this.focusPrevInput();
         break;
       case LEFT_ARROW:
@@ -94,7 +121,7 @@ class OtpInput extends Component<Props> {
   };
 
   renderInputs = () => {
-    const { activeInput } = this.state;
+    const { activeInput, code } = this.state;
     const { numberOfInputs } = this.props;
     const inputs = [];
 
@@ -103,11 +130,13 @@ class OtpInput extends Component<Props> {
         <SingleOtpInput
           key={i}
           focus={activeInput === i}
-          onChange={this.handleOnChange}
-          onKeyDown={this.handleOnKeyDown}
+          value={code && code[i]}
+          onChange={this.handleOnChange.bind(null, i)}
+          onKeyDown={this.handleOnKeyDown.bind(null, i)}
+          onPaste={this.handleOnPaste}
           onFocus={e => {
             this.setState({
-              activeInput: i
+              activeInput: i,
             });
             e.target.select();
           }}
@@ -119,7 +148,7 @@ class OtpInput extends Component<Props> {
   };
 
   render() {
-    return <div style={{ display: "flex" }}>{this.renderInputs()}</div>;
+    return <div style={{ display: 'flex' }}>{this.renderInputs()}</div>;
   }
 }
 
