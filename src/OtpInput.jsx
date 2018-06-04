@@ -1,12 +1,36 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 
 type Props = {
   numberOfInputs: number
 }
 
-const SingleOtpInput = (props: Object) => {
-  return <input style={{ width: '1em' }} type="tel" maxLength="1" {...props}/>
+class SingleOtpInput extends PureComponent {
+  componentDidMount() {
+    if(this.props.focus) {
+      this.input.focus();
+    }
+  }
+
+  componentDidUpdate() {
+    if(this.props.focus) {
+      this.input.focus();
+      this.input.select();
+    }
+  }
+  render() {
+    return (
+      <div>
+        <input
+          style={{ width: '1em' }}
+          type="tel"
+          maxLength="1"
+          ref={input => {this.input = input}}
+          {...this.props}
+        />
+      </div>
+    );
+  }  
 }
 
 class OtpInput extends Component<Props> {
@@ -18,9 +42,13 @@ class OtpInput extends Component<Props> {
     activeInput: 0,
   };
 
+  componentDidUpdate() {
+    console.log(this.state.activeInput);
+  }
+
   focusInput = (input: number) => {
     const { numberOfInputs } = this.props;
-    const activeInput = Math.max(Math.min(numberOfInputs, input),0);
+    const activeInput = Math.max(Math.min(numberOfInputs-1 , input),0);
 
     this.setState({
       activeInput
@@ -46,10 +74,7 @@ class OtpInput extends Component<Props> {
       inputs.push(
         <SingleOtpInput 
           key={i} 
-          ref={input => {
-            if (activeInput === i)
-              input && input.focus();
-          }}
+          focus={activeInput === i}
           onChange={this.handleOnChange}
           onFocus={e => {
             this.setState({
@@ -66,7 +91,7 @@ class OtpInput extends Component<Props> {
 
   render() {
     return (
-      <div>{this.renderInputs()}</div>
+      <div style={{ display: 'flex' }}>{this.renderInputs()}</div>
     );
   }
 }
