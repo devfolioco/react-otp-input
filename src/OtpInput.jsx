@@ -1,13 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 type Props = {
   numberOfInputs: number
 }
 
 const SingleOtpInput = (props: Object) => {
-  return <Input type="tel" maxLength="1" {...props}/>
+  return <input style={{ width: '1em' }} type="tel" maxLength="1" {...props}/>
 }
 
 class OtpInput extends Component<Props> {
@@ -47,7 +46,7 @@ class OtpInput extends Component<Props> {
       inputs.push(
         <SingleOtpInput 
           key={i} 
-          innerRef={input => {
+          ref={input => {
             if (activeInput === i)
               input && input.focus();
           }}
@@ -71,9 +70,5 @@ class OtpInput extends Component<Props> {
     );
   }
 }
-
-const Input = styled.input`
-  width: 1em;
-`;
  
 export default OtpInput;
