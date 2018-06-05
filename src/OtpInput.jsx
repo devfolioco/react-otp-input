@@ -12,16 +12,21 @@ type Props = {
 };
 
 class SingleOtpInput extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.input = React.createRef();
+  }
+
   componentDidMount() {
     if (this.props.focus) {
-      this.input.focus();
+      this.input.current.focus();
     }
   }
 
   componentDidUpdate() {
     if (this.props.focus) {
-      this.input.focus();
-      this.input.select();
+      this.input.current.focus();
+      this.input.current.select();
     }
   }
 
@@ -32,9 +37,7 @@ class SingleOtpInput extends PureComponent {
           style={{ width: '1em' }}
           type="tel"
           maxLength="1"
-          ref={input => {
-            this.input = input;
-          }}
+          ref={this.input}
           {...this.props}
         />
       </div>
@@ -42,7 +45,7 @@ class SingleOtpInput extends PureComponent {
   }
 }
 
-class OtpInput extends Component<Props> {
+class OtpInput extends Component<Props, State> {
   // TODO: onChange function should return number
   static defaultProps = {
     numInputs: 4,
@@ -82,7 +85,7 @@ class OtpInput extends Component<Props> {
   };
 
   // Change OTP value
-  changeCodeAtIndex = (i: number, value: number) => {
+  changeCodeAtIndex = (i: number, value: string) => {
     const { otp } = this.state;
     otp[i] = value;
 
@@ -117,7 +120,7 @@ class OtpInput extends Component<Props> {
     this.returnOtp();
   };
 
-  handleOnChange = (i: number, e: object) => {
+  handleOnChange = (i: number, e: Object) => {
     this.changeCodeAtIndex(i, e.target.value);
     this.focusNextInput();
   };
