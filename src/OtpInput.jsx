@@ -54,6 +54,11 @@ class OtpInput extends Component<Props> {
     otp: [],
   };
 
+  // Helper to return OTP from input
+  returnOtp = () => {
+    this.props.onChange(this.state.otp.join(''));
+  };
+
   // Focus on input by index
   focusInput = (input: number) => {
     const { numInputs } = this.props;
@@ -84,19 +89,32 @@ class OtpInput extends Component<Props> {
     this.setState({
       otp,
     });
-    this.props.onChange(otp);
+    this.returnOtp();
   };
 
   // Handle pasted OTP
-  handleOnPaste = (e: Object) => {
+  handleOnPaste = (i: number, e: Object) => {
     e.preventDefault();
-    const pastedData = e.clipboardData.getData('text/plain');
-    const otp = pastedData.slice(0, 4).split('');
+    const { numInputs } = this.props;
+    const { otp } = this.state;
+    // Get pastedData in an array of max size (num of inputs - current position)
+    const pastedData = e.clipboardData
+      .getData('text/plain')
+      .slice(0, numInputs - i)
+      .split('');
+
+    // Paste data from focused input onwards
+    for (let j = 0; j < numInputs; ++j) {
+      if (j >= i && pastedData.length > 0) {
+        otp[j] = pastedData.shift();
+      }
+    }
 
     this.setState({
       otp,
     });
-    this.props.onChange(otp);
+
+    this.returnOtp();
   };
 
   handleOnChange = (i: number, e: object) => {
@@ -138,7 +156,7 @@ class OtpInput extends Component<Props> {
           value={otp && otp[i]}
           onChange={this.handleOnChange.bind(null, i)}
           onKeyDown={this.handleOnKeyDown.bind(null, i)}
-          onPaste={this.handleOnPaste}
+          onPaste={this.handleOnPaste.bind(null, i)}
           onFocus={e => {
             this.setState({
               activeInput: i,
