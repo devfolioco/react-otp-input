@@ -7,7 +7,7 @@ const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
 
 type Props = {
-  numberOfInputs: number,
+  numInputs: number,
   onChange: Function,
 };
 
@@ -45,58 +45,63 @@ class SingleOtpInput extends PureComponent {
 class OtpInput extends Component<Props> {
   // TODO: onChange function should return number
   static defaultProps = {
-    numberOfInputs: 4,
+    numInputs: 4,
     onChange: (otp: number): void => console.log(otp),
   };
 
   state = {
     activeInput: 0,
-    code: [],
+    otp: [],
   };
 
+  // Focus on input by index
   focusInput = (input: number) => {
-    const { numberOfInputs } = this.props;
-    const activeInput = Math.max(Math.min(numberOfInputs - 1, input), 0);
+    const { numInputs } = this.props;
+    const activeInput = Math.max(Math.min(numInputs - 1, input), 0);
 
     this.setState({
       activeInput,
     });
   };
 
+  // Focus on next input
   focusNextInput = () => {
     const { activeInput } = this.state;
     this.focusInput(activeInput + 1);
   };
 
+  // Focus on previous input
   focusPrevInput = () => {
     const { activeInput } = this.state;
     this.focusInput(activeInput - 1);
   };
 
-  changeCode = (i: number, value: number) => {
-    const { code } = this.state;
-    code[i] = value;
+  // Change OTP value
+  changeCodeAtIndex = (i: number, value: number) => {
+    const { otp } = this.state;
+    otp[i] = value;
 
     this.setState({
-      code,
+      otp,
     });
-    this.props.onChange(code);
+    this.props.onChange(otp);
   };
 
-  handleOnChange = (i: number, e: object) => {
-    this.changeCode(i, e.target.value);
-    this.focusNextInput();
-  };
-
+  // Handle pasted OTP
   handleOnPaste = (e: Object) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData('text/plain');
-    const code = pastedData.slice(0, 4).split('');
+    const otp = pastedData.slice(0, 4).split('');
 
     this.setState({
-      code,
+      otp,
     });
-    this.props.onChange(code);
+    this.props.onChange(otp);
+  };
+
+  handleOnChange = (i: number, e: object) => {
+    this.changeCodeAtIndex(i, e.target.value);
+    this.focusNextInput();
   };
 
   // TODO: delete key
@@ -104,7 +109,7 @@ class OtpInput extends Component<Props> {
     switch (e.keyCode) {
       case BACKSPACE:
         e.preventDefault();
-        this.changeCode(i, '');
+        this.changeCodeAtIndex(i, '');
         this.focusPrevInput();
         break;
       case LEFT_ARROW:
@@ -121,16 +126,16 @@ class OtpInput extends Component<Props> {
   };
 
   renderInputs = () => {
-    const { activeInput, code } = this.state;
-    const { numberOfInputs } = this.props;
+    const { activeInput, otp } = this.state;
+    const { numInputs } = this.props;
     const inputs = [];
 
-    for (let i = 0; i < numberOfInputs; i++) {
+    for (let i = 0; i < numInputs; i++) {
       inputs.push(
         <SingleOtpInput
           key={i}
           focus={activeInput === i}
-          value={code && code[i]}
+          value={otp && otp[i]}
           onChange={this.handleOnChange.bind(null, i)}
           onKeyDown={this.handleOnKeyDown.bind(null, i)}
           onPaste={this.handleOnPaste}
