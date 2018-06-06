@@ -9,24 +9,40 @@ const RIGHT_ARROW = 39;
 type Props = {
   numInputs: number,
   onChange: Function,
+  separator?: boolean,
+  separatorStyle?: Object,
+  containerStyle?: Object,
+  inputStyle?: Object,
 };
 
-class SingleOtpInput extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.input = React.createRef();
-  }
+type State = {
+  activeInput: number,
+  otp: string[],
+};
+
+class SingleOtpInput extends PureComponent<*> {
+  input: ?HTMLInputElement;
 
   componentDidMount() {
-    if (this.props.focus) {
-      this.input.current.focus();
+    const {
+      input,
+      props: { focus },
+    } = this;
+
+    if (input && focus) {
+      input.focus();
     }
   }
 
   componentDidUpdate() {
-    if (this.props.focus) {
-      this.input.current.focus();
-      this.input.current.select();
+    const {
+      input,
+      props: { focus },
+    } = this;
+
+    if (input && focus) {
+      input.focus();
+      input.select();
     }
   }
 
@@ -45,7 +61,9 @@ class SingleOtpInput extends PureComponent {
           style={{ width: '1em', ...inputStyle }}
           type="tel"
           maxLength="1"
-          ref={this.input}
+          ref={input => {
+            this.input = input;
+          }}
           {...rest}
         />
         {!isLastChild && (separator && <div style={separatorStyle}>-</div>)}

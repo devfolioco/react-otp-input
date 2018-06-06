@@ -11,7 +11,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "flow check && react-scripts start"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^2.6.0",
