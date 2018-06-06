@@ -31,10 +31,16 @@ class SingleOtpInput extends PureComponent {
   }
 
   render() {
-    const { inputStyle, ...rest } = this.props;
+    const {
+      separator,
+      separatorStyle,
+      isLastChild,
+      inputStyle,
+      ...rest
+    } = this.props;
 
     return (
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <input
           style={{ width: '1em', ...inputStyle }}
           type="tel"
@@ -42,6 +48,7 @@ class SingleOtpInput extends PureComponent {
           ref={this.input}
           {...rest}
         />
+        {!isLastChild && (separator && <div style={separatorStyle}>-</div>)}
       </div>
     );
   }
@@ -149,7 +156,7 @@ class OtpInput extends Component<Props, State> {
 
   renderInputs = () => {
     const { activeInput, otp } = this.state;
-    const { numInputs, inputStyle } = this.props;
+    const { numInputs, inputStyle, separator, separatorStyle } = this.props;
     const inputs = [];
 
     for (let i = 0; i < numInputs; i++) {
@@ -167,7 +174,10 @@ class OtpInput extends Component<Props, State> {
             });
             e.target.select();
           }}
+          separator={separator}
+          separatorStyle={separatorStyle}
           inputStyle={inputStyle}
+          isLastChild={i === numInputs - 1}
         />
       );
     }

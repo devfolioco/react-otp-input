@@ -23,6 +23,9 @@ class App extends Component {
             margin: '1em',
             padding: 16,
           }}
+          numInputs={6}
+          separator
+          separatorStyle={{ fontWeight: 'bold' }}
         />
       </div>
     );
