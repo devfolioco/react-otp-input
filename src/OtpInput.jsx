@@ -31,14 +31,16 @@ class SingleOtpInput extends PureComponent {
   }
 
   render() {
+    const { inputStyle, ...rest } = this.props;
+
     return (
       <div>
         <input
-          style={{ width: '1em' }}
+          style={{ width: '1em', ...inputStyle }}
           type="tel"
           maxLength="1"
           ref={this.input}
-          {...this.props}
+          {...rest}
         />
       </div>
     );
@@ -46,7 +48,6 @@ class SingleOtpInput extends PureComponent {
 }
 
 class OtpInput extends Component<Props, State> {
-  // TODO: onChange function should return number
   static defaultProps = {
     numInputs: 4,
     onChange: (otp: number): void => console.log(otp),
@@ -148,7 +149,7 @@ class OtpInput extends Component<Props, State> {
 
   renderInputs = () => {
     const { activeInput, otp } = this.state;
-    const { numInputs } = this.props;
+    const { numInputs, inputStyle } = this.props;
     const inputs = [];
 
     for (let i = 0; i < numInputs; i++) {
@@ -166,6 +167,7 @@ class OtpInput extends Component<Props, State> {
             });
             e.target.select();
           }}
+          inputStyle={inputStyle}
         />
       );
     }
@@ -174,7 +176,13 @@ class OtpInput extends Component<Props, State> {
   };
 
   render() {
-    return <div style={{ display: 'flex' }}>{this.renderInputs()}</div>;
+    const { containerStyle } = this.props;
+
+    return (
+      <div style={{ display: 'flex', ...containerStyle }}>
+        {this.renderInputs()}
+      </div>
+    );
   }
 }
 
