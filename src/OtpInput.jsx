@@ -5,6 +5,7 @@ import React, { Component, PureComponent } from 'react';
 const BACKSPACE = 8;
 const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
+const DELETE = 46;
 
 type Props = {
   numInputs: number,
@@ -145,13 +146,16 @@ class OtpInput extends Component<Props, State> {
     this.focusNextInput();
   };
 
-  // TODO: delete key
   handleOnKeyDown = (e: Object) => {
     switch (e.keyCode) {
       case BACKSPACE:
         e.preventDefault();
         this.changeCodeAtFocus('');
         this.focusPrevInput();
+        break;
+      case DELETE:
+        e.preventDefault();
+        this.changeCodeAtFocus('');
         break;
       case LEFT_ARROW:
         e.preventDefault();
