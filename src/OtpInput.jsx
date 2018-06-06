@@ -9,8 +9,7 @@ const RIGHT_ARROW = 39;
 type Props = {
   numInputs: number,
   onChange: Function,
-  separator?: boolean,
-  separatorStyle?: Object,
+  separator?: Object,
   containerStyle?: Object,
   inputStyle?: Object,
 };
@@ -47,13 +46,7 @@ class SingleOtpInput extends PureComponent<*> {
   }
 
   render() {
-    const {
-      separator,
-      separatorStyle,
-      isLastChild,
-      inputStyle,
-      ...rest
-    } = this.props;
+    const { separator, isLastChild, inputStyle, ...rest } = this.props;
 
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -66,7 +59,7 @@ class SingleOtpInput extends PureComponent<*> {
           }}
           {...rest}
         />
-        {!isLastChild && (separator && <div style={separatorStyle}>-</div>)}
+        {!isLastChild && separator}
       </div>
     );
   }
@@ -84,7 +77,7 @@ class OtpInput extends Component<Props, State> {
   };
 
   // Helper to return OTP from input
-  returnOtp = () => {
+  getOtp = () => {
     this.props.onChange(this.state.otp.join(''));
   };
 
@@ -110,32 +103,33 @@ class OtpInput extends Component<Props, State> {
     this.focusInput(activeInput - 1);
   };
 
-  // Change OTP value
-  changeCodeAtIndex = (i: number, value: string) => {
-    const { otp } = this.state;
-    otp[i] = value;
+  // Change OTP value at focused input
+  changeCodeAtFocus = (value: string) => {
+    const { activeInput, otp } = this.state;
+    otp[activeInput] = value;
 
     this.setState({
       otp,
     });
-    this.returnOtp();
+    this.getOtp();
   };
 
   // Handle pasted OTP
-  handleOnPaste = (i: number, e: Object) => {
+  handleOnPaste = (e: Object) => {
     e.preventDefault();
     const { numInputs } = this.props;
-    const { otp } = this.state;
+    const { activeInput, otp } = this.state;
+
     // Get pastedData in an array of max size (num of inputs - current position)
     const pastedData = e.clipboardData
       .getData('text/plain')
-      .slice(0, numInputs - i)
+      .slice(0, numInputs - activeInput)
       .split('');
 
     // Paste data from focused input onwards
-    for (let j = 0; j < numInputs; ++j) {
-      if (j >= i && pastedData.length > 0) {
-        otp[j] = pastedData.shift();
+    for (let pos = 0; pos < numInputs; ++pos) {
+      if (pos >= activeInput && pastedData.length > 0) {
+        otp[pos] = pastedData.shift();
       }
     }
 
@@ -143,20 +137,20 @@ class OtpInput extends Component<Props, State> {
       otp,
     });
 
-    this.returnOtp();
+    this.getOtp();
   };
 
-  handleOnChange = (i: number, e: Object) => {
-    this.changeCodeAtIndex(i, e.target.value);
+  handleOnChange = (e: Object) => {
+    this.changeCodeAtFocus(e.target.value);
     this.focusNextInput();
   };
 
   // TODO: delete key
-  handleOnKeyDown = (i: number, e: Object) => {
+  handleOnKeyDown = (e: Object) => {
     switch (e.keyCode) {
       case BACKSPACE:
         e.preventDefault();
-        this.changeCodeAtIndex(i, '');
+        this.changeCodeAtFocus('');
         this.focusPrevInput();
         break;
       case LEFT_ARROW:
@@ -174,7 +168,7 @@ class OtpInput extends Component<Props, State> {
 
   renderInputs = () => {
     const { activeInput, otp } = this.state;
-    const { numInputs, inputStyle, separator, separatorStyle } = this.props;
+    const { numInputs, inputStyle, separator } = this.props;
     const inputs = [];
 
     for (let i = 0; i < numInputs; i++) {
@@ -183,9 +177,9 @@ class OtpInput extends Component<Props, State> {
           key={i}
           focus={activeInput === i}
           value={otp && otp[i]}
-          onChange={this.handleOnChange.bind(null, i)}
-          onKeyDown={this.handleOnKeyDown.bind(null, i)}
-          onPaste={this.handleOnPaste.bind(null, i)}
+          onChange={this.handleOnChange}
+          onKeyDown={this.handleOnKeyDown}
+          onPaste={this.handleOnPaste}
           onFocus={e => {
             this.setState({
               activeInput: i,
@@ -193,7 +187,6 @@ class OtpInput extends Component<Props, State> {
             e.target.select();
           }}
           separator={separator}
-          separatorStyle={separatorStyle}
           inputStyle={inputStyle}
           isLastChild={i === numInputs - 1}
         />

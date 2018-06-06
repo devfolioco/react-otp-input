@@ -20,11 +20,10 @@ class App extends Component {
             fontSize: 24,
             color: 'black',
             border: '1px solid grey',
-            margin: '1em',
             padding: 16,
           }}
           numInputs={6}
-          separator
+          separator={<span style={{ margin: '1em' }}>-</span>}
           separatorStyle={{ fontWeight: 'bold' }}
         />
       </div>
