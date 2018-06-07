@@ -1,9 +1,33 @@
 # react-otp-input
 
-A fully customizable, one-time password input component for the web.
+A fully customizable, one-time password input component for the web built with React.
 
-<!-- TODO: Installation-->
-<!-- TODO: Basic Usage -->
+## Installation
+
+To install the latest stable version:
+```
+npm install --save react-otp-input
+```
+
+Basic usage:
+```javascript
+import React, { Component } from 'react';
+import OtpInput from 'react-otp-input';
+
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <OtpInputs 
+          onChange={otp => console.log(otp)}
+          numInputs={6}
+          separator={<span>-<span>}
+        />
+      </div>
+    )
+  }
+}
+```
 
 ## API
 
@@ -52,6 +76,16 @@ A fully customizable, one-time password input component for the web.
   </tr>
 </table>                         
 
-<!-- TODO: Checklist -->
-<!-- TODO: Contributions -->
-<!-- TODO: License -->
+## Checklist
+
+- [ ] Add styling support for states including focus/disabled
+- [ ] Travis CI, Codecov
+- [ ] Write tests
+
+## Contributing
+
+Feel free to open issues and pull requests!
+
+## License
+
+MIT
