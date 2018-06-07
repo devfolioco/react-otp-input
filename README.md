@@ -74,10 +74,30 @@ export default class App extends Component {
     <td>none</td>
     <td>Style applied to each input.</td>
   </tr>
-</table>                         
+</table>
+
+## Development
+
+To run the development server: 
+```
+npm run dev
+```
+
+To run the development server for example:
+```
+npm run docs
+```  
+
+To make a production build of the example:
+```
+npm run docs:prod
+```
+              
 
 ## Checklist
 
+- [ ] Add flowtypes
+- [ ] Add ESLint, Prettier for code quality
 - [ ] Add styling support for states including focus/disabled
 - [ ] Travis CI, Codecov
 - [ ] Write tests
