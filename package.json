@@ -11,7 +11,9 @@
     "demo:prod": "webpack --mode production",
     "format": "prettier --write '**/*.{js,jsx}'",
     "lint": "eslint '**/*.{js,jsx}' --quiet",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "predeploy": "npm run demo:prod",
+    "deploy": "gh-pages -d demo"
   },
   "keywords": [],
   "peerDependencies": {
@@ -38,6 +40,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.9.1",
     "flow-bin": "^0.73.0",
+    "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "prettier": "^1.13.4",
     "react": "^16.4.0",
@@ -49,12 +52,12 @@
   },
   "author": "Ajay NS <ajay.ns@outlook.com>",
   "license": "MIT",
+  "homepage": "https://ajayns.github.io/react-otp-input",
   "repository": {
     "type": "git",
     "url": "git@github.com:ajayns/react-otp-input.git"
   },
   "bugs": {
     "url": "https://github.com/ajayns/react-otp-input/issues"
-  },
-  "homepage": "https://github.com/ajayns/react-otp-input#readme"
+  }
 }

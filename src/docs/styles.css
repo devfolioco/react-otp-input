@@ -88,6 +88,12 @@ a {
   padding: 0.5rem 1rem;
   color: white;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: default;
 }
 
 .margin-top--small {

@@ -9,7 +9,7 @@ class Demo extends Component {
     this.state = {
       otp: '',
       numInputs: 4,
-      separator: '',
+      separator: '-',
       isDisabled: false,
     };
   }
@@ -28,11 +28,11 @@ class Demo extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.otp);
+    alert(this.state.otp);
   };
 
   render() {
-    const { numInputs, separator, isDisabled } = this.state;
+    const { otp, numInputs, separator, isDisabled } = this.state;
 
     return (
       <div className="container">
@@ -59,6 +59,7 @@ class Demo extends Component {
               Separator
               <input
                 id="separator"
+                maxLength={1}
                 name="separator"
                 type="text"
                 value={separator}
@@ -104,7 +105,12 @@ class Demo extends Component {
                   separator={<span>{separator}</span>}
                 />
               </div>
-              <button className="btn margin-top--large">Continue</button>
+              <button
+                className="btn margin-top--large"
+                disabled={otp.length < numInputs}
+              >
+                Get OTP
+              </button>
             </form>
           </div>
         </div>
