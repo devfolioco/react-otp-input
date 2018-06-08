@@ -13,6 +13,9 @@ type Props = {
   separator?: Object,
   containerStyle?: Object,
   inputStyle?: Object,
+  inputFocusStyle?: Object,
+  disabled?: boolean,
+  inputDisabledStyle?: Object,
 };
 
 type State = {
@@ -85,6 +88,7 @@ class OtpInput extends Component<Props, State> {
   static defaultProps = {
     numInputs: 4,
     onChange: (otp: number): void => console.log(otp),
+    disabled: false,
   };
 
   state = {
@@ -161,6 +165,7 @@ class OtpInput extends Component<Props, State> {
     this.focusNextInput();
   };
 
+  // Handle cases of backspace, delete, left arrow, right arrow
   handleOnKeyDown = (e: Object) => {
     switch (e.keyCode) {
       case BACKSPACE:
