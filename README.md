@@ -77,7 +77,7 @@ export default class App extends Component {
     <td>Style applied to each input.</td>
   </tr>
   <tr>
-    <td>inputFocusStyle</td>
+    <td>focusStyle</td>
     <td>style (object)</td>
     <td>false</td>
     <td>none</td>
@@ -91,7 +91,7 @@ export default class App extends Component {
     <td>Disables all the inputs.</td>
   </tr>
   <tr>
-    <td>inputDisabledStyle</td>
+    <td>disabledStyle</td>
     <td>style (object)</td>
     <td>false</td>
     <td>none</td>

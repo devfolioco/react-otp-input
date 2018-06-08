@@ -13,9 +13,9 @@ type Props = {
   separator?: Object,
   containerStyle?: Object,
   inputStyle?: Object,
-  inputFocusStyle?: Object,
+  focusStyle?: Object,
   disabled?: boolean,
-  inputDisabledStyle?: Object,
+  disabledStyle?: Object,
 };
 
 type State = {
@@ -56,8 +56,8 @@ class SingleOtpInput extends PureComponent<*> {
       inputStyle,
       focus,
       disabled,
-      inputFocusStyle,
-      inputDisabledStyle,
+      focusStyle,
+      disabledStyle,
       ...rest
     } = this.props;
 
@@ -67,8 +67,8 @@ class SingleOtpInput extends PureComponent<*> {
           style={Object.assign(
             { width: '1em' },
             inputStyle,
-            focus && inputFocusStyle,
-            disabled && inputDisabledStyle
+            focus && focusStyle,
+            disabled && disabledStyle
           )}
           type="tel"
           maxLength="1"
@@ -195,10 +195,10 @@ class OtpInput extends Component<Props, State> {
     const {
       numInputs,
       inputStyle,
-      inputFocusStyle,
+      focusStyle,
       separator,
       disabled,
-      inputDisabledStyle,
+      disabledStyle,
     } = this.props;
     const inputs = [];
 
@@ -219,10 +219,10 @@ class OtpInput extends Component<Props, State> {
           }}
           separator={separator}
           inputStyle={inputStyle}
-          inputFocusStyle={inputFocusStyle}
+          focusStyle={focusStyle}
           isLastChild={i === numInputs - 1}
           disabled={disabled}
-          inputDisabledStyle={inputDisabledStyle}
+          disabledStyle={disabledStyle}
         />
       );
     }
