@@ -4,7 +4,7 @@ A fully customizable, one-time password input component for the web built with R
 
 ![GIPHY](https://media.giphy.com/media/9JiszPVOX5FuPfJm39/giphy.gif)
 
-[Live Demo](https://ajayns.github.io/react-otp-input)
+[Live Demo](https://devfolioco.github.io/react-otp-input)
 
 ## Installation
 
