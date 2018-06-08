@@ -1,6 +1,6 @@
 {
   "name": "react-otp-input",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
@@ -52,12 +52,12 @@
   },
   "author": "Ajay NS <ajay.ns@outlook.com>",
   "license": "MIT",
-  "homepage": "https://ajayns.github.io/react-otp-input",
+  "homepage": "https://devfolioco.github.io/react-otp-input",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ajayns/react-otp-input.git"
+    "url": "https://github.com/devfolioco/react-otp-input"
   },
   "bugs": {
-    "url": "https://github.com/ajayns/react-otp-input/issues"
+    "url": "https://github.com/devfolioco/react-otp-input/issues"
   }
 }
