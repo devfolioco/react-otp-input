@@ -65,7 +65,7 @@ class SingleOtpInput extends PureComponent<*> {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <input
           style={Object.assign(
-            { width: '1em' },
+            { width: '1em', textAlign: 'center' },
             inputStyle,
             focus && focusStyle,
             disabled && disabledStyle
