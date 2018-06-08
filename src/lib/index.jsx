@@ -16,6 +16,7 @@ type Props = {
   focusStyle?: Object,
   disabled?: boolean,
   disabledStyle?: Object,
+  shouldAutoFocus?: boolean,
 };
 
 type State = {
@@ -26,24 +27,28 @@ type State = {
 class SingleOtpInput extends PureComponent<*> {
   input: ?HTMLInputElement;
 
+  // Focus on first render
+  // Only when shouldAutoFocus is true
   componentDidMount() {
     const {
       input,
-      props: { focus },
+      props: { focus, shouldAutoFocus },
     } = this;
 
-    if (input && focus) {
+    if (input && focus && shouldAutoFocus) {
       input.focus();
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {
       input,
       props: { focus },
     } = this;
 
-    if (input && focus) {
+    // Check if focusedInput changed
+    // Prevent calling function if input already in focus
+    if (prevProps.focus !== focus && (input && focus)) {
       input.focus();
       input.select();
     }
@@ -89,6 +94,7 @@ class OtpInput extends Component<Props, State> {
     numInputs: 4,
     onChange: (otp: number): void => console.log(otp),
     disabled: false,
+    shouldAutoFocus: false,
   };
 
   state = {
@@ -199,6 +205,7 @@ class OtpInput extends Component<Props, State> {
       separator,
       disabled,
       disabledStyle,
+      shouldAutoFocus,
     } = this.props;
     const inputs = [];
 
@@ -223,6 +230,7 @@ class OtpInput extends Component<Props, State> {
           isLastChild={i === numInputs - 1}
           disabled={disabled}
           disabledStyle={disabledStyle}
+          shouldAutoFocus={shouldAutoFocus}
         />
       );
     }

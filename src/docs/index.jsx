@@ -103,6 +103,7 @@ class Demo extends Component {
                   disabled={isDisabled}
                   onChange={this.handleOtpChange}
                   separator={<span>{separator}</span>}
+                  shouldAutoFocus
                 />
               </div>
               <button

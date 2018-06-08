@@ -101,6 +101,13 @@ export default class App extends Component {
     <td>none</td>
     <td>Style applied to each input when disabled.</td>
   </tr>
+  <tr>
+    <td>shouldAutoFocus</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Auto focuses input on inital page load.</td>
+  </tr>
 </table>
 
 ## Development
