@@ -47,17 +47,32 @@ class SingleOtpInput extends PureComponent<*> {
   }
 
   render() {
-    const { separator, isLastChild, inputStyle, ...rest } = this.props;
+    const {
+      separator,
+      isLastChild,
+      inputStyle,
+      focus,
+      disabled,
+      inputFocusStyle,
+      inputDisabledStyle,
+      ...rest
+    } = this.props;
 
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <input
-          style={{ width: '1em', ...inputStyle }}
+          style={Object.assign(
+            { width: '1em' },
+            inputStyle,
+            focus && inputFocusStyle,
+            disabled && inputDisabledStyle
+          )}
           type="tel"
           maxLength="1"
           ref={input => {
             this.input = input;
           }}
+          disabled={disabled}
           {...rest}
         />
         {!isLastChild && separator}
@@ -172,7 +187,14 @@ class OtpInput extends Component<Props, State> {
 
   renderInputs = () => {
     const { activeInput, otp } = this.state;
-    const { numInputs, inputStyle, separator } = this.props;
+    const {
+      numInputs,
+      inputStyle,
+      inputFocusStyle,
+      separator,
+      disabled,
+      inputDisabledStyle,
+    } = this.props;
     const inputs = [];
 
     for (let i = 0; i < numInputs; i++) {
@@ -192,7 +214,10 @@ class OtpInput extends Component<Props, State> {
           }}
           separator={separator}
           inputStyle={inputStyle}
+          inputFocusStyle={inputFocusStyle}
           isLastChild={i === numInputs - 1}
+          disabled={disabled}
+          inputDisabledStyle={inputDisabledStyle}
         />
       );
     }
