@@ -1,4 +1,102 @@
 body {
-  background: #eee;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.side-bar {
+  width: 250px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  z-index: 1;
+  position: relative;
+}
+
+.side-bar__segment {
+  padding: 0.5rem 1rem;
+}
+
+.side-bar__segment--header {
+  margin: 1rem 0;
+  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+}
+
+.side-bar__segment--header:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.side-bar__segment--bottom {
+  font-weight: bold;
+  position: absolute;
+  bottom: 2rem;
+}
+
+.view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #f2f2f3;
+}
+
+.side-bar__segment > label > input[type='number'],
+.side-bar__segment > label > input[type='text'] {
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+  margin: 0.5rem 0;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.side-bar__segment > label > input[type='checkbox'] {
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+  margin: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.card {
+  min-width: 360px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  border-radius: 4px;
+  background: white;
+}
+
+.card > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  background-color: #3273dc;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 4px;
+}
+
+.margin-top--small {
+  margin-top: 1rem;
+}
+
+.margin-top--medium {
+  margin-top: 1.5rem;
+}
+
+.margin-top--large {
+  margin-top: 4rem;
 }
