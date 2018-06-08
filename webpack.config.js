@@ -1,36 +1,36 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, "src/docs"),
+  entry: path.join(__dirname, 'src/docs'),
   output: {
-    path: path.join(__dirname, "docs"),
-    filename: "bundle.js"
+    path: path.join(__dirname, 'demo'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: "babel-loader",
-        exclude: /node_modules/
+        use: 'babel-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src/docs/index.html")
-    })
+      template: path.join(__dirname, 'src/docs/index.html'),
+    }),
   ],
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
-    contentBase: path.join(__dirname, "docs"),
+    contentBase: path.join(__dirname, 'docs'),
     port: 8000,
-    stats: "minimal"
-  }
+    stats: 'minimal',
+  },
 };

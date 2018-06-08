@@ -4,11 +4,11 @@
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run build:watch\" \"npm run docs\"",
+    "dev": "concurrently \"npm run build:watch\" \"npm run demo\"",
     "build": "babel src/lib -d lib",
     "build:watch": "babel src/lib -w -d lib",
-    "docs": "webpack-dev-server --mode development",
-    "docs:prod": "webpack --mode production",
+    "demo": "webpack-dev-server --mode development",
+    "demo:prod": "webpack --mode production",
     "format": "prettier --write '**/*.{js,jsx}'",
     "lint": "eslint '**/*.{js,jsx}' --quiet",
     "prepublish": "npm run build"
