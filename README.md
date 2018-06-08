@@ -76,6 +76,27 @@ export default class App extends Component {
     <td>none</td>
     <td>Style applied to each input.</td>
   </tr>
+  <tr>
+    <td>inputFocusStyle</td>
+    <td>style (object)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied to inputs on focus.</td>
+  </tr>
+  <tr>
+    <td>disabled</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Disables all the inputs.</td>
+  </tr>
+  <tr>
+    <td>inputDisabledStyle</td>
+    <td>style (object)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied to each input when disabled.</td>
+  </tr>
 </table>
 
 ## Development
@@ -102,7 +123,7 @@ npm run docs:prod
 
 - [x] Add flowtypes
 - [x] Add ESLint, Prettier for code quality
-- [ ] Add styling support for states including focus/disabled
+- [x] Add styling support for states including focus/disabled
 - [ ] Travis CI, Codecov
 - [ ] Write tests
 
