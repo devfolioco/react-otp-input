@@ -48,14 +48,14 @@ export default class App extends Component {
   <tr>
     <td>numInputs</td>
     <td>number</td>
-    <td>true</td>
+    <td><strong>true</strong></td>
     <td>4</td>
     <td>Number of OTP inputs to be rendered.</td>
   </tr>
   <tr>
     <td>onChange</td>
     <td>function</td>
-    <td>true</td>
+    <td><strong>true</strong></td>
     <td>console.log</td>
     <td>Returns OTP code typed in inputs.</td>
   </tr>
