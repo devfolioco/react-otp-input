@@ -24,7 +24,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <OtpInputs
+        <OtpInput
           onChange={otp => console.log(otp)}
           numInputs={6}
           separator={<span>-<span>}
