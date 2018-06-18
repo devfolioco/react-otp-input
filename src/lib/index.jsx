@@ -14,8 +14,10 @@ type Props = {
   containerStyle?: Object,
   inputStyle?: Object,
   focusStyle?: Object,
-  disabled?: boolean,
+  isDisabled?: boolean,
   disabledStyle?: Object,
+  hasErrored?: boolean, 
+  errorStyle?: Object,
   shouldAutoFocus?: boolean,
 };
 
@@ -60,7 +62,9 @@ class SingleOtpInput extends PureComponent<*> {
       isLastChild,
       inputStyle,
       focus,
-      disabled,
+      isDisabled,
+      hasErrored,
+      errorStyle,
       focusStyle,
       disabledStyle,
       ...rest
@@ -73,14 +77,15 @@ class SingleOtpInput extends PureComponent<*> {
             { width: '1em', textAlign: 'center' },
             inputStyle,
             focus && focusStyle,
-            disabled && disabledStyle
+            isDisabled && disabledStyle,
+            hasErrored && errorStyle
           )}
           type="tel"
           maxLength="1"
           ref={input => {
             this.input = input;
           }}
-          disabled={disabled}
+          disabled={isDisabled}
           {...rest}
         />
         {!isLastChild && separator}
@@ -93,7 +98,7 @@ class OtpInput extends Component<Props, State> {
   static defaultProps = {
     numInputs: 4,
     onChange: (otp: number): void => console.log(otp),
-    disabled: false,
+    isDisabled: false,
     shouldAutoFocus: false,
   };
 
@@ -203,8 +208,10 @@ class OtpInput extends Component<Props, State> {
       inputStyle,
       focusStyle,
       separator,
-      disabled,
+      isDisabled,
       disabledStyle,
+      hasErrored,
+      errorStyle,
       shouldAutoFocus,
     } = this.props;
     const inputs = [];
@@ -228,8 +235,10 @@ class OtpInput extends Component<Props, State> {
           inputStyle={inputStyle}
           focusStyle={focusStyle}
           isLastChild={i === numInputs - 1}
-          disabled={disabled}
+          isDisabled={isDisabled}
           disabledStyle={disabledStyle}
+          hasErrored={hasErrored}
+          errorStyle={errorStyle}
           shouldAutoFocus={shouldAutoFocus}
         />
       );
