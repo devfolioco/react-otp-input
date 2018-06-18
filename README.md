@@ -88,7 +88,7 @@ export default class App extends Component {
     <td>Style applied to inputs on focus.</td>
   </tr>
   <tr>
-    <td>disabled</td>
+    <td>isDisabled</td>
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
@@ -100,6 +100,20 @@ export default class App extends Component {
     <td>false</td>
     <td>none</td>
     <td>Style applied to each input when disabled.</td>
+  </tr>
+  <tr>
+    <td>hasErrored</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Indicates there is an error in the inputs.</td>
+  </tr>
+  <tr>
+    <td>errorStyle</td>
+    <td>style (object)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied to each input when errored.</td>
   </tr>
   <tr>
     <td>shouldAutoFocus</td>
