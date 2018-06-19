@@ -16,7 +16,7 @@ type Props = {
   focusStyle?: Object,
   isDisabled?: boolean,
   disabledStyle?: Object,
-  hasErrored?: boolean, 
+  hasErrored?: boolean,
   errorStyle?: Object,
   shouldAutoFocus?: boolean,
 };
@@ -25,6 +25,8 @@ type State = {
   activeInput: number,
   otp: string[],
 };
+
+const isObject = obj => typeof obj === 'object';
 
 class SingleOtpInput extends PureComponent<*> {
   input: ?HTMLInputElement;
@@ -56,6 +58,8 @@ class SingleOtpInput extends PureComponent<*> {
     }
   }
 
+  getClasses = (...classes) => classes.filter(c => !isObject(c) && c !== false).join(' ');
+
   render() {
     const {
       separator,
@@ -76,6 +80,11 @@ class SingleOtpInput extends PureComponent<*> {
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
             inputStyle,
+            focus && isObject(focusStyle) && focusStyle,
+            isDisabled && isObject(disabledStyle) && disabledStyle,
+            hasErrored && isObject(errorStyle) && errorStyle
+          )}
+          className={this.getClasses(
             focus && focusStyle,
             isDisabled && disabledStyle,
             hasErrored && errorStyle
@@ -251,7 +260,7 @@ class OtpInput extends Component<Props, State> {
     const { containerStyle } = this.props;
 
     return (
-      <div style={{ display: 'flex', ...containerStyle }}>
+      <div style={Object.assign({ display: 'flex' }, isObject(containerStyle) && containerStyle )} className={!isObject(containerStyle) && containerStyle}>
         {this.renderInputs()}
       </div>
     );

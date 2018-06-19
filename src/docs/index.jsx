@@ -116,9 +116,7 @@ class Demo extends Component {
                   numInputs={numInputs}
                   isDisabled={isDisabled}
                   hasErrored={hasErrored}
-                  errorStyle={{
-                    border: '1px solid red',
-                  }}
+                  errorStyle="error"
                   onChange={this.handleOtpChange}
                   separator={<span>{separator}</span>}
                   shouldAutoFocus

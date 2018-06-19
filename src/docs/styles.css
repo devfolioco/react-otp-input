@@ -107,3 +107,7 @@ a {
 .margin-top--large {
   margin-top: 4rem;
 }
+
+.error {
+  border: 1px solid red !important;
+}
