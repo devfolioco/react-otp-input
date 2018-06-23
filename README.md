@@ -68,27 +68,27 @@ export default class App extends Component {
   </tr>
   <tr>
     <td>containerStyle</td>
-    <td>style (object)</td>
+    <td>style (object) / className (string)</td>
     <td>false</td>
     <td>none</td>
-    <td>Style applied to container of inputs.</td>
+    <td>Style applied or class passed to container of inputs.</td>
   </tr>
   <tr>
     <td>inputStyle</td>
-    <td>style (object)</td>
+    <td>style (object) / className (string)</td>
     <td>false</td>
     <td>none</td>
-    <td>Style applied to each input.</td>
+    <td>Style applied or class passed to each input.</td>
   </tr>
   <tr>
     <td>focusStyle</td>
-    <td>style (object)</td>
+    <td>style (object) / className (string)</td>
     <td>false</td>
     <td>none</td>
-    <td>Style applied to inputs on focus.</td>
+    <td>Style applied or class passed to inputs on focus.</td>
   </tr>
   <tr>
-    <td>disabled</td>
+    <td>isDisabled</td>
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
@@ -96,10 +96,24 @@ export default class App extends Component {
   </tr>
   <tr>
     <td>disabledStyle</td>
-    <td>style (object)</td>
+    <td>style (object) / className (string)</td>
     <td>false</td>
     <td>none</td>
-    <td>Style applied to each input when disabled.</td>
+    <td>Style applied or class passed to each input when disabled.</td>
+  </tr>
+  <tr>
+    <td>hasErrored</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Indicates there is an error in the inputs.</td>
+  </tr>
+  <tr>
+    <td>errorStyle</td>
+    <td>style (object) / className (string)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied or class passed to each input when errored.</td>
   </tr>
   <tr>
     <td>shouldAutoFocus</td>

@@ -14,8 +14,10 @@ type Props = {
   containerStyle?: Object,
   inputStyle?: Object,
   focusStyle?: Object,
-  disabled?: boolean,
+  isDisabled?: boolean,
   disabledStyle?: Object,
+  hasErrored?: boolean,
+  errorStyle?: Object,
   shouldAutoFocus?: boolean,
 };
 
@@ -23,6 +25,12 @@ type State = {
   activeInput: number,
   otp: string[],
 };
+
+// Doesn't really check if it's a style Object
+// Basic implemenetation to check if it's not a string
+// of classNames and is an Object
+// TODO: Better implementation
+const isStyleObject = obj => typeof obj === 'object';
 
 class SingleOtpInput extends PureComponent<*> {
   input: ?HTMLInputElement;
@@ -54,13 +62,17 @@ class SingleOtpInput extends PureComponent<*> {
     }
   }
 
+  getClasses = (...classes) => classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
+
   render() {
     const {
       separator,
       isLastChild,
       inputStyle,
       focus,
-      disabled,
+      isDisabled,
+      hasErrored,
+      errorStyle,
       focusStyle,
       disabledStyle,
       ...rest
@@ -72,15 +84,21 @@ class SingleOtpInput extends PureComponent<*> {
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
             inputStyle,
+            focus && isStyleObject(focusStyle) && focusStyle,
+            isDisabled && isStyleObject(disabledStyle) && disabledStyle,
+            hasErrored && isStyleObject(errorStyle) && errorStyle
+          )}
+          className={this.getClasses(
             focus && focusStyle,
-            disabled && disabledStyle
+            isDisabled && disabledStyle,
+            hasErrored && errorStyle
           )}
           type="tel"
           maxLength="1"
           ref={input => {
             this.input = input;
           }}
-          disabled={disabled}
+          disabled={isDisabled}
           {...rest}
         />
         {!isLastChild && separator}
@@ -93,7 +111,7 @@ class OtpInput extends Component<Props, State> {
   static defaultProps = {
     numInputs: 4,
     onChange: (otp: number): void => console.log(otp),
-    disabled: false,
+    isDisabled: false,
     shouldAutoFocus: false,
   };
 
@@ -203,8 +221,10 @@ class OtpInput extends Component<Props, State> {
       inputStyle,
       focusStyle,
       separator,
-      disabled,
+      isDisabled,
       disabledStyle,
+      hasErrored,
+      errorStyle,
       shouldAutoFocus,
     } = this.props;
     const inputs = [];
@@ -228,8 +248,10 @@ class OtpInput extends Component<Props, State> {
           inputStyle={inputStyle}
           focusStyle={focusStyle}
           isLastChild={i === numInputs - 1}
-          disabled={disabled}
+          isDisabled={isDisabled}
           disabledStyle={disabledStyle}
+          hasErrored={hasErrored}
+          errorStyle={errorStyle}
           shouldAutoFocus={shouldAutoFocus}
         />
       );
@@ -242,7 +264,7 @@ class OtpInput extends Component<Props, State> {
     const { containerStyle } = this.props;
 
     return (
-      <div style={{ display: 'flex', ...containerStyle }}>
+      <div style={Object.assign({ display: 'flex' }, isStyleObject(containerStyle) && containerStyle )} className={!isStyleObject(containerStyle) && containerStyle}>
         {this.renderInputs()}
       </div>
     );

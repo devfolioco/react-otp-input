@@ -11,6 +11,7 @@ class Demo extends Component {
       numInputs: 4,
       separator: '-',
       isDisabled: false,
+      hasErrored: false,
     };
   }
 
@@ -22,8 +23,9 @@ class Demo extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleCheck = () => {
-    this.setState(prevState => ({ isDisabled: !prevState.isDisabled }));
+  handleCheck = e => {
+    const { name } = e.target;
+    this.setState(prevState => ({ [name]: !prevState[name] }));
   };
 
   handleSubmit = e => {
@@ -32,7 +34,7 @@ class Demo extends Component {
   };
 
   render() {
-    const { otp, numInputs, separator, isDisabled } = this.state;
+    const { otp, numInputs, separator, isDisabled, hasErrored } = this.state;
 
     return (
       <div className="container">
@@ -79,6 +81,18 @@ class Demo extends Component {
               Disabled
             </label>
           </div>
+          <div className="side-bar__segment">
+            <label htmlFor="hasErrored">
+              <input
+                id="hasErrored"
+                name="hasErrored"
+                type="checkbox"
+                checked={hasErrored}
+                onChange={this.handleCheck}
+              />
+              Error
+            </label>
+          </div>
           <div className="side-bar__segment side-bar__segment--bottom">
             <a href="https://github.com/ajayns/react-otp-input">
               Documentation and Source
@@ -100,7 +114,9 @@ class Demo extends Component {
                     border: '1px solid rgba(0,0,0,0.3)',
                   }}
                   numInputs={numInputs}
-                  disabled={isDisabled}
+                  isDisabled={isDisabled}
+                  hasErrored={hasErrored}
+                  errorStyle="error"
                   onChange={this.handleOtpChange}
                   separator={<span>{separator}</span>}
                   shouldAutoFocus
