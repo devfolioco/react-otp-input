@@ -244,6 +244,7 @@ class OtpInput extends Component<Props, State> {
             });
             e.target.select();
           }}
+          onBlur={() => this.setState({ activeInput: -1 })}
           separator={separator}
           inputStyle={inputStyle}
           focusStyle={focusStyle}
