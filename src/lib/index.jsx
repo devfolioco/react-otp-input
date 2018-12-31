@@ -75,6 +75,7 @@ class SingleOtpInput extends PureComponent<*> {
       errorStyle,
       focusStyle,
       disabledStyle,
+      shouldAutoFocus,
       ...rest
     } = this.props;
 
