@@ -1,6 +1,6 @@
 {
   "name": "react-otp-input",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
@@ -48,7 +48,7 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15",
-    "webpack-dev-server": "^3.1.3"
+    "webpack-dev-server": "^3.1.14"
   },
   "author": "Ajay NS <ajay.ns@outlook.com>",
   "license": "MIT",
