@@ -12,6 +12,7 @@ class Demo extends Component {
       separator: '-',
       isDisabled: false,
       hasErrored: false,
+      isInputNum: false,
     };
   }
 
@@ -34,7 +35,7 @@ class Demo extends Component {
   };
 
   render() {
-    const { otp, numInputs, separator, isDisabled, hasErrored } = this.state;
+    const { otp, numInputs, separator, isDisabled, hasErrored, isInputNum } = this.state;
 
     return (
       <div className="container">
@@ -93,6 +94,18 @@ class Demo extends Component {
               Error
             </label>
           </div>
+          <div className="side-bar__segment">
+            <label htmlFor="isInputNum">
+              <input
+                id="isInputNum"
+                name="isInputNum"
+                type="checkbox"
+                checked={isInputNum}
+                onChange={this.handleCheck}
+              />
+              Input numbers only
+            </label>
+          </div>
           <div className="side-bar__segment side-bar__segment--bottom">
             <a href="https://github.com/ajayns/react-otp-input">
               Documentation and Source
@@ -119,6 +132,7 @@ class Demo extends Component {
                   errorStyle="error"
                   onChange={this.handleOtpChange}
                   separator={<span>{separator}</span>}
+                  isInputNum={isInputNum}
                   shouldAutoFocus
                 />
               </div>

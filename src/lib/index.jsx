@@ -19,6 +19,7 @@ type Props = {
   hasErrored?: boolean,
   errorStyle?: Object,
   shouldAutoFocus?: boolean,
+  isInputNum?: boolean,
 };
 
 type State = {
@@ -76,8 +77,11 @@ class SingleOtpInput extends PureComponent<*> {
       focusStyle,
       disabledStyle,
       shouldAutoFocus,
+      isInputNum,
       ...rest
     } = this.props;
+
+    const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
 
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -94,7 +98,8 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type="tel"
+          type={isInputNum ? 'number' : 'tel'}
+          {...numValueLimits}
           maxLength="1"
           ref={input => {
             this.input = input;
@@ -227,6 +232,7 @@ class OtpInput extends Component<Props, State> {
       hasErrored,
       errorStyle,
       shouldAutoFocus,
+      isInputNum,
     } = this.props;
     const inputs = [];
 
@@ -255,6 +261,7 @@ class OtpInput extends Component<Props, State> {
           hasErrored={hasErrored}
           errorStyle={errorStyle}
           shouldAutoFocus={shouldAutoFocus}
+          isInputNum={isInputNum}
         />
       );
     }
