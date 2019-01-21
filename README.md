@@ -122,6 +122,13 @@ export default class App extends Component {
     <td>false</td>
     <td>Auto focuses input on inital page load.</td>
   </tr>
+  <tr>
+    <td>isInputNum</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Restrict input to only numbers.</td>
+  </tr>
 </table>
 
 ## Development
