@@ -47,7 +47,7 @@ class Demo extends Component {
           </a>
           <div className="side-bar__segment">
             <label htmlFor="num-inputs">
-              Number of inputs:
+              numInputs
               <input
                 id="num-inputs"
                 name="numInputs"
@@ -59,7 +59,7 @@ class Demo extends Component {
           </div>
           <div className="side-bar__segment">
             <label htmlFor="separator">
-              Separator
+              separator
               <input
                 id="separator"
                 maxLength={1}
@@ -79,7 +79,7 @@ class Demo extends Component {
                 checked={isDisabled}
                 onChange={this.handleCheck}
               />
-              Disabled
+              isDisabled
             </label>
           </div>
           <div className="side-bar__segment">
@@ -91,7 +91,7 @@ class Demo extends Component {
                 checked={hasErrored}
                 onChange={this.handleCheck}
               />
-              Error
+              hasErrored
             </label>
           </div>
           <div className="side-bar__segment">
@@ -103,7 +103,7 @@ class Demo extends Component {
                 checked={isInputNum}
                 onChange={this.handleCheck}
               />
-              Input numbers only
+              isInputNum
             </label>
           </div>
           <div className="side-bar__segment side-bar__segment--bottom">
