@@ -78,6 +78,7 @@ class SingleOtpInput extends PureComponent<*> {
       disabledStyle,
       shouldAutoFocus,
       isInputNum,
+      value,
       ...rest
     } = this.props;
 
@@ -105,6 +106,7 @@ class SingleOtpInput extends PureComponent<*> {
             this.input = input;
           }}
           disabled={isDisabled}
+          value={value ? value : ''}
           {...rest}
         />
         {!isLastChild && separator}
