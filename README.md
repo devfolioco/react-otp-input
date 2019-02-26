@@ -6,6 +6,8 @@ A fully customizable, one-time password input component for the web built with R
 
 [Live Demo](https://devfolioco.github.io/react-otp-input)
 
+[CodeSandbox](https://codesandbox.io/s/0y849kwoqv)
+
 ## Installation
 
 To install the latest stable version:
@@ -27,10 +29,10 @@ export default class App extends Component {
         <OtpInput
           onChange={otp => console.log(otp)}
           numInputs={6}
-          separator={<span>-<span>}
+          separator={<span>-</span>}
         />
       </div>
-    )
+    );
   }
 }
 ```
