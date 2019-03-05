@@ -53,7 +53,7 @@ class SingleOtpInput extends PureComponent<*> {
   componentDidUpdate(prevProps) {
     const {
       input,
-      props: { focus, value },
+      props: { focus, },
     } = this;
 
     // Check if focusedInput changed
