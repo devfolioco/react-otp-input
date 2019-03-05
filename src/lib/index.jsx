@@ -8,6 +8,7 @@ const RIGHT_ARROW = 39;
 const DELETE = 46;
 
 type Props = {
+  value: string,
   numInputs: number,
   onChange: Function,
   separator?: Object,
@@ -52,7 +53,7 @@ class SingleOtpInput extends PureComponent<*> {
   componentDidUpdate(prevProps) {
     const {
       input,
-      props: { focus },
+      props: { focus, value },
     } = this;
 
     // Check if focusedInput changed
@@ -127,6 +128,13 @@ class OtpInput extends Component<Props, State> {
     activeInput: 0,
     otp: [],
   };
+
+  static getDerivedStateFromProps(props, state) {
+    return {
+      ... state,
+      otp: props.value ? props.value.split('') : [],
+    }
+  }
 
   // Helper to return OTP from input
   getOtp = () => {
