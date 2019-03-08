@@ -7,4 +7,4 @@ Please include:
 
 - **Any background context you want to provide?**
 
-- **Screenshots**
+- **Screenshots and/or Live Demo**

@@ -1,5 +1,5 @@
 <!-- Please Include: -->
 
-- **Clear steps to reproduce the issue**:
+- **Steps to reproduce the issue**:
 
 - **Relevant error messages and/or screenshots**:
