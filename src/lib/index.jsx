@@ -63,7 +63,8 @@ class SingleOtpInput extends PureComponent<*> {
     }
   }
 
-  getClasses = (...classes) => classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
+  getClasses = (...classes) =>
+    classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
 
   render() {
     const {
@@ -89,12 +90,13 @@ class SingleOtpInput extends PureComponent<*> {
         <input
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
-            inputStyle,
+            isStyleObject(inputStyle) && inputStyle,
             focus && isStyleObject(focusStyle) && focusStyle,
             isDisabled && isStyleObject(disabledStyle) && disabledStyle,
             hasErrored && isStyleObject(errorStyle) && errorStyle
           )}
           className={this.getClasses(
+            inputStyle,
             focus && focusStyle,
             isDisabled && disabledStyle,
             hasErrored && errorStyle
@@ -275,7 +277,13 @@ class OtpInput extends Component<Props, State> {
     const { containerStyle } = this.props;
 
     return (
-      <div style={Object.assign({ display: 'flex' }, isStyleObject(containerStyle) && containerStyle )} className={!isStyleObject(containerStyle) && containerStyle}>
+      <div
+        style={Object.assign(
+          { display: 'flex' },
+          isStyleObject(containerStyle) && containerStyle
+        )}
+        className={!isStyleObject(containerStyle) && containerStyle}
+      >
         {this.renderInputs()}
       </div>
     );
