@@ -132,7 +132,9 @@ class OtpInput extends Component<Props, State> {
 
   // Helper to return OTP from input
   getOtp = () => {
-    this.props.onChange(this.state.otp.join(''));
+    const { onChange, isInputNum } = this.props;
+    const otp = this.state.otp.join('');
+    onChange(isInputNum ? Number(otp) : otp);
   };
 
   // Focus on input by index
@@ -160,7 +162,7 @@ class OtpInput extends Component<Props, State> {
   // Change OTP value at focused input
   changeCodeAtFocus = (value: string) => {
     const { activeInput, otp } = this.state;
-    otp[activeInput] = value;
+    otp[activeInput] = value[0];
 
     this.setState({
       otp,
