@@ -20,6 +20,7 @@ type Props = {
   errorStyle?: Object,
   shouldAutoFocus?: boolean,
   isInputNum?: boolean,
+  value?: string,
 };
 
 type State = {
@@ -123,18 +124,22 @@ class OtpInput extends Component<Props, State> {
     onChange: (otp: number): void => console.log(otp),
     isDisabled: false,
     shouldAutoFocus: false,
+    value: '',
   };
 
   state = {
     activeInput: 0,
-    otp: [],
   };
 
+  getOtpValue = () => (
+    this.props.value ? this.props.value.toString().split('') : []
+  );
+
   // Helper to return OTP from input
-  getOtp = () => {
+  handleOtpChange = (otp: string[]) => {
     const { onChange, isInputNum } = this.props;
-    const otp = this.state.otp.join('');
-    onChange(isInputNum ? Number(otp) : otp);
+    const otpValue = otp.join('');
+    onChange(isInputNum ? Number(otpValue) : otpValue);
   };
 
   // Focus on input by index
@@ -142,9 +147,7 @@ class OtpInput extends Component<Props, State> {
     const { numInputs } = this.props;
     const activeInput = Math.max(Math.min(numInputs - 1, input), 0);
 
-    this.setState({
-      activeInput,
-    });
+    this.setState({ activeInput });
   };
 
   // Focus on next input
@@ -161,20 +164,19 @@ class OtpInput extends Component<Props, State> {
 
   // Change OTP value at focused input
   changeCodeAtFocus = (value: string) => {
-    const { activeInput, otp } = this.state;
+    const { activeInput } = this.state;
+    const otp = this.getOtpValue();
     otp[activeInput] = value[0];
 
-    this.setState({
-      otp,
-    });
-    this.getOtp();
+    this.handleOtpChange(otp);
   };
 
   // Handle pasted OTP
   handleOnPaste = (e: Object) => {
     e.preventDefault();
     const { numInputs } = this.props;
-    const { activeInput, otp } = this.state;
+    const { activeInput } = this.state;
+    const otp = this.getOtpValue();
 
     // Get pastedData in an array of max size (num of inputs - current position)
     const pastedData = e.clipboardData
@@ -189,11 +191,7 @@ class OtpInput extends Component<Props, State> {
       }
     }
 
-    this.setState({
-      otp,
-    });
-
-    this.getOtp();
+    this.handleOtpChange(otp);
   };
 
   handleOnChange = (e: Object) => {
@@ -203,31 +201,31 @@ class OtpInput extends Component<Props, State> {
 
   // Handle cases of backspace, delete, left arrow, right arrow
   handleOnKeyDown = (e: Object) => {
-    switch (e.keyCode) {
-      case BACKSPACE:
-        e.preventDefault();
-        this.changeCodeAtFocus('');
-        this.focusPrevInput();
-        break;
-      case DELETE:
-        e.preventDefault();
-        this.changeCodeAtFocus('');
-        break;
-      case LEFT_ARROW:
-        e.preventDefault();
-        this.focusPrevInput();
-        break;
-      case RIGHT_ARROW:
-        e.preventDefault();
-        this.focusNextInput();
-        break;
-      default:
-        break;
+    if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
+      e.preventDefault();
+      this.changeCodeAtFocus('');
+      this.focusPrevInput();
+    } else if (e.keyCode === DELETE || e.key === 'Delete') {
+      e.preventDefault();
+      this.changeCodeAtFocus('');
+    } else if (e.keyCode === LEFT_ARROW || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      this.focusPrevInput();
+    } else if (e.keyCode === RIGHT_ARROW || e.key === 'ArrowRight') {
+      e.preventDefault();
+      this.focusNextInput();
     }
   };
 
+  checkLength = (e: Object) => {
+    if (e.target.value.length > 1) {
+      e.preventDefault();
+      this.focusNextInput();
+    }
+  }
+
   renderInputs = () => {
-    const { activeInput, otp } = this.state;
+    const { activeInput } = this.state;
     const {
       numInputs,
       inputStyle,
@@ -240,6 +238,7 @@ class OtpInput extends Component<Props, State> {
       shouldAutoFocus,
       isInputNum,
     } = this.props;
+    const otp = this.getOtpValue();
     const inputs = [];
 
     for (let i = 0; i < numInputs; i++) {
@@ -250,11 +249,10 @@ class OtpInput extends Component<Props, State> {
           value={otp && otp[i]}
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
+          onInput={this.checkLength}
           onPaste={this.handleOnPaste}
           onFocus={e => {
-            this.setState({
-              activeInput: i,
-            });
+            this.setState({ activeInput: i });
             e.target.select();
           }}
           onBlur={() => this.setState({ activeInput: -1 })}
