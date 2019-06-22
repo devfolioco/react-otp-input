@@ -62,6 +62,13 @@ export default class App extends Component {
     <td>Returns OTP code typed in inputs.</td>
   </tr>
   <tr>
+    <td>value</td>
+    <td>string / number</td>
+    <td><strong>true</strong></td>
+    <td>''</td>
+    <td>The value of the otp passed into the component.</td>
+  </tr>
+  <tr>
     <td>separator</td>
     <td>component<br></td>
     <td>false</td>
