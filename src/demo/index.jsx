@@ -24,6 +24,10 @@ class Demo extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  clearOtp = () => {
+    this.setState({ otp: '' });
+  };
+
   handleCheck = e => {
     const { name } = e.target;
     this.setState(prevState => ({ [name]: !prevState[name] }));
@@ -66,6 +70,19 @@ class Demo extends Component {
                 name="separator"
                 type="text"
                 value={separator}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div className="side-bar__segment">
+            <label htmlFor="value">
+              value
+              <input
+                id="value"
+                maxLength={numInputs}
+                name="otp"
+                type="text"
+                value={otp}
                 onChange={this.handleChange}
               />
             </label>
@@ -134,14 +151,24 @@ class Demo extends Component {
                   separator={<span>{separator}</span>}
                   isInputNum={isInputNum}
                   shouldAutoFocus
+                  value={otp}
                 />
               </div>
-              <button
-                className="btn margin-top--large"
-                disabled={otp.length < numInputs}
-              >
-                Get OTP
-              </button>
+              <div className="btn-row">
+                <button
+                  className="btn margin-top--large"
+                  type="button"
+                  onClick={this.clearOtp}
+                >
+                  Clear
+                </button>
+                <button
+                  className="btn margin-top--large"
+                  disabled={otp.length < numInputs}
+                >
+                  Get OTP
+                </button>
+              </div>
             </form>
           </div>
         </div>

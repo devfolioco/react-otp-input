@@ -11,6 +11,7 @@
     "demo:prod": "webpack --mode production",
     "format": "prettier --write '**/*.{js,jsx}'",
     "lint": "eslint '**/*.{js,jsx}' --quiet",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
     "prepublish": "npm run build",
     "predeploy": "npm run demo:prod",
     "deploy": "gh-pages -d demo"
