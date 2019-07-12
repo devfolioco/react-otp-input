@@ -131,9 +131,8 @@ class OtpInput extends Component<Props, State> {
     activeInput: 0,
   };
 
-  getOtpValue = () => (
-    this.props.value ? this.props.value.toString().split('') : []
-  );
+  getOtpValue = () =>
+    this.props.value ? this.props.value.toString().split('') : [];
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
@@ -222,7 +221,7 @@ class OtpInput extends Component<Props, State> {
       e.preventDefault();
       this.focusNextInput();
     }
-  }
+  };
 
   renderInputs = () => {
     const { activeInput } = this.state;
@@ -282,7 +281,7 @@ class OtpInput extends Component<Props, State> {
           { display: 'flex' },
           isStyleObject(containerStyle) && containerStyle
         )}
-        className={!isStyleObject(containerStyle) && containerStyle}
+        className={!isStyleObject(containerStyle) ? containerStyle : ''}
       >
         {this.renderInputs()}
       </div>
