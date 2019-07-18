@@ -84,8 +84,6 @@ class SingleOtpInput extends PureComponent<*> {
       ...rest
     } = this.props;
 
-    const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
-
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <input
@@ -102,8 +100,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={isInputNum ? 'number' : 'tel'}
-          {...numValueLimits}
+          type="tel"
           maxLength="1"
           ref={input => {
             this.input = input;
@@ -131,15 +128,14 @@ class OtpInput extends Component<Props, State> {
     activeInput: 0,
   };
 
-  getOtpValue = () => (
-    this.props.value ? this.props.value.toString().split('') : []
-  );
+  getOtpValue = () =>
+    this.props.value ? this.props.value.toString().split('') : [];
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
-    const { onChange, isInputNum } = this.props;
+    const { onChange } = this.props;
     const otpValue = otp.join('');
-    onChange(isInputNum ? Number(otpValue) : otpValue);
+    onChange(otpValue);
   };
 
   // Focus on input by index
@@ -174,13 +170,19 @@ class OtpInput extends Component<Props, State> {
   // Handle pasted OTP
   handleOnPaste = (e: Object) => {
     e.preventDefault();
-    const { numInputs } = this.props;
+    const { numInputs, isInputNum } = this.props;
+
+    const clipboardData = e.clipboardData.getData('text/plain');
+    if (!/^[0-9]*$/.test(clipboardData)) {
+      e.preventDefault();
+      return false;
+    }
+
     const { activeInput } = this.state;
     const otp = this.getOtpValue();
 
     // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = e.clipboardData
-      .getData('text/plain')
+    const pastedData = clipboardData
       .slice(0, numInputs - activeInput)
       .split('');
 
@@ -195,7 +197,16 @@ class OtpInput extends Component<Props, State> {
   };
 
   handleOnChange = (e: Object) => {
-    this.changeCodeAtFocus(e.target.value);
+    const value = e.target.value;
+    const { isInputNum } = this.props;
+    if (isInputNum) {
+      if (!/[0-9]|/.test(value)) {
+        this.changeCodeAtFocus('');
+        return;
+      }
+    }
+
+    this.changeCodeAtFocus(value);
     this.focusNextInput();
   };
 
@@ -222,7 +233,7 @@ class OtpInput extends Component<Props, State> {
       e.preventDefault();
       this.focusNextInput();
     }
-  }
+  };
 
   renderInputs = () => {
     const { activeInput } = this.state;
