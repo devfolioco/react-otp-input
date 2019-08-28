@@ -85,6 +85,7 @@ class SingleOtpInput extends PureComponent<*> {
     } = this.props;
 
     const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
+    const pattern = isInputNum ? { pattern: '\d*' } : {};
 
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -102,7 +103,8 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={isInputNum ? 'number' : 'tel'}
+          type={isInputNum ? 'text' : 'tel'}
+          {...pattern}
           {...numValueLimits}
           maxLength="1"
           ref={input => {
@@ -195,8 +197,12 @@ class OtpInput extends Component<Props, State> {
   };
 
   handleOnChange = (e: Object) => {
-    this.changeCodeAtFocus(e.target.value);
-    this.focusNextInput();
+    console.log(e.target.value);
+    const isValidValue = !this.props.isInputNum || !isNaN(e.target.value);
+    if(isValidValue) {
+      this.changeCodeAtFocus(e.target.value);
+      this.focusNextInput();
+    }
   };
 
   // Handle cases of backspace, delete, left arrow, right arrow
