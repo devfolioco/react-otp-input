@@ -197,7 +197,6 @@ class OtpInput extends Component<Props, State> {
   };
 
   handleOnChange = (e: Object) => {
-    console.log(e.target.value);
     const isValidValue = !this.props.isInputNum || !isNaN(e.target.value);
     if(isValidValue) {
       this.changeCodeAtFocus(e.target.value);
