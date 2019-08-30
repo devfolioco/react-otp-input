@@ -1,13 +1,13 @@
 {
-  "name": "react-otp-input",
-  "version": "1.0.1",
+  "name": "react-passcode-input",
+  "version": "1.1.0",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
     "dev": "concurrently \"npm run build:watch\" \"npm run demo\"",
     "build": "babel src/lib -d lib",
     "build:watch": "babel src/lib -w -d lib",
-    "demo": "webpack-dev-server --mode development",
+    "demo": "webpack-dev-server --mode development --host 0.0.0.0",
     "demo:prod": "webpack --mode production",
     "format": "prettier --write '**/*.{js,jsx}'",
     "lint": "eslint '**/*.{js,jsx}' --quiet",
@@ -51,14 +51,13 @@
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.2"
   },
-  "author": "Ajay NS <ajay.ns@outlook.com>",
+  "author": "Ajay NS <ajay.ns@outlook.com>, Sun Liang <liang@hackplan.com>",
   "license": "MIT",
-  "homepage": "https://devfolioco.github.io/react-otp-input",
   "repository": {
     "type": "git",
-    "url": "https://github.com/devfolioco/react-otp-input"
+    "url": "https://github.com/untsop/react-otp-input"
   },
   "bugs": {
-    "url": "https://github.com/devfolioco/react-otp-input/issues"
+    "url": "https://github.com/untsop/react-otp-input/issues"
   }
 }

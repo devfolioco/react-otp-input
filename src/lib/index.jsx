@@ -195,6 +195,10 @@ class OtpInput extends Component<Props, State> {
   };
 
   handleOnChange = (e: Object) => {
+    if (e.target.value && e.target.value.length > 1) {
+      e.preventDefault();
+      return
+    }
     this.changeCodeAtFocus(e.target.value);
     this.focusNextInput();
   };
@@ -217,10 +221,24 @@ class OtpInput extends Component<Props, State> {
     }
   };
 
-  checkLength = (e: Object) => {
-    if (e.target.value.length > 1) {
+  handleOnInput = (e: Object) => {
+    if (!e.target.value) return
+    if (e.target.value && e.target.value.length > 1) {
       e.preventDefault();
-      this.focusNextInput();
+      const { numInputs } = this.props;
+      const { activeInput } = this.state;
+      const otp = this.getOtpValue();
+
+      // Get pastedData in an array of max size (num of inputs - current position)
+      const pastedData = (e.target.value).slice(0, numInputs - activeInput).split('');
+      // Paste data from focused input onwards
+      for (let pos = 0; pos < numInputs; ++pos) {
+        if (pos >= activeInput && pastedData.length > 0) {
+          otp[pos] = pastedData.shift();
+        }
+      }
+      this.handleOtpChange(otp);
+      return
     }
   }
 
@@ -249,7 +267,7 @@ class OtpInput extends Component<Props, State> {
           value={otp && otp[i]}
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
-          onInput={this.checkLength}
+          onInput={this.handleOnInput}
           onPaste={this.handleOnPaste}
           onFocus={e => {
             this.setState({ activeInput: i });
@@ -269,7 +287,6 @@ class OtpInput extends Component<Props, State> {
         />
       );
     }
-
     return inputs;
   };
 
