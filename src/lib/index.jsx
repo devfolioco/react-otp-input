@@ -7,6 +7,8 @@ const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
 const DELETE = 46;
 
+const NUMBERS_ONLY_PATTERN = '[0-9]';
+
 type Props = {
   numInputs: number,
   onChange: Function,
@@ -85,7 +87,6 @@ class SingleOtpInput extends PureComponent<*> {
     } = this.props;
 
     const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
-    const pattern = isInputNum ? { pattern: '\d*' } : {};
 
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -103,8 +104,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={isInputNum ? 'text' : 'tel'}
-          {...pattern}
+          type={isInputNum ? 'number' : 'tel'}
           {...numValueLimits}
           maxLength="1"
           ref={input => {
@@ -139,9 +139,9 @@ class OtpInput extends Component<Props, State> {
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
-    const { onChange, isInputNum } = this.props;
+    const { onChange } = this.props;
     const otpValue = otp.join('');
-    onChange(isInputNum ? Number(otpValue) : otpValue);
+    onChange(otpValue);
   };
 
   // Focus on input by index
@@ -150,6 +150,12 @@ class OtpInput extends Component<Props, State> {
     const activeInput = Math.max(Math.min(numInputs - 1, input), 0);
 
     this.setState({ activeInput });
+  };
+
+  // Focus on current input
+  focusCurrentInput = () => {
+    const { activeInput } = this.state;
+    this.focusInput(activeInput);
   };
 
   // Focus on next input
@@ -169,7 +175,6 @@ class OtpInput extends Component<Props, State> {
     const { activeInput } = this.state;
     const otp = this.getOtpValue();
     otp[activeInput] = value[0];
-
     this.handleOtpChange(otp);
   };
 
@@ -219,6 +224,12 @@ class OtpInput extends Component<Props, State> {
     } else if (e.keyCode === RIGHT_ARROW || e.key === 'ArrowRight') {
       e.preventDefault();
       this.focusNextInput();
+    } else if (e.key === e.target.value) {
+      e.preventDefault();
+      this.focusNextInput();
+    } else if (this.props.isInputNum && !RegExp(NUMBERS_ONLY_PATTERN).test(e.key.toString())) {
+      e.preventDefault();
+      this.focusCurrentInput();
     }
   };
 
