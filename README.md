@@ -69,7 +69,7 @@ export default class App extends Component {
   </tr>
   <tr>
     <td>value</td>
-    <td>string / number</td>
+    <td>string</td>
     <td><strong>true</strong></td>
     <td>''</td>
     <td>The value of the otp passed into the component.</td>
