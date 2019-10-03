@@ -104,6 +104,15 @@ a {
 
 .margin-top--small {
   margin-top: 1rem;
+  margin-bottom: -1rem;
+}
+
+.margin-top--small > div {
+  flex-wrap: wrap;
+}
+
+.margin-top--small > div > div {
+  margin-bottom: 1rem;
 }
 
 .margin-top--medium {
