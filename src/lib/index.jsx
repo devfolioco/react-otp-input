@@ -6,6 +6,7 @@ const BACKSPACE = 8;
 const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
 const DELETE = 46;
+const SPACEBAR = 32;
 
 type Props = {
   numInputs: number,
@@ -198,7 +199,7 @@ class OtpInput extends Component<Props, State> {
     this.focusNextInput();
   };
 
-  // Handle cases of backspace, delete, left arrow, right arrow
+  // Handle cases of backspace, delete, left arrow, right arrow, space
   handleOnKeyDown = (e: Object) => {
     if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
       e.preventDefault();
@@ -213,6 +214,8 @@ class OtpInput extends Component<Props, State> {
     } else if (e.keyCode === RIGHT_ARROW || e.key === 'ArrowRight') {
       e.preventDefault();
       this.focusNextInput();
+    } else if (e.keyCode === SPACEBAR || e.key === 'Space' ) {
+      e.preventDefault();
     }
   };
 
