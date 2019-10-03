@@ -216,6 +216,12 @@ class OtpInput extends Component<Props, State> {
     }
   };
 
+  // The content may not have changed, but some input took place hence change the focus
+  handleInput = (e: Object) => {
+    this.handleOnChange(e);
+    this.checkLength(e);
+  }
+
   checkLength = (e: Object) => {
     if (e.target.value.length > 1) {
       e.preventDefault();
@@ -248,7 +254,7 @@ class OtpInput extends Component<Props, State> {
           value={otp && otp[i]}
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
-          onInput={this.checkLength}
+          onInput={this.handleInput}
           onPaste={this.handleOnPaste}
           onFocus={e => {
             this.setState({ activeInput: i });
