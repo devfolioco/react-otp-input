@@ -58,6 +58,7 @@ class Demo extends Component {
                 type="number"
                 value={numInputs}
                 onChange={this.handleChange}
+                min="0"
               />
             </label>
           </div>
