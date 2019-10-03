@@ -47,7 +47,7 @@ export default class App extends Component {
 
 <table>
   <tr>
-    <th>Name<br></th>
+    <th>Name<br/></th>
     <th>Type</th>
     <th>Required</th>
     <th>Default</th>
@@ -76,7 +76,7 @@ export default class App extends Component {
   </tr>
   <tr>
     <td>separator</td>
-    <td>component<br></td>
+    <td>component<br/></td>
     <td>false</td>
     <td></td>
     <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input</td>
