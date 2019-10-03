@@ -1,8 +1,10 @@
+{/* libraries */}
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import OtpInput from '../../lib';
 import './styles.css';
 
+{/* class for otp*/}
 class Demo extends Component {
   constructor(props) {
     super(props);
