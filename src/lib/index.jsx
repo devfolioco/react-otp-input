@@ -102,7 +102,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={isInputNum ? 'number' : 'tel'}
+          type='tel'
           {...numValueLimits}
           maxLength="1"
           ref={input => {
@@ -194,7 +194,12 @@ class OtpInput extends Component<Props, State> {
   };
 
   handleOnChange = (e: Object) => {
-    this.changeCodeAtFocus(e.target.value);
+    const { value } = e.target;
+    const { isInputNum } = this.props;
+    if (isInputNum && isNaN(Number(value))) {
+      return;
+    }
+    this.changeCodeAtFocus(value);
     this.focusNextInput();
   };
 
