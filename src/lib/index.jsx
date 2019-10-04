@@ -38,7 +38,7 @@ class SingleOtpInput extends PureComponent<*> {
   input: ?HTMLInputElement;
 
   //Add the value state for controlled input
-  state = {value: null}
+  state = { value: null }
 
   // Focus on first render
   // Only when shouldAutoFocus is true
@@ -70,8 +70,10 @@ class SingleOtpInput extends PureComponent<*> {
   getClasses = (...classes) =>
     classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
 
+  // Handle Change Function
+  // Checks if the value is changed and set the state
   handleValueChange = (event) => {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
   render() {
@@ -113,7 +115,7 @@ class SingleOtpInput extends PureComponent<*> {
           {...numValueLimits}
           maxLength="1"
           value={this.state.value}
-          onChange = {this.handleValueChange}
+          onChange={this.handleValueChange}
           ref={input => {
             this.input = input;
           }}
