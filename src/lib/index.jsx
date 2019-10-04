@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, PureComponent } from 'react';
+import React, { Component, useEffect } from 'react';
 
 // keyCode constants
 const BACKSPACE = 8;
@@ -8,6 +8,7 @@ const RIGHT_ARROW = 39;
 const DELETE = 46;
 const SPACEBAR = 32;
 
+// TODO: Add Default Props
 type Props = {
   numInputs: number,
   onChange: Function,
@@ -29,95 +30,180 @@ type State = {
   otp: string[],
 };
 
+type SingleOtpInputProps = {
+  focus: boolean,
+  shouldAutoFocus: Function,
+  separator: Object,
+  isLastChild: boolean,
+  inputStyle: Object,
+  isDisabled: boolean,
+  hasErrored: boolean,
+  errorStyle: Object,
+  focusStyle: Object,
+  disabledStyle: Object,
+  isInputNum: boolean,
+  value: string,
+};
+
 // Doesn't really check if it's a style Object
 // Basic implemenetation to check if it's not a string
 // of classNames and is an Object
 // TODO: Better implementation
 const isStyleObject = obj => typeof obj === 'object';
 
-class SingleOtpInput extends PureComponent<*> {
-  input: ?HTMLInputElement;
+function SingleOtpInput(props: SingleOtpInputProps) {
+  const {
+    focus,
+    shouldAutoFocus,
+    separator,
+    isLastChild,
+    inputStyle,
+    isDisabled,
+    hasErrored,
+    errorStyle,
+    focusStyle,
+    disabledStyle,
+    isInputNum,
+    value,
+    ...rest
+  } = props;
+
+  let input: HTMLInputElement;
 
   // Focus on first render
   // Only when shouldAutoFocus is true
-  componentDidMount() {
-    const {
-      input,
-      props: { focus, shouldAutoFocus },
-    } = this;
-
+  useEffect(() => {
     if (input && focus && shouldAutoFocus) {
       input.focus();
     }
-  }
+  }, []);
 
-  componentDidUpdate(prevProps) {
-    const {
-      input,
-      props: { focus },
-    } = this;
-
-    // Check if focusedInput changed
-    // Prevent calling function if input already in focus
-    if (prevProps.focus !== focus && (input && focus)) {
+  useEffect(() => {
+    if (input && focus) {
       input.focus();
       input.select();
     }
-  }
+  }, [focus]);
 
-  getClasses = (...classes) =>
+  const getClasses = (...classes) =>
     classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
 
-  render() {
-    const {
-      separator,
-      isLastChild,
-      inputStyle,
-      focus,
-      isDisabled,
-      hasErrored,
-      errorStyle,
-      focusStyle,
-      disabledStyle,
-      shouldAutoFocus,
-      isInputNum,
-      value,
-      ...rest
-    } = this.props;
+  const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
 
-    const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
-
-    return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <input
-          style={Object.assign(
-            { width: '1em', textAlign: 'center' },
-            isStyleObject(inputStyle) && inputStyle,
-            focus && isStyleObject(focusStyle) && focusStyle,
-            isDisabled && isStyleObject(disabledStyle) && disabledStyle,
-            hasErrored && isStyleObject(errorStyle) && errorStyle
-          )}
-          className={this.getClasses(
-            inputStyle,
-            focus && focusStyle,
-            isDisabled && disabledStyle,
-            hasErrored && errorStyle
-          )}
-          type={isInputNum ? 'number' : 'tel'}
-          {...numValueLimits}
-          maxLength="1"
-          ref={input => {
-            this.input = input;
-          }}
-          disabled={isDisabled}
-          value={value ? value : ''}
-          {...rest}
-        />
-        {!isLastChild && separator}
-      </div>
-    );
-  }
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <input
+        style={Object.assign(
+          { width: '1em', textAlign: 'center' },
+          isStyleObject(inputStyle) && inputStyle,
+          focus && isStyleObject(focusStyle) && focusStyle,
+          isDisabled && isStyleObject(disabledStyle) && disabledStyle,
+          hasErrored && isStyleObject(errorStyle) && errorStyle
+        )}
+        className={getClasses(
+          inputStyle,
+          focus && focusStyle,
+          isDisabled && disabledStyle,
+          hasErrored && errorStyle
+        )}
+        type={isInputNum ? 'number' : 'tel'}
+        {...numValueLimits}
+        maxLength="1"
+        ref={(ref: HTMLInputElement) => {
+          input = ref;
+        }}
+        disabled={isDisabled}
+        value={value || ''}
+        {...rest}
+      />
+      {!isLastChild && separator}
+    </div>
+  );
 }
+
+// class SingleOtpInput extends PureComponent<*> {
+// input: ?HTMLInputElement;
+
+// Focus on first render
+// Only when shouldAutoFocus is true
+// componentDidMount() {
+//   const {
+//     input,
+//     props: { focus, shouldAutoFocus },
+//   } = this;
+
+//   if (input && focus && shouldAutoFocus) {
+//     input.focus();
+//   }
+// }
+
+// componentDidUpdate(prevProps) {
+//   const {
+//     input,
+//     props: { focus },
+//   } = this;
+
+//   // Check if focusedInput changed
+//   // Prevent calling function if input already in focus
+//   if (prevProps.focus !== focus && (input && focus)) {
+//     input.focus();
+//     input.select();
+//   }
+// }
+
+// getClasses = (...classes) =>
+//   classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
+
+//   render() {
+//     // const {
+//     //   separator,
+//     //   isLastChild,
+//     //   inputStyle,
+//     //   focus,
+//     //   isDisabled,
+//     //   hasErrored,
+//     //   errorStyle,
+//     //   focusStyle,
+//     //   disabledStyle,
+//     //   shouldAutoFocus,
+//     //   isInputNum,
+//     //   value,
+//     //   ...rest
+//     // } = this.props;
+
+//     // const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
+
+//     return (
+//       <div style={{ display: 'flex', alignItems: 'center' }}>
+//         <input
+//           style={Object.assign(
+//             { width: '1em', textAlign: 'center' },
+//             isStyleObject(inputStyle) && inputStyle,
+//             focus && isStyleObject(focusStyle) && focusStyle,
+//             isDisabled && isStyleObject(disabledStyle) && disabledStyle,
+//             hasErrored && isStyleObject(errorStyle) && errorStyle
+//           )}
+//           className={this.getClasses(
+//             inputStyle,
+//             focus && focusStyle,
+//             isDisabled && disabledStyle,
+//             hasErrored && errorStyle
+//           )}
+//           type={isInputNum ? 'number' : 'tel'}
+//           {...numValueLimits}
+//           maxLength="1"
+//           ref={input => {
+//             this.input = input;
+//           }}
+//           disabled={isDisabled}
+//           value={value ? value : ''}
+//           {...rest}
+//         />
+//         {!isLastChild && separator}
+//       </div>
+//     );
+//   }
+// }
 
 class OtpInput extends Component<Props, State> {
   static defaultProps = {
