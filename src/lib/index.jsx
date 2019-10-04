@@ -37,6 +37,9 @@ const isStyleObject = obj => typeof obj === 'object';
 class SingleOtpInput extends PureComponent<*> {
   input: ?HTMLInputElement;
 
+  //Add the value state for controlled input
+  state = {value: null}
+
   // Focus on first render
   // Only when shouldAutoFocus is true
   componentDidMount() {
@@ -66,6 +69,10 @@ class SingleOtpInput extends PureComponent<*> {
 
   getClasses = (...classes) =>
     classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
+
+  handleValueChange = (event) => {
+    this.setState({value: event.target.value});
+  }
 
   render() {
     const {
@@ -105,6 +112,8 @@ class SingleOtpInput extends PureComponent<*> {
           type={isInputNum ? 'number' : 'tel'}
           {...numValueLimits}
           maxLength="1"
+          value={this.state.value}
+          onChange = {this.handleValueChange}
           ref={input => {
             this.input = input;
           }}
