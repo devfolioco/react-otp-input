@@ -1,3 +1,5 @@
+## A very warm welcome to you all!
+
 # react-otp-input
 
 A fully customizable, one-time password input component for the web built with React.
@@ -185,3 +187,5 @@ Feel free to open issues and pull requests!
 ## License
 
 MIT
+
+## Thanks for Visiting!
