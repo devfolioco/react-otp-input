@@ -214,7 +214,7 @@ class OtpInput extends Component<Props, State> {
     } else if (e.keyCode === RIGHT_ARROW || e.key === 'ArrowRight') {
       e.preventDefault();
       this.focusNextInput();
-    } else if (e.keyCode === SPACEBAR || e.key === 'Space' || e.key === ' ' || e.key === 'Spacebar') {
+    } else if (e.keyCode === SPACEBAR || e.key === ' ' || e.key === 'Spacebar') {
       e.preventDefault();
     }
   };
