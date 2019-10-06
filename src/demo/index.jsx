@@ -165,7 +165,7 @@ class Demo extends Component {
                 </button>
                 <button
                   className="btn margin-top--large"
-                  disabled={otp.length < numInputs}
+                  disabled={otp.length < 1}
                 >
                   Get OTP
                 </button>
