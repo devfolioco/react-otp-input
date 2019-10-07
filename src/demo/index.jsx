@@ -23,7 +23,10 @@ class Demo extends Component {
   handleChange = e => {
     let currVal = e.target.value;
     if(currVal<0) currVal = 0;
-    if(currVal>10) currVal = 10;
+    if(currVal>10){ 
+      currVal = 10;
+      alert("No. of Inputs cannot be greater than 10");
+    }
     this.setState({ [e.target.name]: currVal });
   };
 
