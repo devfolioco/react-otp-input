@@ -21,7 +21,10 @@ class Demo extends Component {
   };
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    let currVal = e.target.value;
+    if(currVal<0) currVal = 0;
+    if(currVal>10) currVal = 10;
+    this.setState({ [e.target.name]: currVal });
   };
 
   clearOtp = () => {
@@ -59,6 +62,7 @@ class Demo extends Component {
                 value={numInputs}
                 onChange={this.handleChange}
                 min="0"
+                max="10"
               />
             </label>
           </div>
