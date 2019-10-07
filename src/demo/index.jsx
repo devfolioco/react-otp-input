@@ -17,7 +17,7 @@ class Demo extends Component {
   }
 
   handleOtpChange = otp => {
-    this.setState({ otp });
+    this.setState({ otp : otp.toString() });
   };
 
   handleChange = e => {
