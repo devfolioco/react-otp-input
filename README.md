@@ -19,8 +19,8 @@ npm install --save react-otp-input
 Basic usage:
 
 ```javascript
-import React, { Component } from 'react';
-import OtpInput from 'react-otp-input';
+import React, { Component } from 'react'; // importing module React
+import OtpInput from 'react-otp-input';  // module for I/O
 
 export default class App extends Component {
   state = {
@@ -44,7 +44,7 @@ export default class App extends Component {
 ```
 
 ## API
-
+```(API stands for Application programming interface used to interconnect different interfaces with eachother)```
 <table>
   <tr>
     <th>Name<br></th>
