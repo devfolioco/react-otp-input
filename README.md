@@ -2,7 +2,7 @@
 
 A fully customizable, one-time password input component for the web built with React.
 
-![GIPHY](https://media.giphy.com/media/9JiszPVOX5FuPfJm39/giphy.gif)
+![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
 
 [Live Demo](https://devfolioco.github.io/react-otp-input)
 
