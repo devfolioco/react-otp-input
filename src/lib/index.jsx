@@ -138,7 +138,7 @@ class OtpInput extends Component<Props, State> {
   handleOtpChange = (otp: string[]) => {
     const { onChange, isInputNum } = this.props;
     const otpValue = otp.join('');
-    onChange(isInputNum ? Number(otpValue) : otpValue);
+    onChange(otpValue);
   };
 
   // Focus on input by index
