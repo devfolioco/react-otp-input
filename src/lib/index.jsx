@@ -257,11 +257,24 @@ class OtpInput extends Component<Props, State> {
             const { onFocus } = this.props;
 
             e.target.select();
+
+            const { relatedTarget } = e;
+             // If the previous focus was another child input don't call onFocus
+             if (relatedTarget && this.container.contains(relatedTarget) && relatedTarget.tagName.toLowerCase() === 'input') {
+              return;
+            }
+
             onFocus && onFocus(e, i);
           }}
           onBlur={(e) => {
             this.setState({ activeInput: -1 });
             const { onBlur } = this.props;
+
+            const { relatedTarget } = e;
+            // If the blur is other input that is part of the OTP don't call onBlur
+            if (relatedTarget && this.container.contains(relatedTarget) && relatedTarget.tagName.toLowerCase() === 'input') {
+              return;
+            }
             onBlur && onBlur(e);
           }}
           separator={separator}
@@ -291,6 +304,7 @@ class OtpInput extends Component<Props, State> {
           isStyleObject(containerStyle) && containerStyle
         )}
         className={!isStyleObject(containerStyle) ? containerStyle : ''}
+        ref={container => this.container = container}
       >
         {this.renderInputs()}
       </div>
