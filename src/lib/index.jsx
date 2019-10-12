@@ -29,7 +29,7 @@ type State = {
 };
 
 // Doesn't really check if it's a style Object
-// Basic implemenetation to check if it's not a string
+// Basic implementation to check if it's not a string
 // of classNames and is an Object
 // TODO: Better implementation
 const isStyleObject = obj => typeof obj === 'object';
