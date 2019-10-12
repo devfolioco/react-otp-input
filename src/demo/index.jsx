@@ -153,6 +153,12 @@ class Demo extends Component {
                   isInputNum={isInputNum}
                   shouldAutoFocus
                   value={otp}
+                  onFocus={(e, i) => {
+                    console.log('focused>>>', e, i);
+                  }}
+                  onBlur={(e) => {
+                    console.log('blurred>>>', e);
+                  }}
                 />
               </div>
               <div className="btn-row">

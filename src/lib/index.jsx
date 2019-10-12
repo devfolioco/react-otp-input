@@ -10,6 +10,8 @@ const DELETE = 46;
 type Props = {
   numInputs: number,
   onChange: Function,
+  onFocus: Function,
+  onBlur: Function,
   separator?: Object,
   containerStyle?: Object,
   inputStyle?: Object,
@@ -252,9 +254,16 @@ class OtpInput extends Component<Props, State> {
           onPaste={this.handleOnPaste}
           onFocus={e => {
             this.setState({ activeInput: i });
+            const { onFocus } = this.props;
+
             e.target.select();
+            onFocus && onFocus(e, i);
           }}
-          onBlur={() => this.setState({ activeInput: -1 })}
+          onBlur={(e) => {
+            this.setState({ activeInput: -1 });
+            const { onBlur } = this.props;
+            onBlur && onBlur(e);
+          }}
           separator={separator}
           inputStyle={inputStyle}
           focusStyle={focusStyle}
