@@ -56,21 +56,21 @@ export default class App extends Component {
   <tr>
     <td>numInputs</td>
     <td>number</td>
-    <td><strong>true</strong></td>
+    <td>true</td>
     <td>4</td>
     <td>Number of OTP inputs to be rendered.</td>
   </tr>
   <tr>
     <td>onChange</td>
     <td>function</td>
-    <td><strong>true</strong></td>
+    <td>true</td>
     <td>console.log</td>
     <td>Returns OTP code typed in inputs.</td>
   </tr>
   <tr>
     <td>value</td>
     <td>string / number</td>
-    <td><strong>true</strong></td>
+    <td>true</td>
     <td>''</td>
     <td>The value of the otp passed into the component.</td>
   </tr>
@@ -78,7 +78,7 @@ export default class App extends Component {
     <td>separator</td>
     <td>component<br></td>
     <td>false</td>
-    <td></td>
+    <td>none</td>
     <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input</td>
   </tr>
   <tr>
