@@ -72,7 +72,7 @@ export default class App extends Component {
     <td>string / number</td>
     <td><strong>true</strong></td>
     <td>''</td>
-    <td>The value of the otp passed into the component.</td>
+    <td>The value of the OTP passed into the component.</td>
   </tr>
   <tr>
     <td>separator</td>
@@ -135,7 +135,7 @@ export default class App extends Component {
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
-    <td>Auto focuses input on inital page load.</td>
+    <td>Auto focuses input on initial page load.</td>
   </tr>
   <tr>
     <td>isInputNum</td>
