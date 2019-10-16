@@ -138,7 +138,7 @@ class OtpInput extends Component<Props, State> {
   handleOtpChange = (otp: string[]) => {
     const { onChange, isInputNum } = this.props;
     const otpValue = otp.join('');
-    onChange(isInputNum ? Number(otpValue) : otpValue);
+    onChange(otpValue);
   };
 
   // Focus on input by index
@@ -214,6 +214,16 @@ class OtpInput extends Component<Props, State> {
       e.preventDefault();
       this.focusNextInput();
     }
+		if (this.props.isInputNum) {
+      const num = parseInt(e.key);
+			var key = e.keyCode || e.charCode;
+
+			// if not a number, prevent user input.
+			if (isNaN(num) && !(key === 8 || key === 46)) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		}
   };
 
   checkLength = (e: Object) => {

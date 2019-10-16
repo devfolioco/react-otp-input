@@ -38,6 +38,20 @@ class Demo extends Component {
     alert(this.state.otp);
   };
 
+  handleOnKeyDown = e => {
+    const { isInputNum } = this.state;
+    if (isInputNum) {
+      const num = parseInt(e.key);
+			var key = e.keyCode || e.charCode;
+
+			// if not a number, prevent user input.
+			if (isNaN(num) && !(key === 8 || key === 46)) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		}
+  }
+
   render() {
     const { otp, numInputs, separator, isDisabled, hasErrored, isInputNum } = this.state;
 
@@ -82,7 +96,9 @@ class Demo extends Component {
                 id="value"
                 maxLength={numInputs}
                 name="otp"
+                pattern={isInputNum ? "[0-9]*" : "*"}
                 type="text"
+                onKeyDown={this.handleOnKeyDown}
                 value={otp}
                 onChange={this.handleChange}
               />
