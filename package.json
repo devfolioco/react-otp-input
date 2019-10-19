@@ -34,6 +34,7 @@
     "babel-preset-react": "^6.24.1",
     "concurrently": "^3.6.1",
     "css-loader": "^3.0.0",
+    "docz": "^2.0.0-rc.58",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -63,7 +64,5 @@
   "bugs": {
     "url": "https://github.com/devfolioco/react-otp-input/issues"
   },
-  "dependencies": {
-    "docz": "^2.0.0-rc.52"
-  }
+  "dependencies": {}
 }
