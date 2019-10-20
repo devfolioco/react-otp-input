@@ -153,19 +153,14 @@ export default class App extends Component {
 ## Development
 
 To run the development server:
-
 ```
 npm run dev
 ```
-
 To run the development server for example:
-
 ```
 npm run docs
 ```
-
 To make a production build of the example:
-
 ```
 npm run docs:prod
 ```
