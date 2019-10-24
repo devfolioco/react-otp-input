@@ -16,7 +16,9 @@
     "predeploy": "npm run demo:prod",
     "deploy": "gh-pages -d demo",
     "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "docz:build": "docz build",
+    "test": "nyc mocha",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "keywords": [],
   "peerDependencies": {
@@ -46,6 +48,8 @@
     "flow-bin": "^0.73.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
