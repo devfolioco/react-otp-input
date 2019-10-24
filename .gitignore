@@ -8,3 +8,7 @@ node_modules
 
 # docz
 .docz
+
+.nyc_output
+coverage
+*.lcov
