@@ -1,7 +1,17 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier", "plugin:flowtype/recommended"],
   "plugins": ["prettier", "flowtype"],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": true
+    }]
   }
 }

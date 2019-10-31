@@ -26,6 +26,7 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "@types/react": "^16.9.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -45,7 +46,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.13.0",
-    "flow-bin": "^0.73.0",
+    "flow-bin": "^0.109.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "mocha": "^6.2.2",
@@ -68,5 +69,7 @@
   "bugs": {
     "url": "https://github.com/devfolioco/react-otp-input/issues"
   },
-  "dependencies": {}
+  "dependencies": {
+    "babel-eslint": "^10.0.3"
+  }
 }
