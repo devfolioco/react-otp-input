@@ -1,5 +1,7 @@
 # react-otp-input
 
+[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
+
 A fully customizable, one-time password input component for the web built with React.
 
 ![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
@@ -9,6 +11,8 @@ A fully customizable, one-time password input component for the web built with R
 [CodeSandbox](https://codesandbox.io/s/0y849kwoqv)
 
 ## Installation
+
+[![NPM](https://nodei.co/npm/react-otp-input.png?compact=true)](https://nodei.co/npm/react-otp-input/)
 
 To install the latest stable version:
 
