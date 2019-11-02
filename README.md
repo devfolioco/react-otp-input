@@ -176,6 +176,8 @@ npm run docs:prod
 
 ## Checklist
 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
+
 - [x] Add flowtypes
 - [x] Add ESLint, Prettier for code quality
 - [x] Add styling support for states including focus/disabled
