@@ -2,7 +2,7 @@
 
 A fully customizable, one-time password input component for the web built with React.
 
-![GIPHY](https://media.giphy.com/media/9JiszPVOX5FuPfJm39/giphy.gif)
+![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
 
 [Live Demo](https://devfolioco.github.io/react-otp-input)
 
@@ -47,7 +47,7 @@ export default class App extends Component {
 
 <table>
   <tr>
-    <th>Name<br></th>
+    <th>Name<br/></th>
     <th>Type</th>
     <th>Required</th>
     <th>Default</th>
@@ -72,11 +72,11 @@ export default class App extends Component {
     <td>string / number</td>
     <td><strong>true</strong></td>
     <td>''</td>
-    <td>The value of the otp passed into the component.</td>
+    <td>The value of the OTP passed into the component.</td>
   </tr>
   <tr>
     <td>separator</td>
-    <td>component<br></td>
+    <td>component<br/></td>
     <td>false</td>
     <td></td>
     <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input</td>
@@ -135,7 +135,7 @@ export default class App extends Component {
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
-    <td>Auto focuses input on inital page load.</td>
+    <td>Auto focuses input on initial page load.</td>
   </tr>
   <tr>
     <td>isInputNum</td>
@@ -148,7 +148,7 @@ export default class App extends Component {
 
 ## Breaking changes when porting to v1.0.0
 
-`react-otp-input` is now a controlled component to facilitate functionalities that weren't possible before from the application using it, such as clearing or pre-assigning values. For `v1.0.0` and above, a `value` prop needs to be passed in the component for it function as expected.
+`react-otp-input` is now a controlled component to facilitate functionalities that weren't possible before from the application using it, such as clearing or pre-assigning values. For `v1.0.0` and above, a `value` prop needs to be passed in the component for it to function as expected.
 
 ## Development
 
