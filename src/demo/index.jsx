@@ -58,6 +58,7 @@ class Demo extends Component {
                 type="number"
                 value={numInputs}
                 onChange={this.handleChange}
+                min="0"
               />
             </label>
           </div>
@@ -132,17 +133,10 @@ class Demo extends Component {
         <div className="view">
           <div className="card">
             <form onSubmit={this.handleSubmit}>
-              <h2>Enter verification code</h2>
+              <p>Enter verification code</p>
               <div className="margin-top--small">
                 <OtpInput
-                  inputStyle={{
-                    width: '3rem',
-                    height: '3rem',
-                    margin: '0 1rem',
-                    fontSize: '2rem',
-                    borderRadius: 4,
-                    border: '1px solid rgba(0,0,0,0.3)',
-                  }}
+                  inputStyle="inputStyle"
                   numInputs={numInputs}
                   isDisabled={isDisabled}
                   hasErrored={hasErrored}
@@ -158,6 +152,7 @@ class Demo extends Component {
                 <button
                   className="btn margin-top--large"
                   type="button"
+                  disabled={isDisabled}
                   onClick={this.clearOtp}
                 >
                   Clear

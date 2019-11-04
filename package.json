@@ -14,7 +14,11 @@
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
     "prepublish": "npm run build",
     "predeploy": "npm run demo:prod",
-    "deploy": "gh-pages -d demo"
+    "deploy": "gh-pages -d demo",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "test": "nyc mocha",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "keywords": [],
   "peerDependencies": {
@@ -32,6 +36,7 @@
     "babel-preset-react": "^6.24.1",
     "concurrently": "^3.6.1",
     "css-loader": "^3.0.0",
+    "docz": "^2.0.0-rc.58",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -43,9 +48,11 @@
     "flow-bin": "^0.73.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
     "prettier": "^1.18.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.4",
@@ -60,5 +67,6 @@
   },
   "bugs": {
     "url": "https://github.com/devfolioco/react-otp-input/issues"
-  }
+  },
+  "dependencies": {}
 }

@@ -22,6 +22,69 @@ a {
   position: relative;
 }
 
+.inputStyle {
+  width: 3rem !important;
+  height: 3rem;
+  margin: 0 1rem;
+  font-size: 2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+@media only screen and (max-width: 678px) {
+  .container {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .side-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .side-bar__segment--header {
+    text-align: center;
+  }
+
+  .side-bar__segment--bottom {
+    position: static !important;
+    margin: 10px;
+  }
+
+  label {
+    display: block;
+    float: left;
+    width : 120px;    
+  }
+
+  .card {
+    width: 100%;
+    min-width: 120px !important;
+    margin: 20px;
+  }
+
+  .side-bar__segment > label > input[type='number'],
+  .side-bar__segment > label > input[type='text'] {
+    width: 180px !important;
+  }
+
+}
+
+@media only screen and (max-width: 470px) {
+  .margin-top--small .inputStyle {
+    width: 2rem !important;
+    height: 2rem;
+    margin: 0 5px;
+    font-size: 1rem;
+  }
+
+  .card > form > p {
+    font-size: 1.2em !important;
+  }
+
+}
+
 .side-bar__segment {
   padding: 0.5rem 1rem;
 }
@@ -82,6 +145,25 @@ a {
   align-items: center;
 }
 
+.card > form > p {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .btn-row {
   display: flex;
   flex-direction: row;
@@ -104,6 +186,15 @@ a {
 
 .margin-top--small {
   margin-top: 1rem;
+  margin-bottom: -1rem;
+}
+
+.margin-top--small > div {
+  flex-wrap: wrap;
+}
+
+.margin-top--small > div > div {
+  margin-bottom: 1rem;
 }
 
 .margin-top--medium {

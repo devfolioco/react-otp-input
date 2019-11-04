@@ -4,3 +4,11 @@ node_modules
 
 # Editor config
 .vscode
+
+
+# docz
+.docz
+
+.nyc_output
+coverage
+*.lcov
