@@ -14,13 +14,13 @@ A fully customizable, one-time password input component for the web built with R
 
 [![NPM](https://nodei.co/npm/react-otp-input.png?compact=true)](https://nodei.co/npm/react-otp-input/)
 
-To install the latest stable version:
+#### To install the latest stable version:
 
 ```
 npm install --save react-otp-input
 ```
 
-Basic usage:
+#### Basic usage:
 
 ```javascript
 import React, { Component } from 'react';
@@ -156,19 +156,19 @@ export default class App extends Component {
 
 ## Development
 
-To run the development server:
+#### To run the development server:
 
 ```
 npm run dev
 ```
 
-To run the development server for example:
+#### To run the development server for example:
 
 ```
 npm run docs
 ```
 
-To make a production build of the example:
+#### To make a production build of the example:
 
 ```
 npm run docs:prod
