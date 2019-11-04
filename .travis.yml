@@ -1,0 +1,19 @@
+language: node_js
+install:
+  - npm install -g codecov
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run test
+  - npm run report-coverage
+  - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  domain: $github_token
+  project: ./build/
+on:
+  branch: master
