@@ -196,7 +196,6 @@ class OtpInput extends Component<Props, State> {
 
   handleOnChange = (e: Object) => {
     this.changeCodeAtFocus(e.target.value);
-    this.focusNextInput();
   };
 
   // Handle cases of backspace, delete, left arrow, right arrow, space
@@ -225,8 +224,7 @@ class OtpInput extends Component<Props, State> {
 
   // The content may not have changed, but some input took place hence change the focus
   handleInput = (e: Object) => {
-    this.handleOnChange(e);
-    this.checkLength(e);
+    this.focusNextInput();
   }
 
   checkLength = (e: Object) => {
