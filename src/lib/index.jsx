@@ -103,7 +103,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={isInputNum ? 'number' : 'tel'}
+          type={isInputNum ? 'number' : 'text'}
           {...numValueLimits}
           maxLength="1"
           ref={input => {
