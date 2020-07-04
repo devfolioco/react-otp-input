@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+
 import OtpInput from '../../lib';
 import './styles.css';
 
 class Demo extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       otp: '',
       numInputs: 4,
@@ -13,6 +15,8 @@ class Demo extends Component {
       isDisabled: false,
       hasErrored: false,
       isInputNum: false,
+      minLength: 0,
+      maxLength: 40,
     };
   }
 
@@ -21,12 +25,17 @@ class Demo extends Component {
   };
 
   handleChange = e => {
+    const { minLength, maxLength } = this.state;
     let currVal = e.target.value;
-    if(currVal<0) currVal = 0;
-    if(currVal>10){ 
-      currVal = 10;
-      alert("No. of Inputs cannot be greater than 10");
+
+    if (currVal < minLength || currVal > maxLength) {
+      currVal = 4;
+
+      console.error(
+        `Please enter a value between ${minLength} and ${maxLength}`
+      );
     }
+
     this.setState({ [e.target.name]: currVal });
   };
 
@@ -45,12 +54,24 @@ class Demo extends Component {
   };
 
   render() {
-    const { otp, numInputs, separator, isDisabled, hasErrored, isInputNum } = this.state;
+    const {
+      otp,
+      numInputs,
+      separator,
+      isDisabled,
+      hasErrored,
+      isInputNum,
+      minLength,
+      maxLength,
+    } = this.state;
 
     return (
       <div className="container">
         <div className="side-bar">
-          <a href="https://github.com/ajayns/react-otp-input" target="_blank">
+          <a
+            href="https://github.com/devfolioco/react-otp-input"
+            target="_blank"
+          >
             <div className="side-bar__segment side-bar__segment--header">
               <h2>react-otp-input</h2>
             </div>
@@ -64,8 +85,8 @@ class Demo extends Component {
                 type="number"
                 value={numInputs}
                 onChange={this.handleChange}
-                min="0"
-                max="10"
+                min={minLength}
+                max={maxLength}
               />
             </label>
           </div>
@@ -132,7 +153,7 @@ class Demo extends Component {
             </label>
           </div>
           <div className="side-bar__segment side-bar__segment--bottom">
-            <a href="https://github.com/ajayns/react-otp-input">
+            <a href="https://github.com/devfolioco/react-otp-input">
               Documentation and Source
             </a>
           </div>
