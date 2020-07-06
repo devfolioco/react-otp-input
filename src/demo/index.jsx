@@ -25,15 +25,18 @@ class Demo extends Component {
   };
 
   handleChange = e => {
-    const { minLength, maxLength } = this.state;
     let currVal = e.target.value;
 
-    if (currVal < minLength || currVal > maxLength) {
-      currVal = 4;
+    if (e.target.name === 'numInputs') {
+      const { minLength, maxLength } = this.state;
 
-      console.error(
-        `Please enter a value between ${minLength} and ${maxLength}`
-      );
+      if (currVal < minLength || currVal > maxLength) {
+        currVal = 4;
+
+        console.error(
+          `Please enter a value between ${minLength} and ${maxLength}`
+        );
+      }
     }
 
     this.setState({ [e.target.name]: currVal });
