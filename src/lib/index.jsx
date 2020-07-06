@@ -85,11 +85,10 @@ class SingleOtpInput extends PureComponent<*> {
       ...rest
     } = this.props;
 
-    const numValueLimits = isInputNum ? { min: 0, max: 9 } : {};
-
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <input
+          autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
             isStyleObject(inputStyle) && inputStyle,
@@ -103,8 +102,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={isInputNum ? 'number' : 'tel'}
-          {...numValueLimits}
+          type={isInputNum ? 'tel' : 'text'}
           maxLength="1"
           ref={input => {
             this.input = input;
@@ -137,9 +135,18 @@ class OtpInput extends Component<Props, State> {
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
-    const { onChange, isInputNum } = this.props;
+    const { onChange } = this.props;
     const otpValue = otp.join('');
+
     onChange(otpValue);
+  };
+
+  isInputValueValid = value => {
+    const isTypeValid = this.props.isInputNum
+      ? !isNaN(parseInt(value, 10))
+      : typeof value === 'string';
+
+    return isTypeValid && value.trim().length === 1;
   };
 
   // Focus on input by index
@@ -195,7 +202,11 @@ class OtpInput extends Component<Props, State> {
   };
 
   handleOnChange = (e: Object) => {
-    this.changeCodeAtFocus(e.target.value);
+    const { value } = e.target;
+
+    if (this.isInputValueValid(value)) {
+      this.changeCodeAtFocus(value);
+    }
   };
 
   // Handle cases of backspace, delete, left arrow, right arrow, space
@@ -216,21 +227,32 @@ class OtpInput extends Component<Props, State> {
     } else if (
       e.keyCode === SPACEBAR ||
       e.key === ' ' ||
-      e.key === 'Spacebar'
+      e.key === 'Spacebar' ||
+      e.key === 'Space'
     ) {
       e.preventDefault();
     }
   };
 
   // The content may not have changed, but some input took place hence change the focus
-  handleInput = (e: Object) => {
-    this.focusNextInput();
-  }
-
-  checkLength = (e: Object) => {
-    if (e.target.value.length > 1) {
-      e.preventDefault();
+  handleOnInput = (e: Object) => {
+    if (this.isInputValueValid(e.target.value)) {
       this.focusNextInput();
+    } else {
+      // This is a workaround for dealing with keyCode "229 Unidentified" on Android.
+
+      if (!this.props.isInputNum) {
+        const { nativeEvent } = e;
+
+        if (
+          nativeEvent.data === null &&
+          nativeEvent.inputType === 'deleteContentBackward'
+        ) {
+          e.preventDefault();
+          this.changeCodeAtFocus('');
+          this.focusPrevInput();
+        }
+      }
     }
   };
 
@@ -259,7 +281,7 @@ class OtpInput extends Component<Props, State> {
           value={otp && otp[i]}
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
-          onInput={this.handleInput}
+          onInput={this.handleOnInput}
           onPaste={this.handleOnPaste}
           onFocus={e => {
             this.setState({ activeInput: i });
