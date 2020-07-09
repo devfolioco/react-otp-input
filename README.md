@@ -192,6 +192,5 @@ Feel free to open [issues](https://github.com/devfolioco/react-otp-input/issues/
 
 ## License
 
-![NPM](https://img.shields.io/npm/l/react-otp-input)
+[![NPM](https://img.shields.io/npm/l/react-otp-input)](https://github.com/devfolioco/react-otp-input/blob/master/LICENSE)
 
-MIT
