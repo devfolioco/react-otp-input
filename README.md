@@ -1,6 +1,6 @@
 # react-otp-input
 
-[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input) 
+[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
 
 A fully customizable, one-time password input component for the web built with React.
 
@@ -8,7 +8,7 @@ A fully customizable, one-time password input component for the web built with R
 
 [Live Demo](https://devfolioco.github.io/react-otp-input)
 
-[CodeSandbox](https://codesandbox.io/s/0y849kwoqv)
+[CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52)
 
 ## Installation
 
@@ -22,26 +22,23 @@ npm install --save react-otp-input
 
 #### Basic usage:
 
-```javascript
+```jsx
 import React, { Component } from 'react';
 import OtpInput from 'react-otp-input';
 
 export default class App extends Component {
-  state = {
-    otp: '',
-  };
+  state = { otp: '' };
 
   handleChange = otp => this.setState({ otp });
 
   render() {
     return (
-      <div>
-        <OtpInput
-          onChange={this.handleChange}
-          numInputs={6}
-          separator={<span>-</span>}
-        />
-      </div>
+      <OtpInput
+        value={this.state.otp}
+        onChange={this.handleChange}
+        numInputs={6}
+        separator={<span>-</span>}
+      />
     );
   }
 }
@@ -193,4 +190,3 @@ Feel free to open [issues](https://github.com/devfolioco/react-otp-input/issues/
 ## License
 
 [![NPM](https://img.shields.io/npm/l/react-otp-input)](https://github.com/devfolioco/react-otp-input/blob/master/LICENSE)
-
