@@ -271,6 +271,7 @@ class OtpInput extends Component<Props, State> {
       errorStyle,
       shouldAutoFocus,
       isInputNum,
+      className
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
@@ -300,6 +301,7 @@ class OtpInput extends Component<Props, State> {
           errorStyle={errorStyle}
           shouldAutoFocus={shouldAutoFocus}
           isInputNum={isInputNum}
+          className={className}
         />
       );
     }
