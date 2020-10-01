@@ -119,6 +119,8 @@ class SingleOtpInput extends PureComponent<*> {
   }
 }
 
+// Undo Stack stores all previous values
+const undoStack=[];
 class OtpInput extends Component<Props, State> {
   static defaultProps = {
     numInputs: 4,
@@ -137,6 +139,7 @@ class OtpInput extends Component<Props, State> {
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
+    undoStack.push(this.props.value);
     const { onChange } = this.props;
     const otpValue = otp.join('');
 
@@ -226,7 +229,13 @@ class OtpInput extends Component<Props, State> {
     } else if (e.keyCode === RIGHT_ARROW || e.key === 'ArrowRight') {
       e.preventDefault();
       this.focusNextInput();
-    } else if (
+    } 
+    else if(e.keyCode == 90 && e.ctrlKey ){
+      // Keycode combination for ctrl+z
+      e.preventDefault();
+      this.handleUndo();
+    }
+    else if (
       e.keyCode === SPACEBAR ||
       e.key === ' ' ||
       e.key === 'Spacebar' ||
@@ -257,6 +266,18 @@ class OtpInput extends Component<Props, State> {
       }
     }
   };
+
+  // handle Undo Operation
+  handleUndo= ()=>{
+    const {onChange}=this.props;
+    const oldVal=undoStack.pop();
+    
+    if(oldVal!==undefined){
+      onChange(oldVal);
+      this.focusInput(oldVal.length);
+      
+    }
+  }
 
   renderInputs = () => {
     const { activeInput } = this.state;
