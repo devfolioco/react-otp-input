@@ -22,7 +22,8 @@ type Props = {
   shouldAutoFocus?: boolean,
   isInputNum?: boolean,
   value?: string,
-  className?: string
+  className?: string,
+  onAutoSubmit?: Function,
 };
 
 type State = {
@@ -126,6 +127,8 @@ class OtpInput extends Component<Props, State> {
     isDisabled: false,
     shouldAutoFocus: false,
     value: '',
+    autoSubmit: false,
+    onAutoSubmit: ()=>{alert("AutoSubmitted")}
   };
 
   state = {
@@ -137,10 +140,12 @@ class OtpInput extends Component<Props, State> {
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
-    const { onChange } = this.props;
+    const { onChange, onAutoSubmit, numInputs, autoSubmit } = this.props;
     const otpValue = otp.join('');
-
     onChange(otpValue);
+    if(otp.length===this.props.numInputs && autoSubmit){
+      onAutoSubmit();
+    }
   };
 
   isInputValueValid = value => {
