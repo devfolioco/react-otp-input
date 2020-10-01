@@ -23,7 +23,7 @@ type Props = {
   shouldAutoFocus?: boolean,
   isInputNum?: boolean,
   value?: string,
-  className?: string
+  className?: string,
 };
 
 type State = {
@@ -138,21 +138,22 @@ class OtpInput extends Component<Props, State> {
   getOtpValue = () =>
     this.props.value ? this.props.value.toString().split('') : [];
 
-  getPlaceholderValue=()=>{
-    const {placeholder,numInputs}= this.props;
+  getPlaceholderValue = () => {
+    const { placeholder, numInputs } = this.props;
 
-    if(!placeholder) return;
-    
-    if(placeholder.length===1){
+    if (typeof placeholder !== 'string'){
+      console.error("Placeholder should be a string");
+      return;
+    } 
+
+    if (placeholder.length === 1) {
       return placeholder.repeat(numInputs);
+    } else if (placeholder.length === numInputs) {
+      return placeholder;
+    } else {
+      console.error('Invalid placeholder value');
     }
-    else if(placeholder.length===numInputs){
-      return placeholder
-    }
-    else{
-      console.error("Invalid placeholder value");
-    }
-  }
+  };
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
