@@ -95,6 +95,7 @@ class SingleOtpInput extends PureComponent<*> {
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <input
+          aria-label={`Verification code ${isInputNum ? 'digit' : 'character'}`}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
