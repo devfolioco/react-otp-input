@@ -9,6 +9,7 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/devfolioco/react-otp-input?logo=git)](https://github.com/devfolioco/react-otp-input/pulls)
 [![Twitter__follow](https://img.shields.io/twitter/follow/devfolioco?style=social)](https://twitter.com/Devfolioco)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-otp-input)
+![GitHub top language](https://img.shields.io/github/languages/top/devfolioco/react-otp-input)
 
 A fully customizable, one-time password input component for the web built with React.
 
