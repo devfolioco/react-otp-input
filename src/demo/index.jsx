@@ -23,6 +23,9 @@ class Demo extends Component {
   handleOtpChange = otp => {
     this.setState({ otp });
   };
+  clearOtp = () => {
+    this.setState({ otp: '' });
+  };
 
   handleChange = e => {
     let currVal = e.target.value;
@@ -40,11 +43,9 @@ class Demo extends Component {
     }
 
     this.setState({ [e.target.name]: currVal });
+    clearOtp();
   };
 
-  clearOtp = () => {
-    this.setState({ otp: '' });
-  };
 
   handleCheck = e => {
     const { name } = e.target;
