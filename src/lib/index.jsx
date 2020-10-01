@@ -90,7 +90,10 @@ class SingleOtpInput extends PureComponent<*> {
     } = this.props;
 
     return (
-      <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        className={className}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         <input
           autoComplete="off"
           style={Object.assign(
@@ -140,18 +143,19 @@ class OtpInput extends Component<Props, State> {
 
   getPlaceholderValue = () => {
     const { placeholder, numInputs } = this.props;
+    if (placeholder !== undefined) {
+      if (typeof placeholder !== 'string') {
+        console.error('Placeholder should be a string');
+        return;
+      }
 
-    if (typeof placeholder !== 'string'){
-      console.error("Placeholder should be a string");
-      return;
-    } 
-
-    if (placeholder.length === 1) {
-      return placeholder.repeat(numInputs);
-    } else if (placeholder.length === numInputs) {
-      return placeholder;
-    } else {
-      console.error('Invalid placeholder value');
+      if (placeholder.length === 1) {
+        return placeholder.repeat(numInputs);
+      } else if (placeholder.length === numInputs) {
+        return placeholder;
+      } else {
+        console.error('Invalid placeholder value');
+      }
     }
   };
 
@@ -291,7 +295,7 @@ class OtpInput extends Component<Props, State> {
       errorStyle,
       shouldAutoFocus,
       isInputNum,
-      className
+      className,
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
