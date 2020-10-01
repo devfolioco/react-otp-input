@@ -22,7 +22,8 @@ type Props = {
   shouldAutoFocus?: boolean,
   isInputNum?: boolean,
   value?: string,
-  className?: string
+  className?: string,
+  placeholder: string,
 };
 
 type State = {
@@ -84,6 +85,7 @@ class SingleOtpInput extends PureComponent<*> {
       isInputNum,
       value,
       className,
+      placeholder,
       ...rest
     } = this.props;
 
@@ -112,6 +114,7 @@ class SingleOtpInput extends PureComponent<*> {
           disabled={isDisabled}
           value={value ? value : ''}
           {...rest}
+          placeholder={placeholder}
         />
         {!isLastChild && separator}
       </div>
@@ -130,6 +133,26 @@ class OtpInput extends Component<Props, State> {
 
   state = {
     activeInput: 0,
+  };
+
+  getPlaceholderValue = () => {
+    const { placeholder, numInputs } = this.props;
+    if(placeholder === undefined){
+      return "0".repeat(numInputs);
+    } else {
+      if (typeof placeholder !== 'string') {
+        console.error('Placeholder type not valid. It should be of typestring.');
+        return;
+      }
+      
+       if (placeholder.length === 1) {
+        return placeholder.repeat(numInputs);
+      } else if (placeholder.length === numInputs) {
+        return placeholder;
+      } else {
+        console.error('Placeholder value not valid.');
+      }
+    }
   };
 
   getOtpValue = () =>
@@ -275,6 +298,7 @@ class OtpInput extends Component<Props, State> {
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
+    const placeholder = this.getPlaceholderValue();
 
     for (let i = 0; i < numInputs; i++) {
       inputs.push(
@@ -302,6 +326,7 @@ class OtpInput extends Component<Props, State> {
           shouldAutoFocus={shouldAutoFocus}
           isInputNum={isInputNum}
           className={className}
+          placeholder={placeholder && placeholder[i]}
         />
       );
     }

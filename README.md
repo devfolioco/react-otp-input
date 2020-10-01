@@ -145,6 +145,13 @@ export default class App extends Component {
     <td>false</td>
     <td>Restrict input to only numbers.</td>
   </tr>
+  <tr>
+     <td>placeholder</td>
+     <td>string</td>
+     <td>false</td>
+     <td>0000</td>
+     <td>Provide a custom placeholder. Can be a single character or a string of length numInputs</td>
+   </tr>
 </table>
 
 ## Breaking changes when porting to v1.0.0
