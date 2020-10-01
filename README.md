@@ -80,7 +80,7 @@ export default class App extends Component {
     <td>component<br/></td>
     <td>false</td>
     <td>none</td>
-    <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input</td>
+    <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input.</td>
   </tr>
   <tr>
     <td>containerStyle</td>
