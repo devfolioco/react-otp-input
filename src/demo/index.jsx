@@ -53,7 +53,10 @@ class Demo extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    alert(this.state.otp);
+    let { numInputs, otp } = this.state;
+    otp = otp.slice(0, numInputs); // get the 1st numInputs chars
+    this.setState({ otp }); 
+    alert(`OTP: ${otp}`);
   };
 
   render() {
