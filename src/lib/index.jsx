@@ -173,7 +173,7 @@ class OtpInput extends Component<Props, State> {
 
   // Change OTP value at focused input
   changeCodeAtFocus = (value: string) => {
-    const { activeInput } = this.state;
+    var { activeInput } = this.state;
     const otp = this.getOtpValue();
     otp[activeInput] = value[0];
 
@@ -184,7 +184,7 @@ class OtpInput extends Component<Props, State> {
   handleOnPaste = (e: Object) => {
     e.preventDefault();
     const { numInputs } = this.props;
-    const { activeInput } = this.state;
+    let { activeInput } = this.state;
     const otp = this.getOtpValue();
 
     // Get pastedData in an array of max size (num of inputs - current position)
@@ -197,8 +197,11 @@ class OtpInput extends Component<Props, State> {
     for (let pos = 0; pos < numInputs; ++pos) {
       if (pos >= activeInput && pastedData.length > 0) {
         otp[pos] = pastedData.shift();
+        activeInput++;
       }
     }
+    this.setState({ activeInput });
+    this.focusInput(activeInput);
 
     this.handleOtpChange(otp);
   };
@@ -215,11 +218,10 @@ class OtpInput extends Component<Props, State> {
   handleOnKeyDown = (e: Object) => {
     if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
       e.preventDefault();
-      this.changeCodeAtFocus('');
-      this.focusPrevInput();
+      this.changeCodeAtFocus('_');
     } else if (e.keyCode === DELETE || e.key === 'Delete') {
       e.preventDefault();
-      this.changeCodeAtFocus('');
+      this.changeCodeAtFocus('_');
     } else if (e.keyCode === LEFT_ARROW || e.key === 'ArrowLeft') {
       e.preventDefault();
       this.focusPrevInput();
