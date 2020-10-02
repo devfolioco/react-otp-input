@@ -76,7 +76,7 @@ class Demo extends Component {
             target="_blank"
           >
             <div className="side-bar__segment side-bar__segment--header">
-              <h2>react-otp-input</h2>
+              <h2>React-OTP-input</h2>
             </div>
           </a>
           <div className="side-bar__segment">

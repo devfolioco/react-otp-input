@@ -97,6 +97,7 @@ a {
 
 .side-bar__segment--header:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  text-shadow: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .side-bar__segment--bottom {
