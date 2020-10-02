@@ -55,7 +55,7 @@ a {
   label {
     display: block;
     float: left;
-    width : 120px;    
+    width : 120px;
   }
 
   .card {
@@ -110,7 +110,7 @@ a {
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: #f2f2f3;
+  background-color: #E9F1F5;
 }
 
 .side-bar__segment > label > input[type='number'],
@@ -150,12 +150,12 @@ a {
   font-weight: bold;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 
 input[type=number] {
@@ -170,7 +170,7 @@ input[type=number] {
 }
 
 .btn {
-  background-color: #3273dc;
+  background-color: #0A50FF;
   border: none;
   padding: 0.5rem 1rem;
   color: white;
