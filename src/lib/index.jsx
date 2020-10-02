@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, PureComponent } from 'react';
+import React from 'react';
 
 // keyCode constants
 const BACKSPACE = 8;
@@ -25,109 +25,77 @@ type Props = {
   className?: string
 };
 
-type State = {
-  activeInput: number,
-  otp: string[],
-};
-
 // Doesn't really check if it's a style Object
 // Basic implementation to check if it's not a string
 // of classNames and is an Object
 // TODO: Better implementation
 const isStyleObject = obj => typeof obj === 'object';
 
-class SingleOtpInput extends PureComponent<*> {
-  input: ?HTMLInputElement;
+const SingleOtpInput = ({
+                             separator, isLastChild, inputStyle, focus, isDisabled, hasErrored, errorStyle,
+                             focusStyle, disabledStyle, shouldAutoFocus, isInputNum, value, className, ...rest
+                           }) => {
+  const inputRef = React.useRef(null)
 
   // Focus on first render
   // Only when shouldAutoFocus is true
-  componentDidMount() {
-    const {
-      input,
-      props: { focus, shouldAutoFocus },
-    } = this;
-
-    if (input && focus && shouldAutoFocus) {
-      input.focus();
+  React.useEffect(()=>{
+    if (inputRef && focus && shouldAutoFocus) {
+      inputRef.current.focus();
     }
-  }
+  }, [])
 
-  componentDidUpdate(prevProps) {
-    const {
-      input,
-      props: { focus },
-    } = this;
-
-    // Check if focusedInput changed
-    // Prevent calling function if input already in focus
-    if (prevProps.focus !== focus && (input && focus)) {
-      input.focus();
-      input.select();
+  // Check if focusedInput changed
+  // Prevent calling function if input already in focus
+  React.useEffect(() => {
+    if (inputRef && focus) {
+      inputRef.current.focus();
+      inputRef.current.select();
     }
-  }
+  }, [focus]);
 
-  getClasses = (...classes) =>
+  const getClasses = (...classes) =>
     classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
 
-  render() {
-    const {
-      separator,
-      isLastChild,
-      inputStyle,
-      focus,
-      isDisabled,
-      hasErrored,
-      errorStyle,
-      focusStyle,
-      disabledStyle,
-      shouldAutoFocus,
-      isInputNum,
-      value,
-      className,
-      ...rest
-    } = this.props;
-
-    return (
-      <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
-        <input
-          autoComplete="off"
-          style={Object.assign(
-            { width: '1em', textAlign: 'center' },
-            isStyleObject(inputStyle) && inputStyle,
-            focus && isStyleObject(focusStyle) && focusStyle,
-            isDisabled && isStyleObject(disabledStyle) && disabledStyle,
-            hasErrored && isStyleObject(errorStyle) && errorStyle
-          )}
-          className={this.getClasses(
-            inputStyle,
-            focus && focusStyle,
-            isDisabled && disabledStyle,
-            hasErrored && errorStyle
-          )}
-          type={isInputNum ? 'tel' : 'text'}
-          maxLength="1"
-          ref={input => {
-            this.input = input;
-          }}
-          disabled={isDisabled}
-          value={value ? value : ''}
-          {...rest}
-        />
-        {!isLastChild && separator}
-      </div>
-    );
-  }
+  return (
+    <div className={className} style={{display: 'flex', alignItems: 'center'}}>
+      <input
+        autoComplete="off"
+        style={Object.assign(
+          {width: '1em', textAlign: 'center'},
+          isStyleObject(inputStyle) && inputStyle,
+          focus && isStyleObject(focusStyle) && focusStyle,
+          isDisabled && isStyleObject(disabledStyle) && disabledStyle,
+          hasErrored && isStyleObject(errorStyle) && errorStyle
+        )}
+        className={getClasses(
+          inputStyle,
+          focus && focusStyle,
+          isDisabled && disabledStyle,
+          hasErrored && errorStyle
+        )}
+        type={isInputNum ? 'tel' : 'text'}
+        maxLength="1"
+        ref={inputRef}
+        disabled={isDisabled}
+        value={value ? value : ''}
+        {...rest}
+      />
+      {!isLastChild && separator}
+    </div>
+  );
 }
 
-const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledStyle, hasErrored, errorStyle,
-                       className, isInputNum, numInputs = 4, onChange= (otp: number): void => console.log(otp),
-                       isDisabled=false, shouldAutoFocus=false, value='',
-                     })=>{
+const OtpInput = ({
+                    separator, containerStyle, inputStyle, focusStyle, disabledStyle, hasErrored, errorStyle,
+                    className, isInputNum, numInputs = 4, onChange = (otp: number): void => console.log(otp),
+                    isDisabled = false, shouldAutoFocus = false, value = '',
+                  }) => {
 
   const [activeInput, setActiveInput] = React.useState(0)
 
   const getOtpValue = () =>
-      value ? value.toString().split('') : [];
+    value ? value.toString().split('') : [];
 
   // Helper to return OTP from input
   const handleOtpChange = (otp: string[]) => {
@@ -138,8 +106,8 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
 
   const isInputValueValid = value => {
     const isTypeValid = isInputNum
-        ? !isNaN(parseInt(value, 10))
-        : typeof value === 'string';
+      ? !isNaN(parseInt(value, 10))
+      : typeof value === 'string';
 
     return isTypeValid && value.trim().length === 1;
   };
@@ -148,7 +116,7 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
   const focusInput = (input: number) => {
     const activeInputNew = Math.max(Math.min(numInputs - 1, input), 0);
 
-    setActiveInput(()=>activeInputNew)
+    setActiveInput(() => activeInputNew)
   };
 
   // Focus on next input
@@ -175,9 +143,9 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
 
     // Get pastedData in an array of max size (num of inputs - current position)
     const pastedData = e.clipboardData
-        .getData('text/plain')
-        .slice(0, numInputs - activeInput)
-        .split('');
+      .getData('text/plain')
+      .slice(0, numInputs - activeInput)
+      .split('');
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
@@ -190,7 +158,7 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
   };
 
   const handleOnChange = (e: Object) => {
-    const { value } = e.target;
+    const {value} = e.target;
 
     if (isInputValueValid(value)) {
       changeCodeAtFocus(value);
@@ -213,10 +181,10 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
       e.preventDefault();
       focusNextInput();
     } else if (
-        e.keyCode === SPACEBAR ||
-        e.key === ' ' ||
-        e.key === 'Spacebar' ||
-        e.key === 'Space'
+      e.keyCode === SPACEBAR ||
+      e.key === ' ' ||
+      e.key === 'Spacebar' ||
+      e.key === 'Space'
     ) {
       e.preventDefault();
     }
@@ -229,11 +197,11 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
       // This is a workaround for dealing with keyCode "229 Unidentified" on Android.
 
       if (!isInputNum) {
-        const { nativeEvent } = e;
+        const {nativeEvent} = e;
 
         if (
-            nativeEvent.data === null &&
-            nativeEvent.inputType === 'deleteContentBackward'
+          nativeEvent.data === null &&
+          nativeEvent.inputType === 'deleteContentBackward'
         ) {
           e.preventDefault();
           changeCodeAtFocus('');
@@ -249,31 +217,31 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
 
     for (let i = 0; i < numInputs; i++) {
       inputs.push(
-          <SingleOtpInput
-              key={i}
-              focus={activeInput === i}
-              value={otp && otp[i]}
-              onChange={handleOnChange}
-              onKeyDown={handleOnKeyDown}
-              onInput={handleOnInput}
-              onPaste={handleOnPaste}
-              onFocus={e => {
-                setActiveInput(() => i)
-                e.target.select();
-              }}
-              onBlur={() => setActiveInput(() => -1)}
-              separator={separator}
-              inputStyle={inputStyle}
-              focusStyle={focusStyle}
-              isLastChild={i === numInputs - 1}
-              isDisabled={isDisabled}
-              disabledStyle={disabledStyle}
-              hasErrored={hasErrored}
-              errorStyle={errorStyle}
-              shouldAutoFocus={shouldAutoFocus}
-              isInputNum={isInputNum}
-              className={className}
-          />
+        <SingleOtpInput
+          key={i}
+          focus={activeInput === i}
+          value={otp && otp[i]}
+          onChange={handleOnChange}
+          onKeyDown={handleOnKeyDown}
+          onInput={handleOnInput}
+          onPaste={handleOnPaste}
+          onFocus={e => {
+            setActiveInput(() => i)
+            e.target.select();
+          }}
+          onBlur={() => setActiveInput(() => -1)}
+          separator={separator}
+          inputStyle={inputStyle}
+          focusStyle={focusStyle}
+          isLastChild={i === numInputs - 1}
+          isDisabled={isDisabled}
+          disabledStyle={disabledStyle}
+          hasErrored={hasErrored}
+          errorStyle={errorStyle}
+          shouldAutoFocus={shouldAutoFocus}
+          isInputNum={isInputNum}
+          className={className}
+        />
       );
     }
 
@@ -281,15 +249,15 @@ const OtpInput = ({separator,containerStyle, inputStyle, focusStyle, disabledSty
   }
 
   return (
-      <div
-          style={Object.assign(
-              { display: 'flex' },
-              isStyleObject(containerStyle) && containerStyle
-          )}
-          className={!isStyleObject(containerStyle) ? containerStyle : ''}
-      >
-        {renderInputs()}
-      </div>
+    <div
+      style={Object.assign(
+        {display: 'flex'},
+        isStyleObject(containerStyle) && containerStyle
+      )}
+      className={!isStyleObject(containerStyle) ? containerStyle : ''}
+    >
+      {renderInputs()}
+    </div>
   );
 }
 
