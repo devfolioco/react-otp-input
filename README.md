@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
 
-A fully customizable, one-time password input component for the web built with React.
+### A fully customizable, one-time password input component for the web built with React.
 
 ![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
 
