@@ -169,13 +169,13 @@ npm run dev
 #### To run the development server for example:
 
 ```
-npm run docs
+npm run docz:dev
 ```
 
 #### To make a production build of the example:
 
 ```
-npm run docs:prod
+npm run docz:prod
 ```
 
 ## Checklist
