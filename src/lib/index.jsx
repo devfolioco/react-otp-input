@@ -8,6 +8,11 @@ const RIGHT_ARROW = 39;
 const DELETE = 46;
 const SPACEBAR = 32;
 
+type KeyDownProp = {
+  keyCode: number,
+  cb: Function
+}
+
 type Props = {
   placeholder: string,
   numInputs: number,
@@ -24,6 +29,7 @@ type Props = {
   isInputNum?: boolean,
   value?: string,
   className?: string,
+  onKeyDown?: KeyDownProp
 };
 
 type State = {
@@ -288,6 +294,7 @@ class OtpInput extends Component<Props, State> {
       shouldAutoFocus,
       isInputNum,
       className,
+      onKeyDown
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
@@ -300,7 +307,12 @@ class OtpInput extends Component<Props, State> {
           focus={activeInput === i}
           value={otp && otp[i]}
           onChange={this.handleOnChange}
-          onKeyDown={this.handleOnKeyDown}
+          onKeyDown={(e: Object) => {
+            if (onKeyDown.keyCode === e.keyCode)
+              onKeyDown.cb();
+            else
+              this.handleOnKeyDown(e)
+          }}
           onInput={this.handleOnInput}
           onPaste={this.handleOnPaste}
           onFocus={e => {
