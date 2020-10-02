@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
+import Route from 'react-router-dom';
 
 import OtpInput from '../../lib';
 import './styles.css';
@@ -203,4 +203,4 @@ class Demo extends Component {
   }
 }
 
-render(<Demo />, document.getElementById('app'));
+<Route path="/" component={Demo} />
