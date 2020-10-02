@@ -1,14 +1,27 @@
-# react-otp-input
-
-[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
-
+<h1 align="center">React-otp-input</h1>
+<p align="center">
+  <a href="https://github.com/devfolioco/react-otp-input/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/devfolioco/react-otp-input"></a>
+  <a href="https://github.com/devfolioco/react-otp-input/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/devfolioco/react-otp-input"></a>
+  <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fdevfolioco%2Freact-otp-input"><img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com"></a>
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/devfolioco/react-otp-input">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/devfolioco/react-otp-input">
+  <br>
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/devfolioco/react-otp-input">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/devfolioco/react-otp-input">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/devfolioco/react-otp-input">
+  <br>
+  <a href="https://t.me/devfolio"><img src="https://img.shields.io/badge/chat-on%20telegram-brightgreen"></a>
+</p>
 A fully customizable, one-time password input component for the web built with React.
+<br>
 
 ![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
 
 [Live Demo](https://devfolioco.github.io/react-otp-input)
 
 [CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52)
+
+## Prequesites
 
 ## Installation
 
