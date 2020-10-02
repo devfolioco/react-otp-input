@@ -7,6 +7,10 @@ a {
   text-decoration: none;
   color: inherit;
 }
+a:hover{
+  text-decoration: none;
+  text-decoration-color: oranged;
+}
 
 .container {
   display: flex;
