@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "aromalanil",
+      "name": "Aromal Anil",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/49222186?v=4",
+      "profile": "http://aromalanil.me",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-otp-input",
+  "projectOwner": "devfolioco",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
