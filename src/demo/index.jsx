@@ -183,7 +183,7 @@ class Demo extends Component {
                 <button
                   className="btn margin-top--large"
                   type="button"
-                  disabled={isDisabled}
+                  disabled={otp.length == 0}
                   onClick={this.clearOtp}
                 >
                   Clear
