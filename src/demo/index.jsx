@@ -1,34 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
 import OtpInput from '../../lib';
 import './styles.css';
 
-class Demo extends Component {
-  constructor(props) {
-    super(props);
+const Demo = () => {
 
-    this.state = {
-      otp: '',
-      numInputs: 4,
-      separator: '-',
-      isDisabled: false,
-      hasErrored: false,
-      isInputNum: false,
-      minLength: 0,
-      maxLength: 40,
-    };
-  }
+  const [state, setState] = React.useState({
+    otp: '',
+    numInputs: 4,
+    separator: '-',
+    isDisabled: false,
+    hasErrored: false,
+    isInputNum: false,
+    minLength: 0,
+    maxLength: 40,
+  });
+  const { otp, numInputs, separator, isDisabled, hasErrored, isInputNum, minLength, maxLength } = state;
 
-  handleOtpChange = otp => {
-    this.setState({ otp });
+  const handleOtpChange = otp => {
+    setState({ ...state, otp: otp });
   };
 
-  handleChange = e => {
+  const handleChange = e => {
     let currVal = e.target.value;
 
     if (e.target.name === 'numInputs') {
-      const { minLength, maxLength } = this.state;
 
       if (currVal < minLength || currVal > maxLength) {
         currVal = 4;
@@ -38,169 +35,155 @@ class Demo extends Component {
         );
       }
     }
-
-    this.setState({ [e.target.name]: currVal });
+    setState({ ...state, [e.target.name]: currVal });
   };
 
-  clearOtp = () => {
-    this.setState({ otp: '' });
+  const clearOtp = () => {
+    setState({ ...state, otp: '' });
   };
 
-  handleCheck = e => {
+  const handleCheck = e => {
     const { name } = e.target;
-    this.setState(prevState => ({ [name]: !prevState[name] }));
+    setState({ ...state, [name]: !state[name] });
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    alert(this.state.otp);
+    alert(otp);
   };
 
-  render() {
-    const {
-      otp,
-      numInputs,
-      separator,
-      isDisabled,
-      hasErrored,
-      isInputNum,
-      minLength,
-      maxLength,
-    } = this.state;
-
-    return (
-      <div className="container">
-        <div className="side-bar">
-          <a
-            href="https://github.com/devfolioco/react-otp-input"
-            target="_blank"
-          >
-            <div className="side-bar__segment side-bar__segment--header">
-              <h2>react-otp-input</h2>
-            </div>
-          </a>
-          <div className="side-bar__segment">
-            <label htmlFor="num-inputs">
-              numInputs
-              <input
-                id="num-inputs"
-                name="numInputs"
-                type="number"
-                value={numInputs}
-                onChange={this.handleChange}
-                min={minLength}
-                max={maxLength}
-              />
-            </label>
+  return (
+    <div className="container">
+      <div className="side-bar">
+        <a
+          href="https://github.com/devfolioco/react-otp-input"
+          target="_blank"
+        >
+          <div className="side-bar__segment side-bar__segment--header">
+            <h2>react-otp-input</h2>
           </div>
-          <div className="side-bar__segment">
-            <label htmlFor="separator">
-              separator
-              <input
-                id="separator"
-                maxLength={1}
-                name="separator"
-                type="text"
-                value={separator}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="value">
-              value
-              <input
-                id="value"
-                maxLength={numInputs}
-                name="otp"
-                type="text"
-                value={otp}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="disabled">
-              <input
-                id="disabled"
-                name="isDisabled"
-                type="checkbox"
-                checked={isDisabled}
-                onChange={this.handleCheck}
-              />
-              isDisabled
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="hasErrored">
-              <input
-                id="hasErrored"
-                name="hasErrored"
-                type="checkbox"
-                checked={hasErrored}
-                onChange={this.handleCheck}
-              />
-              hasErrored
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="isInputNum">
-              <input
-                id="isInputNum"
-                name="isInputNum"
-                type="checkbox"
-                checked={isInputNum}
-                onChange={this.handleCheck}
-              />
-              isInputNum
-            </label>
-          </div>
-          <div className="side-bar__segment side-bar__segment--bottom">
-            <a href="https://github.com/devfolioco/react-otp-input">
-              Documentation and Source
-            </a>
-          </div>
+        </a>
+        <div className="side-bar__segment">
+          <label htmlFor="num-inputs">
+            numInputs
+            <input
+              id="num-inputs"
+              name="numInputs"
+              type="number"
+              value={numInputs}
+              onChange={handleChange}
+              min={minLength}
+              max={maxLength}
+            />
+          </label>
         </div>
-        <div className="view">
-          <div className="card">
-            <form onSubmit={this.handleSubmit}>
-              <p>Enter verification code</p>
-              <div className="margin-top--small">
-                <OtpInput
-                  inputStyle="inputStyle"
-                  numInputs={numInputs}
-                  isDisabled={isDisabled}
-                  hasErrored={hasErrored}
-                  errorStyle="error"
-                  onChange={this.handleOtpChange}
-                  separator={<span>{separator}</span>}
-                  isInputNum={isInputNum}
-                  shouldAutoFocus
-                  value={otp}
-                />
-              </div>
-              <div className="btn-row">
-                <button
-                  className="btn margin-top--large"
-                  type="button"
-                  disabled={isDisabled}
-                  onClick={this.clearOtp}
-                >
-                  Clear
-                </button>
-                <button
-                  className="btn margin-top--large"
-                  disabled={otp.length < numInputs}
-                >
-                  Get OTP
-                </button>
-              </div>
-            </form>
-          </div>
+        <div className="side-bar__segment">
+          <label htmlFor="separator">
+            separator
+            <input
+              id="separator"
+              maxLength={1}
+              name="separator"
+              type="text"
+              value={separator}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="value">
+            value
+            <input
+              id="value"
+              maxLength={numInputs}
+              name="otp"
+              type="text"
+              value={otp}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="disabled">
+            <input
+              id="disabled"
+              name="isDisabled"
+              type="checkbox"
+              checked={isDisabled}
+              onChange={handleCheck}
+            />
+            isDisabled
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="hasErrored">
+            <input
+              id="hasErrored"
+              name="hasErrored"
+              type="checkbox"
+              checked={hasErrored}
+              onChange={handleCheck}
+            />
+            hasErrored
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="isInputNum">
+            <input
+              id="isInputNum"
+              name="isInputNum"
+              type="checkbox"
+              checked={isInputNum}
+              onChange={handleCheck}
+            />
+            isInputNum
+          </label>
+        </div>
+        <div className="side-bar__segment side-bar__segment--bottom">
+          <a href="https://github.com/devfolioco/react-otp-input">
+            Documentation and Source
+          </a>
         </div>
       </div>
-    );
-  }
+      <div className="view">
+        <div className="card">
+          <form onSubmit={handleSubmit}>
+            <p>Enter verification code</p>
+            <div className="margin-top--small">
+              <OtpInput
+                inputStyle="inputStyle"
+                numInputs={numInputs}
+                isDisabled={isDisabled}
+                hasErrored={hasErrored}
+                errorStyle="error"
+                onChange={handleOtpChange}
+                separator={<span>{separator}</span>}
+                isInputNum={isInputNum}
+                shouldAutoFocus
+                value={otp}
+              />
+            </div>
+            <div className="btn-row">
+              <button
+                className="btn margin-top--large"
+                type="button"
+                disabled={isDisabled}
+                onClick={clearOtp}
+              >
+                Clear
+              </button>
+              <button
+                className="btn margin-top--large"
+                disabled={otp.length < numInputs}
+              >
+                Get OTP
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 render(<Demo />, document.getElementById('app'));
