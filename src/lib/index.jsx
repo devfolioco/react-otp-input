@@ -82,6 +82,7 @@ class SingleOtpInput extends PureComponent<*> {
       disabledStyle,
       shouldAutoFocus,
       isInputNum,
+      index,
       value,
       className,
       ...rest
@@ -90,7 +91,7 @@ class SingleOtpInput extends PureComponent<*> {
     return (
       <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
         <input
-          aria-label={`Verification code ${isInputNum ? 'digit' : 'character'}`}
+          aria-label={`${(index === 0) ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} n° ${index + 1}`}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
@@ -281,6 +282,7 @@ class OtpInput extends Component<Props, State> {
       inputs.push(
         <SingleOtpInput
           key={i}
+          index={i}
           focus={activeInput === i}
           value={otp && otp[i]}
           onChange={this.handleOnChange}
