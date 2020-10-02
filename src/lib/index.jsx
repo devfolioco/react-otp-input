@@ -149,13 +149,9 @@ class OtpInput extends Component<Props, State> {
         return;
       }
 
-      if (placeholder.length === 1) {
-        return placeholder.repeat(numInputs);
-      } else if (placeholder.length === numInputs) {
-        return placeholder;
-      } else {
-        console.error('Invalid placeholder value');
-      }
+      if (placeholder.length === 1) return placeholder.repeat(numInputs);
+      else if (placeholder.length === numInputs) return placeholder;
+      else console.error('Invalid placeholder value');
     }
   };
 
