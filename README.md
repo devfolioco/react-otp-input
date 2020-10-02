@@ -143,7 +143,7 @@ export default class App extends Component {
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
-    <td>Restrict input to only numbers.</td>
+    <td>Restrict input to only numbers .</td>
   </tr>
 </table>
 
@@ -165,13 +165,13 @@ npm run dev
 npm run docs
 ```
 
-#### To make a production build of the example:
+#### To make a production build TYPE of the example:
 
 ```
 npm run docs:prod
 ```
 
-## Checklist
+## Checklist 
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
 
