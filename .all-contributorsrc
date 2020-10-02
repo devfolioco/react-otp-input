@@ -9,7 +9,7 @@
       "login": "apollonian",
       "name": "Abhishek Warokar",
       "avatar_url": "https://avatars2.githubusercontent.com/u/2150306?v=4",
-      "profile": "https://abhi.studio/",
+      "profile": "https://github.com/apollonian",
       "contributions": [
         "code",
         "design",
@@ -17,7 +17,27 @@
         "ideas",
         "review"
       ]
-    }
+    },
+    {
+       "login": "ajayns",
+       "name": "Aj",
+       "avatar_url": "https://avatars0.githubusercontent.com/u/20743219?v=4",
+       "profile": "https://ajayns.me",
+       "contributions": [
+         "code",
+         "design",
+         "ideas"
+       ]
+     },
+     {
+       "login": "aromalanil",
+       "name": "Aromal Anil",
+       "avatar_url": "https://avatars1.githubusercontent.com/u/49222186?v=4",
+       "profile": "http://aromalanil.me",
+       "contributions": [
+         "code"
+       ]
+     }
   ],
   "contributorsPerLine": 7,
   "projectName": "react-otp-input",
