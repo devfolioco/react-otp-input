@@ -22,7 +22,7 @@ type Props = {
   shouldAutoFocus?: boolean,
   isInputNum?: boolean,
   value?: string,
-  className?: string
+  className?: string,
 };
 
 type State = {
@@ -60,7 +60,7 @@ class SingleOtpInput extends PureComponent<*> {
 
     // Check if focusedInput changed
     // Prevent calling function if input already in focus
-    if (prevProps.focus !== focus && (input && focus)) {
+    if (input && focus) {
       input.focus();
       input.select();
     }
@@ -88,7 +88,10 @@ class SingleOtpInput extends PureComponent<*> {
     } = this.props;
 
     return (
-      <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        className={className}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         <input
           autoComplete="off"
           style={Object.assign(
@@ -139,7 +142,6 @@ class OtpInput extends Component<Props, State> {
   handleOtpChange = (otp: string[]) => {
     const { onChange } = this.props;
     const otpValue = otp.join('');
-
     onChange(otpValue);
   };
 
@@ -155,7 +157,6 @@ class OtpInput extends Component<Props, State> {
   focusInput = (input: number) => {
     const { numInputs } = this.props;
     const activeInput = Math.max(Math.min(numInputs - 1, input), 0);
-
     this.setState({ activeInput });
   };
 
@@ -176,7 +177,6 @@ class OtpInput extends Component<Props, State> {
     const { activeInput } = this.state;
     const otp = this.getOtpValue();
     otp[activeInput] = value[0];
-
     this.handleOtpChange(otp);
   };
 
@@ -205,7 +205,6 @@ class OtpInput extends Component<Props, State> {
 
   handleOnChange = (e: Object) => {
     const { value } = e.target;
-
     if (this.isInputValueValid(value)) {
       this.changeCodeAtFocus(value);
     }
@@ -215,11 +214,10 @@ class OtpInput extends Component<Props, State> {
   handleOnKeyDown = (e: Object) => {
     if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
       e.preventDefault();
-      this.changeCodeAtFocus('');
-      this.focusPrevInput();
+      this.changeCodeAtFocus(' ');
     } else if (e.keyCode === DELETE || e.key === 'Delete') {
       e.preventDefault();
-      this.changeCodeAtFocus('');
+      this.changeCodeAtFocus(' ');
     } else if (e.keyCode === LEFT_ARROW || e.key === 'ArrowLeft') {
       e.preventDefault();
       this.focusPrevInput();
@@ -271,7 +269,7 @@ class OtpInput extends Component<Props, State> {
       errorStyle,
       shouldAutoFocus,
       isInputNum,
-      className
+      className,
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
