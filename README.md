@@ -75,13 +75,13 @@ export default class App extends Component {
     <td>''</td>
     <td>The value of the OTP passed into the component.</td>
   </tr>
-  <tr>
+  <!-- <tr>
     <td>placeholder</td>
     <td>string</td>
     <td>false</td>
     <td>none</td>
-    <td>Provide a custom placeholder. Should be a single character or a string of length <code>&lt;numInputs&lt;</code>.</td>
-  </tr>
+    <td>Provide a custom placeholder. Should be a single character or a string of length <code>numInputs</code>.</td>
+  </tr> -->
   <tr>
     <td>separator</td>
     <td>component<br/></td>
