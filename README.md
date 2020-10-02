@@ -40,8 +40,8 @@ export default class App extends Component {
         separator={<span>-</span>}
       />
     );
-  }
-}
+  };
+};
 ```
 
 ## API
