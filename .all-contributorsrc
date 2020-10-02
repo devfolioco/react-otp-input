@@ -1,0 +1,28 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "apollonian",
+      "name": "Abhishek Warokar",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2150306?v=4",
+      "profile": "https://abhi.studio/",
+      "contributions": [
+        "code",
+        "design",
+        "maintenance",
+        "ideas",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-otp-input",
+  "projectOwner": "devfolioco",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
