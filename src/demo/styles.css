@@ -99,6 +99,10 @@ a {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.side-bar__segment--bottom:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .side-bar__segment--bottom {
   font-weight: bold;
   position: absolute;
