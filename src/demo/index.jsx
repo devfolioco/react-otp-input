@@ -17,7 +17,24 @@ class Demo extends Component {
       isInputNum: false,
       minLength: 0,
       maxLength: 40,
+      inputStyle: {
+        width: "3rem",
+        height: "3rem",
+        margin: "0 1rem",
+        fontSize: "2rem",
+        borderRadius: "4px",
+        border: "1px solid #0003",
+      },
+      valErrors: {
+        inputStyle: false,
+      },
     };
+  }
+
+  componentDidMount() {
+    let $inputStyle = document.querySelector(`#inputStyle`);
+
+    $inputStyle.value = JSON.stringify(this.state.inputStyle, undefined, 2)
   }
 
   handleOtpChange = otp => {
@@ -41,6 +58,35 @@ class Demo extends Component {
 
     this.setState({ [e.target.name]: currVal });
   };
+
+  applyStyles = (name) => {
+    let curVal;
+    let $el = document.querySelector(`#${name}`);
+    let json = $el.value;
+    if (name == 'inputStyle') {
+      try {
+        curVal = JSON.parse(json);
+        this.setState({
+          [name]: curVal,
+          valErrors: {
+            [name]: false
+          }
+        });
+
+        $el.value = JSON.stringify(curVal, undefined, 2);
+        $el.style.color = "black";
+        return;
+      }
+      catch (e) {
+        this.setState({
+          valErrors: {
+            [name]: e.message
+          }
+        })
+        return;
+      }
+    }
+  }
 
   clearOtp = () => {
     this.setState({ otp: '' });
@@ -66,6 +112,8 @@ class Demo extends Component {
       isInputNum,
       minLength,
       maxLength,
+      inputStyle,
+      valErrors,
     } = this.state;
 
     return (
@@ -120,6 +168,19 @@ class Demo extends Component {
             </label>
           </div>
           <div className="side-bar__segment">
+            <label htmlFor="inputStyle">
+              inputStyle <button className="btn btn-sm" onClick={() => this.applyStyles('inputStyle')}>Apply</button>
+              <textarea
+                id="inputStyle"
+                name="inputStyle"
+                spellCheck={false}
+                onChange={(e) => { e.target.style.color = "#3273dc"; }}
+                className={valErrors.inputStyle ? 'error-text' : ''}
+              />
+            </label>
+            {valErrors.inputStyle ? <div style={{ color: 'red', fontSize: '0.7em' }}>{valErrors.inputStyle}</div> : null}
+          </div>
+          <div className="side-bar__segment">
             <label htmlFor="disabled">
               <input
                 id="disabled"
@@ -155,6 +216,7 @@ class Demo extends Component {
               isInputNum
             </label>
           </div>
+
           <div className="side-bar__segment side-bar__segment--bottom">
             <a href="https://github.com/devfolioco/react-otp-input">
               Documentation and Source
@@ -167,7 +229,7 @@ class Demo extends Component {
               <p>Enter verification code</p>
               <div className="margin-top--small">
                 <OtpInput
-                  inputStyle="inputStyle"
+                  inputStyle={inputStyle || "inputStyle"}
                   numInputs={numInputs}
                   isDisabled={isDisabled}
                   hasErrored={hasErrored}

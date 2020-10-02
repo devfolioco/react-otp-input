@@ -16,7 +16,7 @@ a {
 }
 
 .side-bar {
-  width: 250px;
+  width: 400px;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   z-index: 1;
   position: relative;
@@ -115,7 +115,7 @@ a {
 
 .side-bar__segment > label > input[type='number'],
 .side-bar__segment > label > input[type='text'] {
-  width: 150px;
+  width: 300px;
   border-radius: 4px;
   border: 1px solid lightgrey;
   margin: 0.5rem 0;
@@ -129,6 +129,22 @@ a {
   margin: 0.5rem;
   width: 1rem;
   height: 1rem;
+}
+
+.side-bar__segment > label > textarea {
+  width: 300px;
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+  margin: 0.5rem 0;
+  height: auto;
+  min-height: 8em;
+  font-family: monospace;
+  font-size: 0.8em;
+  padding: 0.5rem;
+}
+
+.side-bar__segment > label > textarea::-webkit-scrollbar{
+  display: none;
 }
 
 .card {
@@ -179,6 +195,12 @@ input[type=number] {
   margin: 1rem;
 }
 
+.btn-sm{
+  font-size: smaller;
+  padding: 0.3em 0.5em;
+  margin: 0 0.5em;
+}
+
 .btn:disabled {
   background-color: rgba(0, 0, 0, 0.4);
   cursor: default;
@@ -207,4 +229,7 @@ input[type=number] {
 
 .error {
   border: 1px solid red !important;
+}
+.error-text{
+  color: red;
 }
