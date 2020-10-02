@@ -183,14 +183,14 @@ class Demo extends Component {
                 <button
                   className="btn margin-top--large"
                   type="button"
-                  disabled={isDisabled}
+                  disabled={isDisabled || !numInputs || !otp}
                   onClick={this.clearOtp}
                 >
                   Clear
                 </button>
                 <button
                   className="btn margin-top--large"
-                  disabled={otp.length < numInputs}
+                  disabled={otp.length < numInputs || !numInputs}
                 >
                   Get OTP
                 </button>
