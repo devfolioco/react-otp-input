@@ -143,16 +143,12 @@ class OtpInput extends Component<Props, State> {
 
   getPlaceholderValue = () => {
     const { placeholder, numInputs } = this.props;
-    if (placeholder !== undefined) {
-      if (typeof placeholder !== 'string') {
-        console.error('Placeholder should be a string');
-        return;
-      }
-
+    if (typeof placeholder === 'string') {
       if (placeholder.length === 1) return placeholder.repeat(numInputs);
       else if (placeholder.length === numInputs) return placeholder;
       else console.error('Invalid placeholder value');
     }
+    return;
   };
 
   // Helper to return OTP from input
