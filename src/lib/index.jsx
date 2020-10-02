@@ -70,14 +70,11 @@ class SingleOtpInput extends PureComponent<*> {
   getClasses = (...classes) =>
     classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
   
-  setType = (isSecure, isInputNum) => {
-    if (isSecure) {
-      return 'password'
-    } else 
-    if (isInputNum) {
-      return 'tel'
-    } else return 'text'
-    }
+  getType = () => {
+    if (this.props.isSecure) return 'password'
+    if (this.props.isInputNum) return 'tel'
+    return 'text' 
+  }
 
   render() {
     const {
@@ -115,7 +112,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={this.setType(isSecure, isInputNum)}
+          type={this.getType()}
           maxLength="1"
           ref={input => {
             this.input = input;
