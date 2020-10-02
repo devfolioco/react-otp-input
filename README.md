@@ -17,7 +17,7 @@ A fully customizable, one-time password input component for the web built with R
 
 [![NPM](https://nodei.co/npm/react-otp-input.png?compact=true)](https://nodei.co/npm/react-otp-input/)
 
-#### To install the latest stable version:
+#### To install the latest stable version execute the following command:
 
 ```
 npm install --save react-otp-input
