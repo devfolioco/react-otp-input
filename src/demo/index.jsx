@@ -17,6 +17,7 @@ class Demo extends Component {
       isInputNum: false,
       minLength: 0,
       maxLength: 40,
+      btndisable:false
     };
   }
 
@@ -37,6 +38,23 @@ class Demo extends Component {
           `Please enter a value between ${minLength} and ${maxLength}`
         );
       }
+    }
+    if(e.target.name==='separator')
+    {
+      //console.log("currVal=",currVal);
+      if(currVal.length===0)
+      {alert("Enter the separator otherwise Get OTP button will be disabled.");this.setState({btndisable:true});}
+      else if(currVal===' ')
+      {currVal=' ';this.setState({btndisable:false});}
+      else if(currVal=== '-')
+      {currVal='-';this.setState({btndisable:false});}
+      else if(currVal==='.')
+      {currVal='.';this.setState({btndisable:false});}
+      else
+      {alert("separator should be either hyphen ('-') , dot ('.') or whitespace(' ') ");this.setState({btndisable:true});currVal='';}
+      //console.log(currVal.length);
+      
+      
     }
 
     this.setState({ [e.target.name]: currVal });
@@ -190,7 +208,7 @@ class Demo extends Component {
                 </button>
                 <button
                   className="btn margin-top--large"
-                  disabled={otp.length < numInputs}
+                  disabled={otp.length < numInputs || this.state.btndisable===true}
                 >
                   Get OTP
                 </button>
