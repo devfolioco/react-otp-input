@@ -182,25 +182,27 @@ class OtpInput extends Component<Props, State> {
 
   // Handle pasted OTP
   handleOnPaste = (e: Object) => {
-    e.preventDefault();
-    const { numInputs } = this.props;
-    const { activeInput } = this.state;
-    const otp = this.getOtpValue();
+    if(this.state.isDisabled == false){
+      e.preventDefault();
+      const { numInputs } = this.props;
+      const { activeInput } = this.state;
+      const otp = this.getOtpValue();
 
-    // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = e.clipboardData
-      .getData('text/plain')
-      .slice(0, numInputs - activeInput)
-      .split('');
+      // Get pastedData in an array of max size (num of inputs - current position)
+      const pastedData = e.clipboardData
+        .getData('text/plain')
+        .slice(0, numInputs - activeInput)
+        .split('');
 
-    // Paste data from focused input onwards
-    for (let pos = 0; pos < numInputs; ++pos) {
-      if (pos >= activeInput && pastedData.length > 0) {
-        otp[pos] = pastedData.shift();
+      // Paste data from focused input onwards
+      for (let pos = 0; pos < numInputs; ++pos) {
+        if (pos >= activeInput && pastedData.length > 0) {
+          otp[pos] = pastedData.shift();
+        }
       }
-    }
 
-    this.handleOtpChange(otp);
+      this.handleOtpChange(otp);
+    }
   };
 
   handleOnChange = (e: Object) => {
@@ -271,7 +273,8 @@ class OtpInput extends Component<Props, State> {
       errorStyle,
       shouldAutoFocus,
       isInputNum,
-      className
+      className,
+      testProp
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
