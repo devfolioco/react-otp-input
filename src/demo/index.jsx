@@ -183,7 +183,7 @@ class Demo extends Component {
                 <button
                   className="btn margin-top--large"
                   type="button"
-                  disabled={isDisabled || this.state.otp.trim() === ""}
+                  disabled={isDisabled || otp.trim() === ""}
                   onClick={this.clearOtp}
                 >
                   Clear
