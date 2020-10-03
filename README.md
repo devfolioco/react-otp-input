@@ -13,6 +13,16 @@ A fully customizable, one-time password input component for the web built with R
 
 [CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52)
 
+### Prerequisites 📋
+
+You'll need [Git](https://git-scm.com) and (which comes with [NPM](http://npmjs.com)) installed on your computer.
+
+```
+npm@6.9.0 or higher
+git@2.17.1 or higher
+```
+
+
 ## Installation
 
 [![NPM](https://nodei.co/npm/react-otp-input.png?compact=true)](https://nodei.co/npm/react-otp-input/)
