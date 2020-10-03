@@ -169,18 +169,6 @@ export default class App extends Component {
 npm run dev
 ```
 
-#### To run the development server for example:
-
-```
-npm run docs
-```
-
-#### To make a production build of the example:
-
-```
-npm run docs:prod
-```
-
 ## Checklist
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
@@ -190,6 +178,7 @@ npm run docs:prod
 - [x] Add styling support for states including focus/disabled
 - [ ] Travis CI, Codecov
 - [ ] Write tests
+- [ ] Improve Documentation
 
 ## Contributing
 
