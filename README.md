@@ -163,6 +163,12 @@ export default class App extends Component {
 
 ## Development
 
+#### To install all the dependencies:
+
+```
+npm install
+```
+
 #### To run the development server:
 
 ```
