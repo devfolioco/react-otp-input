@@ -22,7 +22,7 @@ type Props = {
   shouldAutoFocus?: boolean,
   isInputNum?: boolean,
   value?: string,
-  className?: string
+  className?: string,
 };
 
 type State = {
@@ -88,7 +88,10 @@ class SingleOtpInput extends PureComponent<*> {
     } = this.props;
 
     return (
-      <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        className={className}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         <input
           autoComplete="off"
           style={Object.assign(
@@ -271,7 +274,7 @@ class OtpInput extends Component<Props, State> {
       errorStyle,
       shouldAutoFocus,
       isInputNum,
-      className
+      className,
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];

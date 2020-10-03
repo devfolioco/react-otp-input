@@ -48,6 +48,8 @@
     "flow-bin": "^0.73.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
@@ -68,5 +70,15 @@
   "bugs": {
     "url": "https://github.com/devfolioco/react-otp-input/issues"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}":[
+      "prettier --write"
+    ]
+  }
 }
