@@ -292,6 +292,7 @@ class OtpInput extends Component<Props, State> {
     const otp = this.getOtpValue();
     const inputs = [];
     const placeholder = this.getPlaceholderValue();
+    console.log(otp)
     for (let i = 0; i < numInputs; i++) {
       inputs.push(
         <SingleOtpInput
@@ -314,7 +315,7 @@ class OtpInput extends Component<Props, State> {
           isLastChild={i === numInputs - 1}
           isDisabled={isDisabled}
           disabledStyle={disabledStyle}
-          hasErrored={hasErrored}
+          hasErrored={hasErrored&&otp[i]?true:false}
           errorStyle={errorStyle}
           shouldAutoFocus={shouldAutoFocus}
           isInputNum={isInputNum}
