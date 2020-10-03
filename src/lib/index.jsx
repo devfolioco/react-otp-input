@@ -9,6 +9,7 @@ const DELETE = 46;
 const SPACEBAR = 32;
 
 type Props = {
+  placeholder: string,
   numInputs: number,
   onChange: Function,
   separator?: Object,
@@ -78,6 +79,7 @@ class SingleOtpInput extends PureComponent<*> {
 
   render() {
     const {
+      placeholder,
       separator,
       isLastChild,
       inputStyle,
@@ -96,7 +98,10 @@ class SingleOtpInput extends PureComponent<*> {
     } = this.props;
 
     return (
-      <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        className={className}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         <input
           autoComplete="off"
           style={Object.assign(
@@ -106,6 +111,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && isStyleObject(disabledStyle) && disabledStyle,
             hasErrored && isStyleObject(errorStyle) && errorStyle
           )}
+          placeholder={placeholder}
           className={this.getClasses(
             inputStyle,
             focus && focusStyle,
@@ -143,6 +149,16 @@ class OtpInput extends Component<Props, State> {
 
   getOtpValue = () =>
     this.props.value ? this.props.value.toString().split('') : [];
+
+  getPlaceholderValue = () => {
+    const { placeholder, numInputs } = this.props;
+    if (typeof placeholder === 'string') {
+      if (placeholder.length === 1) return placeholder.repeat(numInputs);
+      else if (placeholder.length === numInputs) return placeholder;
+      else console.error('Length of the placeholder should be either 1 or equal to the number of inputs');
+    }
+    return;
+  };
 
   // Helper to return OTP from input
   handleOtpChange = (otp: string[]) => {
@@ -285,10 +301,11 @@ class OtpInput extends Component<Props, State> {
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
-
+    const placeholder = this.getPlaceholderValue();
     for (let i = 0; i < numInputs; i++) {
       inputs.push(
         <SingleOtpInput
+          placeholder={placeholder && placeholder[i]}
           key={i}
           focus={activeInput === i}
           value={otp && otp[i]}
