@@ -26,7 +26,7 @@ class Demo extends Component {
 
   handleChange = e => {
     let currVal = e.target.value;
-
+    currVal = (isNaN(parseInt(currVal)) && currVal != '') ? 4 : parseInt(currVal);
     if (e.target.name === 'numInputs') {
       const { minLength, maxLength } = this.state;
 
