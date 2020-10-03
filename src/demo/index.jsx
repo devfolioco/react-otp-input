@@ -15,7 +15,6 @@ class Demo extends Component {
       isDisabled: false,
       hasErrored: false,
       isInputNum: false,
-      autoSubmit: false,
       minLength: 0,
       maxLength: 40,
     };
@@ -65,7 +64,6 @@ class Demo extends Component {
       isDisabled,
       hasErrored,
       isInputNum,
-      autoSubmit,
       minLength,
       maxLength,
     } = this.state;
@@ -157,18 +155,6 @@ class Demo extends Component {
               isInputNum
             </label>
           </div>
-          <div className="side-bar__segment">
-            <label htmlFor="autoSubmit">
-              <input
-                id="autoSubmit"
-                name="autoSubmit"
-                type="checkbox"
-                checked={autoSubmit}
-                onChange={this.handleCheck}
-              />
-              autoSubmit
-            </label>
-          </div>
           <div className="side-bar__segment side-bar__segment--bottom">
             <a href="https://github.com/devfolioco/react-otp-input">
               Documentation and Source
@@ -191,9 +177,6 @@ class Demo extends Component {
                   isInputNum={isInputNum}
                   shouldAutoFocus
                   value={otp}
-                  onSubmit={this.handleSubmit}
-                  autoSubmit={autoSubmit}
-
                 />
               </div>
               <div className="btn-row">
