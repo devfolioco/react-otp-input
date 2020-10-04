@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void* one, const void* two) 
+{
+    return *(int*)one > *(int*)two;
+}
+int CountNumberOfTriangles (int *arr1, int arr_size) 
+{
+    int ctrTriangle = 0, i, j, k;
+    qsort(arr1, arr_size, sizeof(int), compare);
+ 
+    for(i = 0; i < arr_size-2; ++i) 
+	{
+
+        for (j = i+1; j < arr_size; ++j) 
+		{
+            k = j +1;
+            while (k < arr_size && (arr1[i] + arr1[j])> arr1[k]) 
+			{
+             k++;
+            }
+            ctrTriangle += k - j - 1;
+        }
+    }
+    return ctrTriangle;
+}
+int main() 
+{
+    int arr1[] =  {6, 18, 9, 7, 10};
+	int n = sizeof(arr1)/sizeof(arr1[0]);
+	int i;
+ //------------- print original array ------------------	
+	printf("The given array is :  ");
+	for(i = 0; i < n; i++)
+	{
+	printf("%d  ", arr1[i]);
+    } 
+	printf("\n");
+//------------------------------------------------------ 	
+    printf("Number of possible triangles can be formed from the array is: %d\n",
+           CountNumberOfTriangles(arr1, n));
+    return 0;
+}
