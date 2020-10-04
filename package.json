@@ -18,7 +18,8 @@
     "docz:dev": "docz dev",
     "docz:build": "docz build",
     "test": "nyc mocha",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "start": "react-scripts start"
   },
   "keywords": [],
   "peerDependencies": {
