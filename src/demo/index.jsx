@@ -4,6 +4,10 @@ import { render } from 'react-dom';
 import OtpInput from '../../lib';
 import './styles.css';
 
+function ShowError(props){ 
+  return <p> {props.message} </p>; 
+}
+
 class Demo extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +21,7 @@ class Demo extends Component {
       isInputNum: false,
       minLength: 0,
       maxLength: 40,
+      errorMessage:"",
     };
   }
 
@@ -32,14 +37,16 @@ class Demo extends Component {
 
       if (currVal < minLength || currVal > maxLength) {
         currVal = 4;
-
+        this.setState({hasErrored:true, errorMessage:`Please enter a value between ${minLength} and ${maxLength}`});
         console.error(
           `Please enter a value between ${minLength} and ${maxLength}`
         );
-      }
+      }else { 
+       this.setState({hasErrored:false, errorMessage:""});
+     }
     }
 
-    this.setState({ [e.target.name]: currVal });
+    this.setState({ [e.target.name]: currVal});
   };
 
   clearOtp = () => {
@@ -53,7 +60,13 @@ class Demo extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    alert(this.state.otp);
+    if(!this.state.hasErrored && !this.state.errorMsg){
+      try{
+        alert(this.state.otp);
+        this.setState({hasErrored:false, errorMsg:""});
+      }catch(error){
+        this.setState({hasErrored:true, errorMsg:"Error Occurred, Please try again."});
+    }
   };
 
   render() {
@@ -66,6 +79,7 @@ class Demo extends Component {
       isInputNum,
       minLength,
       maxLength,
+      errorMessage,
     } = this.state;
 
     return (
@@ -178,6 +192,9 @@ class Demo extends Component {
                   shouldAutoFocus
                   value={otp}
                 />
+              </div>
+              <div style={{ display:"flex", justifyContent:"center",color:"red" }}>
+                    {hasErrored && errorMessage && <ShowError message={errorMessage}>}
               </div>
               <div className="btn-row">
                 <button
