@@ -117,7 +117,7 @@ a {
 .side-bar__segment > label > input[type='text'] {
   width: 150px;
   border-radius: 4px;
-  border: 1px solid lightgrey;
+  border: 2px solid black;
   margin: 0.5rem 0;
   height: 1.5rem;
   padding: 0 0.5rem;
