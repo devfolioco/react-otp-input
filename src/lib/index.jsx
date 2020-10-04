@@ -24,6 +24,7 @@ type Props = {
   isInputNum?: boolean,
   value?: string,
   className?: string,
+  testprop?: string,
 };
 
 type State = {
@@ -87,6 +88,7 @@ class SingleOtpInput extends PureComponent<*> {
       index,
       value,
       className,
+      testProp,
       ...rest
     } = this.props;
 
@@ -119,6 +121,7 @@ class SingleOtpInput extends PureComponent<*> {
           }}
           disabled={isDisabled}
           value={value ? value : ''}
+          id={testProp}
           {...rest}
         />
         {!isLastChild && separator}
@@ -290,6 +293,7 @@ class OtpInput extends Component<Props, State> {
       shouldAutoFocus,
       isInputNum,
       className,
+      testProp,
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
@@ -322,6 +326,7 @@ class OtpInput extends Component<Props, State> {
           shouldAutoFocus={shouldAutoFocus}
           isInputNum={isInputNum}
           className={className}
+          testProp={testProp ? testProp.concat(i + 1) : null}
         />
       );
     }
