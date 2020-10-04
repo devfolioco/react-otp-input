@@ -180,14 +180,25 @@ class Demo extends Component {
                 />
               </div>
               <div className="btn-row">
-                <button
-                  className="btn margin-top--large"
-                  type="button"
-                  disabled={isDisabled}
-                  onClick={this.clearOtp}
-                >
-                  Clear
-                </button>
+                {this.state.otp === '' ? (
+                  <button
+                    className="btn margin-top--large"
+                    type="button"
+                    disabled={isDisabled}
+                    onClick={this.clearOtp}
+                  >
+                    Clear
+                  </button>
+                ) : (
+                  <button
+                    className="btn margin-top--large"
+                    type="button"
+                    disabled
+                    onClick={this.clearOtp}
+                  >
+                    Clear
+                  </button>
+                )}
                 <button
                   className="btn margin-top--large"
                   disabled={otp.length < numInputs}
