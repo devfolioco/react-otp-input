@@ -49,26 +49,24 @@ export default class App extends Component {
 ##### As functional component with hooks
 
 ```jsx
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import OtpInput from 'react-otp-input';
 
-export default function ReactOtpInput () {
+export default function ReactOtpInput() {
   const [otp, setOtp] = useState('');
 
-  const handleChange = enteredOtp => {
-		setOtp(enteredOtp);
-	};
+  const handleChange = (enteredOtp) => {
+    setOtp(enteredOtp);
+  };
 
-  render() {
-    return (
-      <OtpInput
-        value={otp}
-        onChange={handleChange}
-        numInputs={6}
-        separator={<span>-</span>}
-      />
-    );
-  }
+  return (
+    <OtpInput
+      value={otp}
+      onChange={handleChange}
+      numInputs={6}
+      separator={<span>-</span>}
+    />
+  );
 }
 ```
 
