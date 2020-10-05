@@ -22,6 +22,8 @@ npm install --save react-otp-input
 
 #### Basic usage:
 
+##### As class component
+
 ```jsx
 import React, { Component } from 'react';
 import OtpInput from 'react-otp-input';
@@ -29,13 +31,39 @@ import OtpInput from 'react-otp-input';
 export default class App extends Component {
   state = { otp: '' };
 
-  handleChange = otp => this.setState({ otp });
+  handleChange = (otp) => this.setState({ otp });
 
   render() {
     return (
       <OtpInput
         value={this.state.otp}
         onChange={this.handleChange}
+        numInputs={6}
+        separator={<span>-</span>}
+      />
+    );
+  }
+}
+```
+
+##### As functional component with hooks
+
+```jsx
+import React, {useState} from 'react';
+import OtpInput from 'react-otp-input';
+
+export default function ReactOtpInput () {
+  const [otp, setOtp] = useState('');
+
+  const handleChange = enteredOtp => {
+		setOtp(enteredOtp);
+	};
+
+  render() {
+    return (
+      <OtpInput
+        value={otp}
+        onChange={handleChange}
         numInputs={6}
         separator={<span>-</span>}
       />
