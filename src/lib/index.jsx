@@ -29,6 +29,7 @@ type Props = {
 type State = {
   activeInput: number,
   otp: string[],
+  hasFocusedOnceErrored: boolean
 };
 
 // Doesn't really check if it's a style Object
@@ -138,7 +139,22 @@ class OtpInput extends Component<Props, State> {
 
   state = {
     activeInput: 0,
+    hasFocusedOnceErrored: false
   };
+
+    static getDerivedStateFromProps(props, state) {
+    if(
+      props.hasErrored === true &&
+      state.hasFocusedOnceErrored === false
+    ) {
+      return {
+        ...state,
+        activeInput: 0,
+        hasFocusedOnceErrored: true
+      }
+    }
+    return state;
+  }
 
   getOtpValue = () =>
     this.props.value ? this.props.value.toString().split('') : [];
@@ -179,7 +195,10 @@ class OtpInput extends Component<Props, State> {
 
   // Focus on next input
   focusNextInput = () => {
-    const { activeInput } = this.state;
+    const { activeInput, hasFocusedOnceErrored } = this.state;
+    if (hasFocusedOnceErrored) {
+      this.setState({ hasFocusedOnceErrored: true });
+    }
     this.focusInput(activeInput + 1);
   };
 
