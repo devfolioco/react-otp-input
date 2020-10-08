@@ -200,25 +200,3 @@ Feel free to open [issues](https://github.com/devfolioco/react-otp-input/issues/
 ## License
 
 [![NPM](https://img.shields.io/npm/l/react-otp-input)](https://github.com/devfolioco/react-otp-input/blob/master/LICENSE)
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/apollonian"><img src="https://avatars2.githubusercontent.com/u/2150306?v=4" width="100px;" alt=""/><br /><sub><b>Abhishek Warokar</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=apollonian" title="Code">💻</a> <a href="#design-apollonian" title="Design">🎨</a> <a href="#maintenance-apollonian" title="Maintenance">🚧</a> <a href="#ideas-apollonian" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devfolioco/react-otp-input/pulls?q=is%3Apr+reviewed-by%3Aapollonian" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://ajayns.me"><img src="https://avatars0.githubusercontent.com/u/20743219?v=4" width="100px;" alt=""/><br /><sub><b>Aj</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ajayns" title="Code">💻</a> <a href="#design-ajayns" title="Design">🎨</a> <a href="#ideas-ajayns" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="http://aromalanil.me"><img src="https://avatars1.githubusercontent.com/u/49222186?v=4" width="100px;" alt=""/><br /><sub><b>Aromal Anil</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=aromalanil" title="Code">💻</a></td>
-    <td align="center"><a href="https://borntofrappe.github.io"><img src="https://avatars0.githubusercontent.com/u/33316703?v=4" width="100px;" alt=""/><br /><sub><b>Gabriele Corti</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=borntofrappe" title="Code">💻</a> <a href="#a11y-borntofrappe" title="Accessibility">️️️️♿️</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

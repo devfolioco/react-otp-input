@@ -21,6 +21,7 @@ class Demo extends Component {
   }
 
   handleOtpChange = otp => {
+    console.log(otp);
     this.setState({ otp });
   };
 

@@ -1,0 +1,44 @@
+---
+name: Demo
+route: /docs-demo
+---
+
+import { Playground, Props } from 'docz';
+import OtpInput from '../lib/index.js';
+import '../src/demo/styles.css';
+
+<Playground>
+    {class ExampleButton extends React.Component {
+            constructor(props) {
+            super(props);
+                this.state = {
+                    otp: '',
+                    numInputs: 4,
+                    separator: '-',
+                    isDisabled: false,
+                    hasErrored: false,
+                    isInputNum: false,
+                    minLength: 0,
+                    maxLength: 40,
+                };
+            }
+            render() {
+                const { inverted } = this.state;
+                return (
+                    <OtpInput
+                    inputStyle="inputStyle"
+                    numInputs={this.state.numInputs}
+                    isDisabled={this.state.isDisabled}
+                    hasErrored={this.state.hasErrored}
+                    errorStyle="error"
+                    onChange={(otp)=>{this.setState({otp})}}
+                    separator={<span>-</span>}
+                    isInputNum={this.state.isInputNum}
+                    shouldAutoFocus
+                    value={this.state.otp}
+                    />
+                );
+            }
+        }
+}
+</Playground>
