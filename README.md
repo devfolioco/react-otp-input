@@ -83,7 +83,7 @@ export default class App extends Component {
     <td>string</td>
     <td>false</td>
     <td>none</td>
-    <td>Provide a custom placeholder. Should be a single character or a string of length <code>&lt;numInputs&lt;</code>.</td>
+    <td>Provide a custom placeholder. Should be a single character or a string of length <code>&lt;numInputs&gt;</code>.</td>
   </tr>
   <tr>
     <td>separator</td>
