@@ -125,14 +125,14 @@ export default class App extends Component {
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
-    <td>Indicates there is an error in the inputs.</td>
+    <td>Indicates that there is an error in the inputs.</td>
   </tr>
   <tr>
     <td>errorStyle</td>
     <td>style (object) / className (string)</td>
     <td>false</td>
     <td>none</td>
-    <td>Style applied or class passed to each input when errored.</td>
+    <td>Style applied or class passed to each input when gets errored.</td>
   </tr>
   <tr>
     <td>shouldAutoFocus</td>
@@ -203,4 +203,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome! Let's grow together! 
