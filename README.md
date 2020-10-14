@@ -1,3 +1,7 @@
+Overview
+<p align = "center">
+<img src = "https://forthebadge.com/images/badges/uses-html.svg"> <img src = "https://forthebadge.com/images/badges/uses-css.svg"> <img src = "https://forthebadge.com/images/badges/made-with-javascript.svg"> <br> <img src = "https://forthebadge.com/images/badges/built-with-love.svg">
+
 # react-otp-input
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
