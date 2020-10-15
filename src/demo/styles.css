@@ -17,7 +17,7 @@ a {
 
 .side-bar {
   width: 250px;
-  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #4949a7;
   z-index: 1;
   position: relative;
 }
