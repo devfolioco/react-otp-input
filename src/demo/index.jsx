@@ -63,6 +63,15 @@ class Demo extends Component {
    * @return <div> </div>
    */
   renderView() {
+    const {
+      otp,
+      numInputs,
+      separator,
+      isDisabled,
+      hasErrored,
+      isInputNum,
+    } = this.state;
+
     return (
       <div className="view">
         <div className="card">
@@ -209,7 +218,7 @@ class Demo extends Component {
             </a>
           </div>
         </div>
-        {this.renderView}
+        {this.renderView()}
       </div>
     );
   }
