@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import View from './component/View';
+import OtpInput from '../../lib';
 import './styles.css';
 
 class Demo extends Component {
