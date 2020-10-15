@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import OtpInput from '../../lib';
+import View from './component/View';
 import './styles.css';
 
 class Demo extends Component {
@@ -55,6 +55,54 @@ class Demo extends Component {
     e.preventDefault();
     alert(this.state.otp);
   };
+
+  /**
+   *
+   * Function to render View
+   * @param
+   * @return <div> </div>
+   */
+  renderView() {
+    return (
+      <div className="view">
+        <div className="card">
+          <form onSubmit={this.handleSubmit}>
+            <p>Enter verification code</p>
+            <div className="margin-top--small">
+              <OtpInput
+                inputStyle="inputStyle"
+                numInputs={numInputs}
+                isDisabled={isDisabled}
+                hasErrored={hasErrored}
+                errorStyle="error"
+                onChange={this.handleOtpChange}
+                separator={<span>{separator}</span>}
+                isInputNum={isInputNum}
+                shouldAutoFocus
+                value={otp}
+              />
+            </div>
+            <div className="btn-row">
+              <button
+                className="btn margin-top--large"
+                type="button"
+                disabled={isDisabled || otp.trim() === ''}
+                onClick={this.clearOtp}
+              >
+                Clear
+              </button>
+              <button
+                className="btn margin-top--large"
+                disabled={otp.length < numInputs}
+              >
+                Get OTP
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   render() {
     const {
@@ -161,43 +209,7 @@ class Demo extends Component {
             </a>
           </div>
         </div>
-        <div className="view">
-          <div className="card">
-            <form onSubmit={this.handleSubmit}>
-              <p>Enter verification code</p>
-              <div className="margin-top--small">
-                <OtpInput
-                  inputStyle="inputStyle"
-                  numInputs={numInputs}
-                  isDisabled={isDisabled}
-                  hasErrored={hasErrored}
-                  errorStyle="error"
-                  onChange={this.handleOtpChange}
-                  separator={<span>{separator}</span>}
-                  isInputNum={isInputNum}
-                  shouldAutoFocus
-                  value={otp}
-                />
-              </div>
-              <div className="btn-row">
-                <button
-                  className="btn margin-top--large"
-                  type="button"
-                  disabled={isDisabled || otp.trim() === ""}
-                  onClick={this.clearOtp}
-                >
-                  Clear
-                </button>
-                <button
-                  className="btn margin-top--large"
-                  disabled={otp.length < numInputs}
-                >
-                  Get OTP
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        {this.renderView}
       </div>
     );
   }
