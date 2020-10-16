@@ -3,8 +3,10 @@ body {
   font-size: 16px;
   margin: auto;
   width: 50%;
-  border: 3px solid green;
+  border: 3px solid red;
   padding: 10px;
+  background-color: lightblue;
+  position: static;
 
 }
 
