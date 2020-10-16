@@ -184,6 +184,7 @@ class Demo extends Component {
                   className="btn margin-top--large"
                   type="button"
                   disabled={isDisabled || !numInputs || !otp}
+                  disabled={isDisabled || otp.trim() === ""}
                   onClick={this.clearOtp}
                 >
                   Clear

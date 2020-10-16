@@ -1,0 +1,58 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "apollonian",
+      "name": "Abhishek Warokar",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2150306?v=4",
+      "profile": "https://github.com/apollonian",
+      "contributions": [
+        "code",
+        "design",
+        "maintenance",
+        "ideas",
+        "review"
+      ]
+    },
+    {
+      "login": "ajayns",
+      "name": "Aj",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/20743219?v=4",
+      "profile": "https://ajayns.me",
+      "contributions": [
+        "code",
+        "design",
+        "ideas"
+      ]
+    },
+    {
+      "login": "aromalanil",
+      "name": "Aromal Anil",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/49222186?v=4",
+      "profile": "http://aromalanil.me",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "borntofrappe",
+      "name": "Gabriele Corti",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/33316703?v=4",
+      "profile": "https://borntofrappe.github.io",
+      "contributions": [
+        "code",
+        "a11y"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-otp-input",
+  "projectOwner": "devfolioco",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
