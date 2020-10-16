@@ -13,7 +13,7 @@ A fully customizable, one-time password input component for the web built with R
 
 [CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52)
 
-## Installation
+## Installation required
 
 [![NPM](https://nodei.co/npm/react-otp-input.png?compact=true)](https://nodei.co/npm/react-otp-input/)
 
@@ -177,7 +177,7 @@ npm run dev
 
 [![GitHub issues](https://img.shields.io/github/issues-raw/devfolioco/react-otp-input?logo=github)](https://github.com/devfolioco/react-otp-input/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/devfolioco/react-otp-input?logo=git)](https://github.com/devfolioco/react-otp-input/pulls)
 
-Feel free to open [issues](https://github.com/devfolioco/react-otp-input/issues/new/choose) and [pull requests](https://github.com/devfolioco/react-otp-input/pulls)!
+Feel free to open [issues](https://github.com/devfolioco/react-otp-input/issues/new/choose) and [pull requests](https://github.com/devfolioco/react-otp-input/pulls)! Let's grow together 👍
 
 ## License
 
