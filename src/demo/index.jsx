@@ -1,206 +1,117 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { useState } from "react";
+import OTPInput, { ResendOTP } from "../lib";
 
-import OtpInput from '../../lib';
-import './styles.css';
+const OtpInputCard = ({ title, resendOTP, ...rest }) => {
+  const [OTP, setOTP] = useState("");
+  return (
+    <div
+      style={{
+        padding: 12
+      }}
+    >
+      <div style={{ marginBottom: 12 }}>{title}</div>
+      <OTPInput value={OTP} onChange={setOTP} {...rest} />
+    </div>
+  );
+};
 
-class Demo extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      otp: '',
-      numInputs: 4,
-      separator: '-',
-      isDisabled: false,
-      hasErrored: false,
-      isInputNum: false,
-      minLength: 0,
-      maxLength: 40,
-    };
-  }
-
-  handleOtpChange = otp => {
-    this.setState({ otp });
-  };
-
-  handleChange = e => {
-    let currVal = e.target.value;
-
-    if (e.target.name === 'numInputs') {
-      const { minLength, maxLength } = this.state;
-
-      if (currVal < minLength || currVal > maxLength) {
-        currVal = 4;
-
-        console.error(
-          `Please enter a value between ${minLength} and ${maxLength}`
-        );
-      }
-    }
-
-    this.setState({ [e.target.name]: currVal });
-  };
-
-  clearOtp = () => {
-    this.setState({ otp: '' });
-  };
-
-  handleCheck = e => {
-    const { name } = e.target;
-    this.setState(prevState => ({ [name]: !prevState[name] }));
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    alert(this.state.otp);
-  };
-
-  render() {
-    const {
-      otp,
-      numInputs,
-      separator,
-      isDisabled,
-      hasErrored,
-      isInputNum,
-      minLength,
-      maxLength,
-    } = this.state;
-
-    return (
-      <div className="container">
-        <div className="side-bar">
-          <a
-            href="https://github.com/devfolioco/react-otp-input"
-            target="_blank"
-          >
-            <div className="side-bar__segment side-bar__segment--header">
-              <h2>react-otp-input</h2>
-            </div>
-          </a>
-          <div className="side-bar__segment">
-            <label htmlFor="num-inputs">
-              numInputs
-              <input
-                id="num-inputs"
-                name="numInputs"
-                type="number"
-                value={numInputs}
-                onChange={this.handleChange}
-                min={minLength}
-                max={maxLength}
-              />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="separator">
-              separator
-              <input
-                id="separator"
-                maxLength={1}
-                name="separator"
-                type="text"
-                value={separator}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="value">
-              value
-              <input
-                id="value"
-                maxLength={numInputs}
-                name="otp"
-                type="text"
-                value={otp}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="disabled">
-              <input
-                id="disabled"
-                name="isDisabled"
-                type="checkbox"
-                checked={isDisabled}
-                onChange={this.handleCheck}
-              />
-              isDisabled
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="hasErrored">
-              <input
-                id="hasErrored"
-                name="hasErrored"
-                type="checkbox"
-                checked={hasErrored}
-                onChange={this.handleCheck}
-              />
-              hasErrored
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="isInputNum">
-              <input
-                id="isInputNum"
-                name="isInputNum"
-                type="checkbox"
-                checked={isInputNum}
-                onChange={this.handleCheck}
-              />
-              isInputNum
-            </label>
-          </div>
-          <div className="side-bar__segment side-bar__segment--bottom">
-            <a href="https://github.com/devfolioco/react-otp-input">
-              Documentation and Source
-            </a>
-          </div>
-        </div>
-        <div className="view">
-          <div className="card">
-            <form onSubmit={this.handleSubmit}>
-              <p>Enter verification code</p>
-              <div className="margin-top--small">
-                <OtpInput
-                  inputStyle="inputStyle"
-                  numInputs={numInputs}
-                  isDisabled={isDisabled}
-                  hasErrored={hasErrored}
-                  errorStyle="error"
-                  onChange={this.handleOtpChange}
-                  separator={<span>{separator}</span>}
-                  isInputNum={isInputNum}
-                  shouldAutoFocus
-                  value={otp}
-                />
-              </div>
-              <div className="btn-row">
-                <button
-                  className="btn margin-top--large"
-                  type="button"
-                  disabled={isDisabled || otp.trim() === ""}
-                  onClick={this.clearOtp}
-                >
-                  Clear
-                </button>
-                <button
-                  className="btn margin-top--large"
-                  disabled={otp.length < numInputs}
-                >
-                  Get OTP
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+function App() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+      }}
+    >
+      <h2>OTP Input React</h2>
+      <div>
+        <OtpInputCard
+          title="Secrate input with auto focus on mount"
+          autoFocus
+          OTPLength={4}
+          otpType="number"
+          disabled={false}
+          resendOTP={{}}
+          secure
+        />
+        <ResendOTP handelResendClick={() => alert("Resend clicked")} />
+        <OtpInputCard
+          title="Number only input"
+          // autoFocus
+          OTPLength={4}
+          otpType="number"
+          disabled={false}
+          // secure
+        />
+        <ResendOTP
+          renderTime={() => React.Fragment}
+          renderButton={buttonProps => {
+            return (
+              <button {...buttonProps}>
+                {buttonProps.remainingTime !== 0
+                  ? `Please wait for ${buttonProps.remainingTime} sec`
+                  : "Resend"}
+              </button>
+            );
+          }}
+        />
+        <OtpInputCard
+          title="Alphabetic input"
+          // autoFocus
+          OTPLength={4}
+          otpType="alpha"
+          disabled={false}
+          // secure
+        />
+        <OtpInputCard
+          title="Alphanumeric input"
+          // autoFocus
+          OTPLength={4}
+          otpType="alphanumeric"
+          disabled={false}
+          // secure
+        />
+        <OtpInputCard
+          title="Any character input"
+          // autoFocus
+          OTPLength={4}
+          otpType="any"
+          disabled={false}
+          // secure
+        />
+        <OtpInputCard
+          title="Disabled"
+          // autoFocus
+          OTPLength={4}
+          otpType="any"
+          disabled={true}
+          // secure
+        />
+        <OtpInputCard
+          title="6 length otp Inputs"
+          // autoFocus
+          OTPLength={6}
+          otpType="any"
+          disabled={false}
+          // secure
+        />
+        <OtpInputCard
+          title="Input styling with inputStyles prop"
+          inputClassName="bottom__border"
+          // autoFocus
+          OTPLength={3}
+          otpType="any"
+          disabled={false}
+          inputStyles={{
+            border: 0,
+            borderBottom: "1px solid #cbcbcb"
+          }}
+          // secure
+        />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-render(<Demo />, document.getElementById('app'));
+export default App;
