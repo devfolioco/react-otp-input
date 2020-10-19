@@ -91,8 +91,8 @@ a {
 
 .side-bar__segment--header {
   margin: 1rem 0;
-  border-bottom: 1px solid lightgray;
-  border-top: 1px solid lightgray;
+  border-bottom: 2px solid lightgray;
+  border-top: 2px solid lightgray;
 }
 
 .side-bar__segment--header:hover {
@@ -136,7 +136,7 @@ a {
   padding: 2rem;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   border-radius: 4px;
-  background: white;
+  background: #fff;
 }
 
 .card > form {
