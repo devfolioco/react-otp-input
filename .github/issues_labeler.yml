@@ -1,0 +1,30 @@
+javascript:
+  - "(JavaScript|JAVASCRIPT|Javascript|javascript|JS|js|Js)"
+enhancement:
+  - "(enhancement|Enhancement|enhance)"
+difficulty-easy:
+  - "(Easy|easy)"  
+difficulty-medium:
+  - "(Medium|medium)"
+difficulty-hard:
+  - "(Hard|hard)"
+git:
+  - "(Git|git|GIT)"
+github-actions:
+  - "(GitHub actions|GIT actions|github actions)"
+hacktoberfest:
+  - "(hacktoberfest|Hacktoberfest|Hacktober fest|Hacktoberfest2020)"
+react:
+  - "(react|ReactJS|React)"
+bug:
+  - "(bug|Bug|BUG)"  
+otp:
+  - "(otp|OTP|One Time Password|Password)"
+up-for-grab:
+  - "(up for grab)"  
+urgent:
+  - "(urgent|URGENT|Urgent)"  
+documentation:
+  - "(documentation|Documentation|Docs)"
+no-Code:
+  - "(No Code)" 
