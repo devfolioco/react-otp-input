@@ -17,6 +17,7 @@ class Demo extends Component {
       isInputNum: false,
       minLength: 0,
       maxLength: 40,
+      placeholder: '',
     };
   }
 
@@ -66,6 +67,7 @@ class Demo extends Component {
       isInputNum,
       minLength,
       maxLength,
+      placeholder,
     } = this.state;
 
     return (
@@ -115,6 +117,18 @@ class Demo extends Component {
                 name="otp"
                 type="text"
                 value={otp}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div className="side-bar__segment">
+            <label htmlFor="placeholder">
+              placeholder
+              <input
+                id="placeholder"
+                name="placeholder"
+                type="text"
+                value={placeholder}
                 onChange={this.handleChange}
               />
             </label>
@@ -177,13 +191,14 @@ class Demo extends Component {
                   isInputNum={isInputNum}
                   shouldAutoFocus
                   value={otp}
+                  placeholder={placeholder}
                 />
               </div>
               <div className="btn-row">
                 <button
                   className="btn margin-top--large"
                   type="button"
-                  disabled={isDisabled || otp.trim() === ""}
+                  disabled={isDisabled || otp.trim() === ''}
                   onClick={this.clearOtp}
                 >
                   Clear

@@ -1,6 +1,9 @@
 # react-otp-input
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
@@ -78,6 +81,13 @@ export default class App extends Component {
     <td>''</td>
     <td>The value of the OTP passed into the component.</td>
   </tr>
+    <tr>		
+     <td>placeholder</td>		
+     <td>string</td>		
+     <td>false</td>		
+     <td>none</td>		
+     <td>Specify an expected value of each input. The length of this string should be equal to <code>numInputs</code>.</td>		
+   </tr>
   <tr>
     <td>separator</td>
     <td>component<br/></td>
@@ -201,6 +211,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
