@@ -40,6 +40,10 @@ class Demo extends Component {
       }
     }
 
+    if(this.state.isInputNum) {
+      currVal = currVal.replace(/[^\d]/g, '');
+    }
+
     this.setState({ [e.target.name]: currVal });
   };
 
