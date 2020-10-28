@@ -24,6 +24,7 @@ type Props = {
   isInputNum?: boolean,
   value?: string,
   className?: string,
+  isSecure?: boolean
 };
 
 type State = {
@@ -69,6 +70,12 @@ class SingleOtpInput extends PureComponent<*> {
 
   getClasses = (...classes) =>
     classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
+  
+  getType = () => {
+    if (this.props.isSecure) return 'password'
+    if (this.props.isInputNum) return 'tel'
+    return 'text' 
+  }
 
   render() {
     const {
@@ -87,6 +94,7 @@ class SingleOtpInput extends PureComponent<*> {
       index,
       value,
       className,
+      isSecure,
       ...rest
     } = this.props;
 
@@ -112,7 +120,7 @@ class SingleOtpInput extends PureComponent<*> {
             isDisabled && disabledStyle,
             hasErrored && errorStyle
           )}
-          type={isInputNum ? 'tel' : 'text'}
+          type={this.getType()}
           maxLength="1"
           ref={input => {
             this.input = input;
@@ -134,6 +142,7 @@ class OtpInput extends Component<Props, State> {
     isDisabled: false,
     shouldAutoFocus: false,
     value: '',
+    isSecure:false
   };
 
   state = {
@@ -293,7 +302,8 @@ class OtpInput extends Component<Props, State> {
       errorStyle,
       shouldAutoFocus,
       isInputNum,
-      className,
+      isSecure,
+      className
     } = this.props;
     const otp = this.getOtpValue();
     const inputs = [];
@@ -325,6 +335,7 @@ class OtpInput extends Component<Props, State> {
           errorStyle={errorStyle}
           shouldAutoFocus={shouldAutoFocus}
           isInputNum={isInputNum}
+          isSecure={isSecure}
           className={className}
         />
       );

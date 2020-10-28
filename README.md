@@ -158,6 +158,13 @@ export default class App extends Component {
     <td>false</td>
     <td>Restrict input to only numbers.</td>
   </tr>
+    <tr>
+    <td>isSecure</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Masks input characters.</td>
+  </tr>
 </table>
 
 ## Breaking changes when porting to v1.0.0
