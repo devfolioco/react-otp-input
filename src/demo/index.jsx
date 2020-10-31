@@ -15,7 +15,7 @@ class Demo extends Component {
       isDisabled: false,
       hasErrored: false,
       isInputNum: false,
-      isSecure: false,
+      isInputSecure: false,
       minLength: 0,
       maxLength: 40,
       placeholder: '',
@@ -66,7 +66,7 @@ class Demo extends Component {
       isDisabled,
       hasErrored,
       isInputNum,
-      isSecure,
+      isInputSecure,
       minLength,
       maxLength,
       placeholder,
@@ -172,15 +172,15 @@ class Demo extends Component {
             </label>
           </div>
           <div className="side-bar__segment">
-            <label htmlFor="isSecure">
+            <label htmlFor="isInputSecure">
               <input
-                id="isSecure"
-                name="isSecure"
+                id="isInputSecure"
+                name="isInputSecure"
                 type="checkbox"
-                checked={isSecure}
+                checked={isInputSecure}
                 onChange={this.handleCheck}
               />
-              isSecure
+              isInputSecure
             </label>
           </div>
           <div className="side-bar__segment side-bar__segment--bottom">
@@ -203,7 +203,7 @@ class Demo extends Component {
                   onChange={this.handleOtpChange}
                   separator={<span>{separator}</span>}
                   isInputNum={isInputNum}
-                  isSecure={isSecure}
+                  isInputSecure={isInputSecure}
                   shouldAutoFocus
                   value={otp}
                   placeholder={placeholder}
