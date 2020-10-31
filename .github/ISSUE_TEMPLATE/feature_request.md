@@ -1,7 +1,7 @@
 ---
 name: Feature Request
 about: Suggest a new feature
-explanation: Explain your new feature idea
+resource: Give more information
 ---
 
 - **Describe the Feature Request**
