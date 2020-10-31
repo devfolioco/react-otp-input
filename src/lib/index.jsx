@@ -224,9 +224,16 @@ class OtpInput extends Component<Props, State> {
   // Handle pasted OTP
   handleOnPaste = (e: Object) => {
     e.preventDefault();
-    const { numInputs } = this.props;
-    var { activeInput } = this.state;
+
+    const { activeInput } = this.state;
+    const { numInputs, isDisabled } = this.props;
+
+    if (isDisabled) {
+      return;
+    }
+
     const otp = this.getOtpValue();
+    let nextActiveInput = activeInput;
 
     // Get pastedData in an array of max size (num of inputs - current position)
     const pastedData = e.clipboardData
@@ -238,14 +245,14 @@ class OtpInput extends Component<Props, State> {
     for (let pos = 0; pos < numInputs; ++pos) {
       if (pos >= activeInput && pastedData.length > 0) {
         otp[pos] = pastedData.shift();
-        activeInput++;
+        nextActiveInput++;
       }
     }
 
-    this.setState({ activeInput });
-    this.focusInput(activeInput);
-
-    this.handleOtpChange(otp);
+    this.setState({ activeInput: nextActiveInput }, () => {
+      this.focusInput(activeInput);
+      this.handleOtpChange(otp);
+    });
   };
 
   handleOnChange = (e: Object) => {
