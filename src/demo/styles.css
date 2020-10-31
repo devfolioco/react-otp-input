@@ -181,7 +181,7 @@ input[type=number] {
 
 .btn:disabled {
   background-color: rgba(0, 0, 0, 0.4);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .margin-top--small {
