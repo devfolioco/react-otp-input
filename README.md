@@ -159,7 +159,7 @@ export default class App extends Component {
     <td>Restrict input to only numbers.</td>
   </tr>
     <tr>
-    <td>isSecure</td>
+    <td>isInputSecure</td>
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
