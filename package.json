@@ -1,6 +1,6 @@
 {
   "name": "react-otp-input",
-  "version": "2.3.0-next.0",
+  "version": "2.3.0-next.1",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
