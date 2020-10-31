@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-export class OtpInput extends React.Component<OtpInputProps, OtpInputState> {
+declare class OtpInput extends React.Component<
+  OtpInputProps,
+  OtpInputState,
+  any
+> {
   static defaultProps: {
     numInputs: number;
     onChange: (otp: number) => void;
@@ -8,6 +12,8 @@ export class OtpInput extends React.Component<OtpInputProps, OtpInputState> {
     shouldAutoFocus: boolean;
     value: string;
   };
+  constructor(props: Readonly<OtpInputProps>);
+  constructor(props: OtpInputProps, context?: any);
   getOtpValue: () => any;
   getPlaceholderValue: () => any;
   handleOtpChange: (otp: string[]) => void;
@@ -23,7 +29,7 @@ export class OtpInput extends React.Component<OtpInputProps, OtpInputState> {
   renderInputs: () => any[];
 }
 
-export interface OtpInputProps {
+interface OtpInputProps {
   className?: string;
   containerStyle?: Object;
   disabledStyle?: Object;
@@ -36,13 +42,16 @@ export interface OtpInputProps {
   isInputSecure?: boolean;
   numInputs: number;
   onChange: Function;
-  placeholder: string;
+  placeholder?: string;
   separator?: Object;
   shouldAutoFocus?: boolean;
   value?: string;
 }
 
-export interface OtpInputState {
+interface OtpInputState {
   activeInput: number;
   otp: string[];
 }
+
+export { OtpInputProps };
+export default OtpInput;
