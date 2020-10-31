@@ -24,7 +24,7 @@ type Props = {
   isInputNum?: boolean,
   value?: string,
   className?: string,
-  isSecure?: boolean
+  isInputSecure?: boolean,
 };
 
 type State = {
@@ -70,12 +70,18 @@ class SingleOtpInput extends PureComponent<*> {
 
   getClasses = (...classes) =>
     classes.filter(c => !isStyleObject(c) && c !== false).join(' ');
-  
+
   getType = () => {
-    if (this.props.isSecure) return 'password'
-    if (this.props.isInputNum) return 'tel'
-    return 'text' 
-  }
+    if (this.props.isInputSecure) {
+      return 'password';
+    }
+
+    if (this.props.isInputNum) {
+      return 'tel';
+    }
+
+    return 'text';
+  };
 
   render() {
     const {
@@ -94,7 +100,7 @@ class SingleOtpInput extends PureComponent<*> {
       index,
       value,
       className,
-      isSecure,
+      isInputSecure,
       ...rest
     } = this.props;
 
@@ -104,7 +110,9 @@ class SingleOtpInput extends PureComponent<*> {
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <input
-          aria-label={`${(index === 0) ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${index + 1}`}
+          aria-label={`${
+            index === 0 ? 'Please enter verification code. ' : ''
+          }${isInputNum ? 'Digit' : 'Character'} ${index + 1}`}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
@@ -142,7 +150,7 @@ class OtpInput extends Component<Props, State> {
     isDisabled: false,
     shouldAutoFocus: false,
     value: '',
-    isSecure:false
+    isInputSecure: false,
   };
 
   state = {
@@ -161,7 +169,9 @@ class OtpInput extends Component<Props, State> {
       }
 
       if (placeholder.length > 0) {
-        console.error('Length of the placeholder should be equal to the number of inputs.');
+        console.error(
+          'Length of the placeholder should be equal to the number of inputs.'
+        );
       }
     }
   };
@@ -306,12 +316,14 @@ class OtpInput extends Component<Props, State> {
       errorStyle,
       shouldAutoFocus,
       isInputNum,
-      isSecure,
-      className
+      isInputSecure,
+      className,
     } = this.props;
-    const otp = this.getOtpValue();
+
     const inputs = [];
+    const otp = this.getOtpValue();
     const placeholder = this.getPlaceholderValue();
+
     for (let i = 0; i < numInputs; i++) {
       inputs.push(
         <SingleOtpInput
@@ -339,7 +351,7 @@ class OtpInput extends Component<Props, State> {
           errorStyle={errorStyle}
           shouldAutoFocus={shouldAutoFocus}
           isInputNum={isInputNum}
-          isSecure={isSecure}
+          isInputSecure={isInputSecure}
           className={className}
         />
       );
