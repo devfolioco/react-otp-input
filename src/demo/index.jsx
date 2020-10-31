@@ -126,6 +126,7 @@ class Demo extends Component {
               placeholder
               <input
                 id="placeholder"
+                maxLength={numInputs}
                 name="placeholder"
                 type="text"
                 value={placeholder}

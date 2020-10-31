@@ -147,7 +147,7 @@ class OtpInput extends Component<Props, State> {
     const { placeholder, numInputs } = this.props;
 
     if (typeof placeholder === 'string') {
-      if (placeholder.length === numInputs) {
+      if (placeholder.length == numInputs) {
         return placeholder;
       }
 
