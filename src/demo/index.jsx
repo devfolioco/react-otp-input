@@ -27,21 +27,22 @@ class Demo extends Component {
   };
 
   handleChange = e => {
-    let currVal = e.target.value;
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-    if (e.target.name === 'numInputs') {
-      const { minLength, maxLength } = this.state;
+  handleNumInputsChange = e => {
+    let numInputs = e.target.value;
+    const { minLength, maxLength } = this.state;
 
-      if (currVal < minLength || currVal > maxLength) {
-        currVal = 4;
+    if (numInputs < minLength || numInputs > maxLength) {
+      numInputs = 4;
 
-        console.error(
-          `Please enter a value between ${minLength} and ${maxLength}`
-        );
-      }
+      console.error(
+        `Please enter a value between ${minLength} and ${maxLength}`
+      );
     }
 
-    this.setState({ [e.target.name]: currVal });
+    this.setState({ [e.target.name]: parseInt(numInputs, 10) });
   };
 
   clearOtp = () => {
@@ -91,7 +92,7 @@ class Demo extends Component {
                 name="numInputs"
                 type="number"
                 value={numInputs}
-                onChange={this.handleChange}
+                onChange={this.handleNumInputsChange}
                 min={minLength}
                 max={maxLength}
               />
