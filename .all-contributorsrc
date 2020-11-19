@@ -66,6 +66,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "ishan-chhabra",
+      "name": "Ishan Chhabra",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/32290367?v=4",
+      "profile": "http://ishanchhabra.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
