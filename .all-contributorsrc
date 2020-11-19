@@ -47,6 +47,15 @@
         "code",
         "a11y"
       ]
+    },
+    {
+      "login": "anoopmsivadas",
+      "name": "Anoop",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/46913894?v=4",
+      "profile": "https://www.anoopms.me",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

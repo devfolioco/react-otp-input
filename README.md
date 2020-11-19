@@ -1,9 +1,7 @@
 # react-otp-input
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
@@ -213,12 +211,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://ajayns.me"><img src="https://avatars0.githubusercontent.com/u/20743219?v=4" width="100px;" alt=""/><br /><sub><b>Aj</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ajayns" title="Code">💻</a> <a href="#design-ajayns" title="Design">🎨</a> <a href="#ideas-ajayns" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://aromalanil.me"><img src="https://avatars1.githubusercontent.com/u/49222186?v=4" width="100px;" alt=""/><br /><sub><b>Aromal Anil</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=aromalanil" title="Code">💻</a></td>
     <td align="center"><a href="https://borntofrappe.github.io"><img src="https://avatars0.githubusercontent.com/u/33316703?v=4" width="100px;" alt=""/><br /><sub><b>Gabriele Corti</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=borntofrappe" title="Code">💻</a> <a href="#a11y-borntofrappe" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://www.anoopms.me"><img src="https://avatars1.githubusercontent.com/u/46913894?v=4" width="100px;" alt=""/><br /><sub><b>Anoop</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=anoopmsivadas" title="Code">💻</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
