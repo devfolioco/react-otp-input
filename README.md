@@ -1,7 +1,7 @@
 # react-otp-input
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
@@ -213,6 +213,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://borntofrappe.github.io"><img src="https://avatars0.githubusercontent.com/u/33316703?v=4" width="100px;" alt=""/><br /><sub><b>Gabriele Corti</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=borntofrappe" title="Code">💻</a> <a href="#a11y-borntofrappe" title="Accessibility">️️️️♿️</a></td>
     <td align="center"><a href="https://www.anoopms.me"><img src="https://avatars1.githubusercontent.com/u/46913894?v=4" width="100px;" alt=""/><br /><sub><b>Anoop</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=anoopmsivadas" title="Code">💻</a></td>
     <td align="center"><a href="http://dewanshrawat.xyz"><img src="https://avatars0.githubusercontent.com/u/17003127?v=4" width="100px;" alt=""/><br /><sub><b>Dewansh Rawat</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/issues?q=author%3Adewanshrawat15" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://ishanchhabra.com"><img src="https://avatars3.githubusercontent.com/u/32290367?v=4" width="100px;" alt=""/><br /><sub><b>Ishan Chhabra</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ishan-chhabra" title="Code">💻</a></td>
   </tr>
 </table>
 
