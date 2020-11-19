@@ -56,6 +56,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dewanshrawat15",
+      "name": "Dewansh Rawat",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/17003127?v=4",
+      "profile": "http://dewanshrawat.xyz",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
