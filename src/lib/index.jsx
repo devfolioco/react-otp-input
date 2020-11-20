@@ -25,6 +25,7 @@ type Props = {
   value?: string,
   className?: string,
   isInputSecure?: boolean,
+  onKeyDown: Function,
 };
 
 type State = {
@@ -265,6 +266,9 @@ class OtpInput extends Component<Props, State> {
 
   // Handle cases of backspace, delete, left arrow, right arrow, space
   handleOnKeyDown = (e: Object) => {
+    if (this.props.onKeyDown) {
+      this.props.onKeyDown(e)
+    }
     if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
       e.preventDefault();
       this.changeCodeAtFocus('');
