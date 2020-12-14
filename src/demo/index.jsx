@@ -15,8 +15,10 @@ class Demo extends Component {
       isDisabled: false,
       hasErrored: false,
       isInputNum: false,
+      isInputSecure: false,
       minLength: 0,
       maxLength: 40,
+      placeholder: '',
     };
   }
 
@@ -25,21 +27,22 @@ class Demo extends Component {
   };
 
   handleChange = e => {
-    let currVal = e.target.value;
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-    if (e.target.name === 'numInputs') {
-      const { minLength, maxLength } = this.state;
+  handleNumInputsChange = e => {
+    let numInputs = e.target.value;
+    const { minLength, maxLength } = this.state;
 
-      if (currVal < minLength || currVal > maxLength) {
-        currVal = 4;
+    if (numInputs < minLength || numInputs > maxLength) {
+      numInputs = 4;
 
-        console.error(
-          `Please enter a value between ${minLength} and ${maxLength}`
-        );
-      }
+      console.error(
+        `Please enter a value between ${minLength} and ${maxLength}`
+      );
     }
 
-    this.setState({ [e.target.name]: currVal });
+    this.setState({ [e.target.name]: parseInt(numInputs, 10) });
   };
 
   clearOtp = () => {
@@ -64,8 +67,10 @@ class Demo extends Component {
       isDisabled,
       hasErrored,
       isInputNum,
+      isInputSecure,
       minLength,
       maxLength,
+      placeholder,
     } = this.state;
 
     return (
@@ -87,7 +92,7 @@ class Demo extends Component {
                 name="numInputs"
                 type="number"
                 value={numInputs}
-                onChange={this.handleChange}
+                onChange={this.handleNumInputsChange}
                 min={minLength}
                 max={maxLength}
               />
@@ -115,6 +120,18 @@ class Demo extends Component {
                 name="otp"
                 type="text"
                 value={otp}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div className="side-bar__segment">
+            <label htmlFor="placeholder">
+              placeholder
+              <input
+                id="placeholder"
+                name="placeholder"
+                type="text"
+                value={placeholder}
                 onChange={this.handleChange}
               />
             </label>
@@ -155,6 +172,18 @@ class Demo extends Component {
               isInputNum
             </label>
           </div>
+          <div className="side-bar__segment">
+            <label htmlFor="isInputSecure">
+              <input
+                id="isInputSecure"
+                name="isInputSecure"
+                type="checkbox"
+                checked={isInputSecure}
+                onChange={this.handleCheck}
+              />
+              isInputSecure
+            </label>
+          </div>
           <div className="side-bar__segment side-bar__segment--bottom">
             <a href="https://github.com/devfolioco/react-otp-input">
               Documentation and Source
@@ -175,15 +204,17 @@ class Demo extends Component {
                   onChange={this.handleOtpChange}
                   separator={<span>{separator}</span>}
                   isInputNum={isInputNum}
+                  isInputSecure={isInputSecure}
                   shouldAutoFocus
                   value={otp}
+                  placeholder={placeholder}
                 />
               </div>
               <div className="btn-row">
                 <button
                   className="btn margin-top--large"
                   type="button"
-                  disabled={isDisabled}
+                  disabled={isDisabled || otp.trim() === ''}
                   onClick={this.clearOtp}
                 >
                   Clear

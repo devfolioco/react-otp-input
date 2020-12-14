@@ -19,25 +19,63 @@
       ]
     },
     {
-       "login": "ajayns",
-       "name": "Aj",
-       "avatar_url": "https://avatars0.githubusercontent.com/u/20743219?v=4",
-       "profile": "https://ajayns.me",
-       "contributions": [
-         "code",
-         "design",
-         "ideas"
-       ]
-     },
-     {
-       "login": "aromalanil",
-       "name": "Aromal Anil",
-       "avatar_url": "https://avatars1.githubusercontent.com/u/49222186?v=4",
-       "profile": "http://aromalanil.me",
-       "contributions": [
-         "code"
-       ]
-     }
+      "login": "ajayns",
+      "name": "Aj",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/20743219?v=4",
+      "profile": "https://ajayns.me",
+      "contributions": [
+        "code",
+        "design",
+        "ideas"
+      ]
+    },
+    {
+      "login": "aromalanil",
+      "name": "Aromal Anil",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/49222186?v=4",
+      "profile": "http://aromalanil.me",
+      "contributions": [
+        "code",
+        "tool"
+      ]
+    },
+    {
+      "login": "borntofrappe",
+      "name": "Gabriele Corti",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/33316703?v=4",
+      "profile": "https://borntofrappe.github.io",
+      "contributions": [
+        "code",
+        "a11y"
+      ]
+    },
+    {
+      "login": "anoopmsivadas",
+      "name": "Anoop",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/46913894?v=4",
+      "profile": "https://www.anoopms.me",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dewanshrawat15",
+      "name": "Dewansh Rawat",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/17003127?v=4",
+      "profile": "http://dewanshrawat.xyz",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "ishan-chhabra",
+      "name": "Ishan Chhabra",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/32290367?v=4",
+      "profile": "http://ishanchhabra.com",
+      "contributions": [
+        "code"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "react-otp-input",

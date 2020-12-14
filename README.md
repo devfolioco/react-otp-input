@@ -1,6 +1,8 @@
 # react-otp-input
-[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input) [![npm](https://img.shields.io/bundlephobia/minzip/react-otp-input)](https://www.npmjs.com/package/react-otp-input)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
+[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input) [![npm](https://img.shields.io/bundlephobia/minzip/react-otp-input)](https://www.npmjs.com/package/react-otp-input)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A fully customizable, one-time password input component for the web built with React.
@@ -76,19 +78,19 @@ export default class App extends Component {
     <td>''</td>
     <td>The value of the OTP passed into the component.</td>
   </tr>
-  <!-- <tr>
-    <td>placeholder</td>
-    <td>string</td>
-    <td>false</td>
-    <td>none</td>
-    <td>Provide a custom placeholder. Should be a single character or a string of length <code>numInputs</code>.</td>
-  </tr> -->
+    <tr>		
+     <td>placeholder</td>		
+     <td>string</td>		
+     <td>false</td>		
+     <td>none</td>		
+     <td>Specify an expected value of each input. The length of this string should be equal to <code>numInputs</code>.</td>		
+   </tr>
   <tr>
     <td>separator</td>
     <td>component<br/></td>
     <td>false</td>
     <td>none</td>
-    <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input</td>
+    <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input.</td>
   </tr>
   <tr>
     <td>containerStyle</td>
@@ -153,6 +155,13 @@ export default class App extends Component {
     <td>false</td>
     <td>Restrict input to only numbers.</td>
   </tr>
+    <tr>
+    <td>isInputSecure</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Masks input characters.</td>
+  </tr>
 </table>
 
 ## Breaking changes when porting to v1.0.0
@@ -167,18 +176,6 @@ export default class App extends Component {
 npm run dev
 ```
 
-#### To run the development server for example:
-
-```
-npm run docs
-```
-
-#### To make a production build of the example:
-
-```
-npm run docs:prod
-```
-
 ## Checklist
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
@@ -188,6 +185,7 @@ npm run docs:prod
 - [x] Add styling support for states including focus/disabled
 - [ ] Travis CI, Codecov
 - [ ] Write tests
+- [ ] Improve Documentation
 
 ## Contributing
 
@@ -208,15 +206,18 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/apollonian"><img src="https://avatars2.githubusercontent.com/u/2150306?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhishek Warokar</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=apollonian" title="Code">💻</a> <a href="#design-apollonian" title="Design">🎨</a> <a href="#maintenance-apollonian" title="Maintenance">🚧</a> <a href="#ideas-apollonian" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devfolioco/react-otp-input/pulls?q=is%3Apr+reviewed-by%3Aapollonian" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://ajayns.me"><img src="https://avatars0.githubusercontent.com/u/20743219?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aj</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ajayns" title="Code">💻</a> <a href="#design-ajayns" title="Design">🎨</a> <a href="#ideas-ajayns" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="http://aromalanil.me"><img src="https://avatars1.githubusercontent.com/u/49222186?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aromal Anil</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=aromalanil" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/apollonian"><img src="https://avatars2.githubusercontent.com/u/2150306?v=4" width="100px;" alt=""/><br /><sub><b>Abhishek Warokar</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=apollonian" title="Code">💻</a> <a href="#design-apollonian" title="Design">🎨</a> <a href="#maintenance-apollonian" title="Maintenance">🚧</a> <a href="#ideas-apollonian" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devfolioco/react-otp-input/pulls?q=is%3Apr+reviewed-by%3Aapollonian" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://ajayns.me"><img src="https://avatars0.githubusercontent.com/u/20743219?v=4" width="100px;" alt=""/><br /><sub><b>Aj</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ajayns" title="Code">💻</a> <a href="#design-ajayns" title="Design">🎨</a> <a href="#ideas-ajayns" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://aromalanil.me"><img src="https://avatars1.githubusercontent.com/u/49222186?v=4" width="100px;" alt=""/><br /><sub><b>Aromal Anil</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=aromalanil" title="Code">💻</a> <a href="#tool-aromalanil" title="Tools">🔧</a></td>
+    <td align="center"><a href="https://borntofrappe.github.io"><img src="https://avatars0.githubusercontent.com/u/33316703?v=4" width="100px;" alt=""/><br /><sub><b>Gabriele Corti</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=borntofrappe" title="Code">💻</a> <a href="#a11y-borntofrappe" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://www.anoopms.me"><img src="https://avatars1.githubusercontent.com/u/46913894?v=4" width="100px;" alt=""/><br /><sub><b>Anoop</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=anoopmsivadas" title="Code">💻</a></td>
+    <td align="center"><a href="http://dewanshrawat.xyz"><img src="https://avatars0.githubusercontent.com/u/17003127?v=4" width="100px;" alt=""/><br /><sub><b>Dewansh Rawat</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/issues?q=author%3Adewanshrawat15" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://ishanchhabra.com"><img src="https://avatars3.githubusercontent.com/u/32290367?v=4" width="100px;" alt=""/><br /><sub><b>Ishan Chhabra</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ishan-chhabra" title="Code">💻</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-restore -->
+<!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
