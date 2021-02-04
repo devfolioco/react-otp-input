@@ -115,7 +115,7 @@ class SingleOtpInput extends PureComponent<*> {
           }${isInputNum ? 'Digit' : 'Character'} ${index + 1}`}
           autoComplete="off"
           style={Object.assign(
-            { width: '1em', textAlign: 'center' },
+            { width: '1em', textAlign: 'center', padding: 0 },
             isStyleObject(inputStyle) && inputStyle,
             focus && isStyleObject(focusStyle) && focusStyle,
             isDisabled && isStyleObject(disabledStyle) && disabledStyle,
