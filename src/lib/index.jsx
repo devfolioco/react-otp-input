@@ -226,7 +226,7 @@ class OtpInput extends Component<Props, State> {
     e.preventDefault();
 
     const { activeInput } = this.state;
-    const { numInputs, isDisabled } = this.props;
+    const { numInputs, isDisabled, isInputNum } = this.props;
 
     if (isDisabled) {
       return;
@@ -240,6 +240,12 @@ class OtpInput extends Component<Props, State> {
       .getData('text/plain')
       .slice(0, numInputs - activeInput)
       .split('');
+
+    if (isInputNum) {
+      var regex = new RegExp('^[0-9]*$');
+      const isNumeric = regex.test(pastedData)
+      if (!isNumeric) return;
+    }
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
