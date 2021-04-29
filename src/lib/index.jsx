@@ -151,6 +151,8 @@ class OtpInput extends Component<Props, State> {
     shouldAutoFocus: false,
     value: '',
     isInputSecure: false,
+    onFocus: () => {},
+    onBlur: () => {},
   };
 
   state = {
@@ -325,6 +327,8 @@ class OtpInput extends Component<Props, State> {
       isInputNum,
       isInputSecure,
       className,
+      onFocus,
+      onBlur,
     } = this.props;
 
     const inputs = [];
@@ -346,8 +350,12 @@ class OtpInput extends Component<Props, State> {
           onFocus={e => {
             this.setState({ activeInput: i });
             e.target.select();
+            onFocus(e);
           }}
-          onBlur={() => this.setState({ activeInput: -1 })}
+          onBlur={e => {
+            this.setState({ activeInput: -1 });
+            onBlur(e);
+          }}
           separator={separator}
           inputStyle={inputStyle}
           focusStyle={focusStyle}

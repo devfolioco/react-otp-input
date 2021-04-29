@@ -11,6 +11,8 @@ declare class OtpInput extends React.Component<
     isDisabled: boolean;
     shouldAutoFocus: boolean;
     value: string;
+    onFocus: (e: any) => void;
+    onBlur: (e: any) => void;
   };
   constructor(props: Readonly<OtpInputProps>);
   constructor(props: OtpInputProps, context?: any);
@@ -42,6 +44,8 @@ interface OtpInputProps {
   isInputSecure?: boolean;
   numInputs: number;
   onChange: Function;
+  onFocus: Function;
+  onBlur: Function;
   placeholder?: string;
   separator?: Object;
   shouldAutoFocus?: boolean;
