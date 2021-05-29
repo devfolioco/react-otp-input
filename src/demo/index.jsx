@@ -22,15 +22,15 @@ class Demo extends Component {
     };
   }
 
-  handleOtpChange = otp => {
+  handleOtpChange = (otp) => {
     this.setState({ otp });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleNumInputsChange = e => {
+  handleNumInputsChange = (e) => {
     let numInputs = e.target.value;
     const { minLength, maxLength } = this.state;
 
@@ -49,12 +49,12 @@ class Demo extends Component {
     this.setState({ otp: '' });
   };
 
-  handleCheck = e => {
+  handleCheck = (e) => {
     const { name } = e.target;
-    this.setState(prevState => ({ [name]: !prevState[name] }));
+    this.setState((prevState) => ({ [name]: !prevState[name] }));
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     alert(this.state.otp);
   };
@@ -79,6 +79,7 @@ class Demo extends Component {
           <a
             href="https://github.com/devfolioco/react-otp-input"
             target="_blank"
+            rel="noreferrer"
           >
             <div className="side-bar__segment side-bar__segment--header">
               <h2>react-otp-input</h2>
