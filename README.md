@@ -32,7 +32,7 @@ import OtpInput from 'react-otp-input';
 export default class App extends Component {
   state = { otp: '' };
 
-  handleChange = otp => this.setState({ otp });
+  handleChange = (otp) => this.setState({ otp });
 
   render() {
     return (
@@ -78,12 +78,12 @@ export default class App extends Component {
     <td>''</td>
     <td>The value of the OTP passed into the component.</td>
   </tr>
-    <tr>		
-     <td>placeholder</td>		
-     <td>string</td>		
-     <td>false</td>		
-     <td>none</td>		
-     <td>Specify an expected value of each input. The length of this string should be equal to <code>numInputs</code>.</td>		
+    <tr>
+     <td>placeholder</td>
+     <td>string</td>
+     <td>false</td>
+     <td>none</td>
+     <td>Specify an expected value of each input. The length of this string should be equal to <code>numInputs</code>.</td>
    </tr>
   <tr>
     <td>separator</td>
@@ -218,6 +218,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

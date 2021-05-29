@@ -1,7 +1,28 @@
 {
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier", "flowtype"],
+  "env": {
+    "browser": true
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
-    "prettier/prettier": "error"
+    "no-unused-vars": "off",
+    "react/prop-types": "off"
   }
 }

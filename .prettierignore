@@ -1,0 +1,8 @@
+# Build
+/lib
+
+# Demo Build
+/demo
+
+# Dependencies
+/node_modules
