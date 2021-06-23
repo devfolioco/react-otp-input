@@ -86,9 +86,8 @@ class SingleOtpInput extends PureComponent {
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <input
-          aria-label={`${
-            index === 0 ? 'Please enter verification code. ' : ''
-          }${isInputNum ? 'Digit' : 'Character'} ${index + 1}`}
+          aria-label={`${index === 0 ? 'Please enter verification code. ' : ''
+            }${isInputNum ? 'Digit' : 'Character'} ${index + 1}`}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
@@ -309,7 +308,6 @@ class OtpInput extends Component {
       inputs.push(
         <SingleOtpInput
           placeholder={placeholder && placeholder[i]}
-          data-cy={this.props["data-cy"] ? `${this.props["data-cy"]}-${i}` : null}
           key={i}
           index={i}
           focus={activeInput === i}
@@ -335,6 +333,8 @@ class OtpInput extends Component {
           isInputNum={isInputNum}
           isInputSecure={isInputSecure}
           className={className}
+          data-cy={this.props["data-cy"] ? `${this.props["data-cy"]}-${i}` : null}
+          data-testid={this.props["data-testid"] ? `${this.props["data-testid"]}-${i}` : null}
         />
       );
     }
