@@ -309,6 +309,7 @@ class OtpInput extends Component {
       inputs.push(
         <SingleOtpInput
           placeholder={placeholder && placeholder[i]}
+          data-cy={this.props["data-cy"] ? `${this.props["data-cy"]}-${i}` : null}
           key={i}
           index={i}
           focus={activeInput === i}
