@@ -42,8 +42,7 @@ class SingleOtpInput extends PureComponent {
     }
   }
 
-  getClasses = (...classes) =>
-    classes.filter((c) => !isStyleObject(c) && c !== false).join(' ');
+  getClasses = (...classes) => classes.filter((c) => !isStyleObject(c) && c !== false).join(' ');
 
   getType = () => {
     const { isInputSecure, isInputNum } = this.props;
@@ -81,13 +80,11 @@ class SingleOtpInput extends PureComponent {
     } = this.props;
 
     return (
-      <div
-        className={className}
-        style={{ display: 'flex', alignItems: 'center' }}
-      >
+      <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
         <input
-          aria-label={`${index === 0 ? 'Please enter verification code. ' : ''
-            }${isInputNum ? 'Digit' : 'Character'} ${index + 1}`}
+          aria-label={`${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${
+            index + 1
+          }`}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
@@ -130,8 +127,7 @@ class OtpInput extends Component {
     activeInput: 0,
   };
 
-  getOtpValue = () =>
-    this.props.value ? this.props.value.toString().split('') : [];
+  getOtpValue = () => (this.props.value ? this.props.value.toString().split('') : []);
 
   getPlaceholderValue = () => {
     const { placeholder, numInputs } = this.props;
@@ -142,9 +138,7 @@ class OtpInput extends Component {
       }
 
       if (placeholder.length > 0) {
-        console.error(
-          'Length of the placeholder should be equal to the number of inputs.'
-        );
+        console.error('Length of the placeholder should be equal to the number of inputs.');
       }
     }
   };
@@ -158,9 +152,7 @@ class OtpInput extends Component {
   };
 
   isInputValueValid = (value) => {
-    const isTypeValid = this.props.isInputNum
-      ? !isNaN(parseInt(value, 10))
-      : typeof value === 'string';
+    const isTypeValid = this.props.isInputNum ? !isNaN(parseInt(value, 10)) : typeof value === 'string';
 
     return isTypeValid && value.trim().length === 1;
   };
@@ -251,12 +243,7 @@ class OtpInput extends Component {
     } else if (e.keyCode === RIGHT_ARROW || e.key === 'ArrowRight') {
       e.preventDefault();
       this.focusNextInput();
-    } else if (
-      e.keyCode === SPACEBAR ||
-      e.key === ' ' ||
-      e.key === 'Spacebar' ||
-      e.key === 'Space'
-    ) {
+    } else if (e.keyCode === SPACEBAR || e.key === ' ' || e.key === 'Spacebar' || e.key === 'Space') {
       e.preventDefault();
     }
   };
@@ -271,10 +258,7 @@ class OtpInput extends Component {
       if (!this.props.isInputNum) {
         const { nativeEvent } = e;
 
-        if (
-          nativeEvent.data === null &&
-          nativeEvent.inputType === 'deleteContentBackward'
-        ) {
+        if (nativeEvent.data === null && nativeEvent.inputType === 'deleteContentBackward') {
           e.preventDefault();
           this.changeCodeAtFocus('');
           this.focusPrevInput();
@@ -303,6 +287,8 @@ class OtpInput extends Component {
     const inputs = [];
     const otp = this.getOtpValue();
     const placeholder = this.getPlaceholderValue();
+    const dataCy = this.props['data-cy'];
+    const dataTestId = this.props['data-testid'];
 
     for (let i = 0; i < numInputs; i++) {
       inputs.push(
@@ -333,8 +319,8 @@ class OtpInput extends Component {
           isInputNum={isInputNum}
           isInputSecure={isInputSecure}
           className={className}
-          data-cy={this.props["data-cy"] ? `${this.props["data-cy"]}-${i}` : null}
-          data-testid={this.props["data-testid"] ? `${this.props["data-testid"]}-${i}` : null}
+          data-cy={dataCy && `${dataCy}-${i}`}
+          data-testid={dataTestId && `${dataTestId}-${i}`}
         />
       );
     }
@@ -347,10 +333,7 @@ class OtpInput extends Component {
 
     return (
       <div
-        style={Object.assign(
-          { display: 'flex' },
-          isStyleObject(containerStyle) && containerStyle
-        )}
+        style={Object.assign({ display: 'flex' }, isStyleObject(containerStyle) && containerStyle)}
         className={!isStyleObject(containerStyle) ? containerStyle : ''}
       >
         {this.renderInputs()}
