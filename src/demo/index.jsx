@@ -37,9 +37,7 @@ class Demo extends Component {
     if (numInputs < minLength || numInputs > maxLength) {
       numInputs = 4;
 
-      console.error(
-        `Please enter a value between ${minLength} and ${maxLength}`
-      );
+      console.error(`Please enter a value between ${minLength} and ${maxLength}`);
     }
 
     this.setState({ [e.target.name]: parseInt(numInputs, 10) });
@@ -76,11 +74,7 @@ class Demo extends Component {
     return (
       <div className="container">
         <div className="side-bar">
-          <a
-            href="https://github.com/devfolioco/react-otp-input"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://github.com/devfolioco/react-otp-input" target="_blank" rel="noreferrer">
             <div className="side-bar__segment side-bar__segment--header">
               <h2>react-otp-input</h2>
             </div>
@@ -115,37 +109,18 @@ class Demo extends Component {
           <div className="side-bar__segment">
             <label htmlFor="value">
               value
-              <input
-                id="value"
-                maxLength={numInputs}
-                name="otp"
-                type="text"
-                value={otp}
-                onChange={this.handleChange}
-              />
+              <input id="value" maxLength={numInputs} name="otp" type="text" value={otp} onChange={this.handleChange} />
             </label>
           </div>
           <div className="side-bar__segment">
             <label htmlFor="placeholder">
               placeholder
-              <input
-                id="placeholder"
-                name="placeholder"
-                type="text"
-                value={placeholder}
-                onChange={this.handleChange}
-              />
+              <input id="placeholder" name="placeholder" type="text" value={placeholder} onChange={this.handleChange} />
             </label>
           </div>
           <div className="side-bar__segment">
             <label htmlFor="disabled">
-              <input
-                id="disabled"
-                name="isDisabled"
-                type="checkbox"
-                checked={isDisabled}
-                onChange={this.handleCheck}
-              />
+              <input id="disabled" name="isDisabled" type="checkbox" checked={isDisabled} onChange={this.handleCheck} />
               isDisabled
             </label>
           </div>
@@ -186,9 +161,7 @@ class Demo extends Component {
             </label>
           </div>
           <div className="side-bar__segment side-bar__segment--bottom">
-            <a href="https://github.com/devfolioco/react-otp-input">
-              Documentation and Source
-            </a>
+            <a href="https://github.com/devfolioco/react-otp-input">Documentation and Source</a>
           </div>
         </div>
         <div className="view">
@@ -220,10 +193,7 @@ class Demo extends Component {
                 >
                   Clear
                 </button>
-                <button
-                  className="btn margin-top--large"
-                  disabled={otp.length < numInputs}
-                >
+                <button className="btn margin-top--large" disabled={otp.length < numInputs}>
                   Get OTP
                 </button>
               </div>

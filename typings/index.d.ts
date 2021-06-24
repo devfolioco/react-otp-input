@@ -1,10 +1,6 @@
 import * as React from 'react';
 
-declare class OtpInput extends React.Component<
-  OtpInputProps,
-  OtpInputState,
-  any
-> {
+declare class OtpInput extends React.Component<OtpInputProps, OtpInputState, any> {
   static defaultProps: {
     numInputs: number;
     onChange: (otp: number) => void;
@@ -46,6 +42,8 @@ interface OtpInputProps {
   separator?: Object;
   shouldAutoFocus?: boolean;
   value?: string;
+  'data-testid'?: string;
+  'data-cy'?: string;
 }
 
 interface OtpInputState {
