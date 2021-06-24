@@ -155,12 +155,26 @@ export default class App extends Component {
     <td>false</td>
     <td>Restrict input to only numbers.</td>
   </tr>
-    <tr>
+  <tr>
     <td>isInputSecure</td>
     <td>boolean</td>
     <td>false</td>
     <td>false</td>
     <td>Masks input characters.</td>
+  </tr>
+  <tr>
+    <td>data-cy</td>
+    <td>string</td>
+    <td>false</td>
+    <td>-</td>
+    <td>Test attribute passed to the inputs.</td>
+  </tr>
+  <tr>
+    <td>data-testid</td>
+    <td>string</td>
+    <td>false</td>
+    <td>-</td>
+    <td>Test attribute passed to the inputs.</td>
   </tr>
 </table>
 
@@ -183,9 +197,7 @@ npm run dev
 - [x] Add flowtypes
 - [x] Add ESLint, Prettier for code quality
 - [x] Add styling support for states including focus/disabled
-- [ ] Travis CI, Codecov
 - [ ] Write tests
-- [ ] Improve Documentation
 
 ## Contributing
 
