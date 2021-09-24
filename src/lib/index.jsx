@@ -191,10 +191,15 @@ class OtpInput extends Component {
     e.preventDefault();
 
     const { activeInput } = this.state;
-    const { numInputs, isDisabled } = this.props;
+    const { numInputs, isDisabled, isInputNum } = this.props;
 
     if (isDisabled) {
       return;
+    }
+
+    if (isInputNum) {
+      const isNumeric = pastedData.every(c => '0123456789'.includes(c));
+      if (!isNumeric) return;
     }
 
     const otp = this.getOtpValue();
