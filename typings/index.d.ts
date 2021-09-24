@@ -26,6 +26,7 @@ declare class OtpInput extends React.Component<OtpInputProps, OtpInputState, any
 }
 
 interface OtpInputProps {
+  ariaLabelOverride?: string;
   className?: string;
   containerStyle?: Object;
   disabledStyle?: Object;

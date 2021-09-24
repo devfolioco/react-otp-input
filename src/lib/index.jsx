@@ -58,8 +58,19 @@ class SingleOtpInput extends PureComponent {
     return 'text';
   };
 
+  getAriaLabel = () => {
+    const { ariaLabelOverride } = this.props;
+
+    if(ariaLabelOverride){
+      return ariaLabelOverride;
+    }
+
+    return `${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${ index + 1 }`
+  };
+
   render() {
     const {
+      ariaLabelOverride,
       placeholder,
       separator,
       isLastChild,
@@ -82,9 +93,7 @@ class SingleOtpInput extends PureComponent {
     return (
       <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
         <input
-          aria-label={`${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${
-            index + 1
-          }`}
+          aria-label={this.getAriaLabel}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
