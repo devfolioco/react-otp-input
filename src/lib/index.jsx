@@ -93,7 +93,7 @@ class SingleOtpInput extends PureComponent {
     return (
       <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
         <input
-          aria-label={this.getAriaLabel}
+          aria-label={this.getAriaLabel()}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
