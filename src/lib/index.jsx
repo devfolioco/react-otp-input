@@ -127,6 +127,14 @@ class OtpInput extends Component {
     activeInput: 0,
   };
 
+  componentDidUpdate() {
+    const { value } = this.props;
+    const { activeInput } = this.state;
+    if (value == '' && activeInput > 0) {
+      this.setState({activeInput: 0});
+    }
+  }
+
   getOtpValue = () => (this.props.value ? this.props.value.toString().split('') : []);
 
   getPlaceholderValue = () => {
