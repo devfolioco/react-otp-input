@@ -62,6 +62,7 @@ class SingleOtpInput extends PureComponent {
     const {
       placeholder,
       separator,
+      shouldRender,
       isLastChild,
       inputStyle,
       focus,
@@ -107,7 +108,7 @@ class SingleOtpInput extends PureComponent {
           value={value ? value : ''}
           {...rest}
         />
-        {!isLastChild && separator}
+        {!isLastChild && shouldRender && separator}
       </div>
     );
   }
@@ -274,6 +275,7 @@ class OtpInput extends Component {
       inputStyle,
       focusStyle,
       separator,
+      separateAfter,
       isDisabled,
       disabledStyle,
       hasErrored,
@@ -291,6 +293,12 @@ class OtpInput extends Component {
     const dataTestId = this.props['data-testid'];
 
     for (let i = 0; i < numInputs; i++) {
+      let shouldRender;
+      if(((i + 1) % parseInt(separateAfter)) === 0){
+        shouldRender = true;
+      } else {
+        shouldRender = false;
+      }
       inputs.push(
         <SingleOtpInput
           placeholder={placeholder && placeholder[i]}
@@ -308,6 +316,7 @@ class OtpInput extends Component {
           }}
           onBlur={() => this.setState({ activeInput: -1 })}
           separator={separator}
+          shouldRender={shouldRender}
           inputStyle={inputStyle}
           focusStyle={focusStyle}
           isLastChild={i === numInputs - 1}

@@ -12,6 +12,7 @@ class Demo extends Component {
       otp: '',
       numInputs: 4,
       separator: '-',
+      separateAfter: 1,
       isDisabled: false,
       hasErrored: false,
       isInputNum: false,
@@ -62,6 +63,7 @@ class Demo extends Component {
       otp,
       numInputs,
       separator,
+      separateAfter,
       isDisabled,
       hasErrored,
       isInputNum,
@@ -102,6 +104,19 @@ class Demo extends Component {
                 name="separator"
                 type="text"
                 value={separator}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div className="side-bar__segment">
+            <label htmlFor="separateAfter">
+              separate after
+              <input
+                id="separateAfter"
+                maxLength={1}
+                name="separateAfter"
+                type="text"
+                value={separateAfter}
                 onChange={this.handleChange}
               />
             </label>
@@ -177,6 +192,7 @@ class Demo extends Component {
                   errorStyle="error"
                   onChange={this.handleOtpChange}
                   separator={<span>{separator}</span>}
+                  separateAfter={separateAfter}
                   isInputNum={isInputNum}
                   isInputSecure={isInputSecure}
                   shouldAutoFocus
