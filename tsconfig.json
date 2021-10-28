@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "lib": ["ES2018", "DOM"],
+    "target": "ES5",
+    "module": "CommonJS",
+    "strict": true,
+    "declaration": true,
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
