@@ -1,4 +1,10 @@
-import React, { Component, PureComponent } from 'react';
+import React, {
+  ChangeEventHandler,
+  ClipboardEventHandler,
+  FocusEventHandler,
+  KeyboardEventHandler,
+  PureComponent,
+} from 'react';
 
 // keyCode constants
 const BACKSPACE = 8;
@@ -11,13 +17,64 @@ const SPACEBAR = 32;
 // Basic implementation to check if it's not a string
 // of classNames and is an Object
 // TODO: Better implementation
-const isStyleObject = (obj) => typeof obj === 'object';
+const isStyleObject = (obj?: Object) => typeof obj === 'object';
 
-class SingleOtpInput extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.input = React.createRef();
-  }
+interface OtpInputProps {
+  className?: string;
+  containerStyle?: string;
+  disabledStyle?: Object;
+  errorStyle?: Object;
+  focusStyle?: Object;
+  hasErrored?: boolean;
+  inputStyle?: Object;
+  isDisabled?: boolean;
+  isInputNum?: boolean;
+  isInputSecure?: boolean;
+  numInputs: number;
+  onChange: Function;
+  placeholder?: string;
+  separator?: Object;
+  shouldAutoFocus?: boolean;
+  value?: string;
+  'data-testid'?: string;
+  'data-cy'?: string;
+}
+interface SingleOtpInputState {
+  input: HTMLInputElement;
+}
+
+interface SingleOtpInputProps {
+  placeholder?: string;
+  separator?: Object;
+  isLastChild: boolean;
+  inputStyle?: Object;
+  focus: any;
+  isDisabled?: boolean;
+  hasErrored?: boolean;
+  errorStyle?: Object;
+  focusStyle?: Object;
+  disabledStyle?: Object;
+  shouldAutoFocus?: boolean;
+  isInputNum?: boolean;
+  index: number;
+  value: string;
+  className?: string;
+  isInputSecure?: boolean;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  onKeyDown: KeyboardEventHandler<HTMLInputElement>;
+  onFocus: FocusEventHandler<HTMLInputElement>;
+  onBlur: FocusEventHandler<HTMLInputElement>;
+  onInput: ChangeEventHandler<HTMLInputElement>;
+  onPaste: ClipboardEventHandler<HTMLInputElement>;
+}
+
+interface OtpInputState {
+  activeInput: number;
+  otp?: string[];
+}
+
+class SingleOtpInput extends PureComponent<SingleOtpInputProps, SingleOtpInputState> {
+  private input = React.createRef<HTMLInputElement>();
 
   // Focus on first render
   // Only when shouldAutoFocus is true
@@ -30,7 +87,7 @@ class SingleOtpInput extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: SingleOtpInputProps) {
     const { focus } = this.props;
     const { current: inputEl } = this.input;
 
@@ -42,7 +99,8 @@ class SingleOtpInput extends PureComponent {
     }
   }
 
-  getClasses = (...classes) => classes.filter((c) => !isStyleObject(c) && c !== false).join(' ');
+  getClasses = (...classes: (Object | undefined)[]) =>
+    classes.filter((c) => !isStyleObject(c) && c !== false).join(' ');
 
   getType = () => {
     const { isInputSecure, isInputNum } = this.props;
@@ -101,7 +159,7 @@ class SingleOtpInput extends PureComponent {
             hasErrored && errorStyle
           )}
           type={this.getType()}
-          maxLength="1"
+          maxLength={1}
           ref={this.input}
           disabled={isDisabled}
           value={value ? value : ''}
@@ -113,10 +171,10 @@ class SingleOtpInput extends PureComponent {
   }
 }
 
-class OtpInput extends Component {
+class OtpInput extends React.Component<OtpInputProps, OtpInputState, any> {
   static defaultProps = {
     numInputs: 4,
-    onChange: (otp) => console.log(otp),
+    onChange: (otp: string) => console.log(otp),
     isDisabled: false,
     shouldAutoFocus: false,
     value: '',
@@ -144,21 +202,21 @@ class OtpInput extends Component {
   };
 
   // Helper to return OTP from input
-  handleOtpChange = (otp) => {
+  handleOtpChange = (otp: string[]) => {
     const { onChange } = this.props;
     const otpValue = otp.join('');
 
     onChange(otpValue);
   };
 
-  isInputValueValid = (value) => {
+  isInputValueValid = (value: string) => {
     const isTypeValid = this.props.isInputNum ? !isNaN(parseInt(value, 10)) : typeof value === 'string';
 
     return isTypeValid && value.trim().length === 1;
   };
 
   // Focus on input by index
-  focusInput = (input) => {
+  focusInput = (input: number) => {
     const { numInputs } = this.props;
     const activeInput = Math.max(Math.min(numInputs - 1, input), 0);
 
@@ -178,7 +236,7 @@ class OtpInput extends Component {
   };
 
   // Change OTP value at focused input
-  changeCodeAtFocus = (value) => {
+  changeCodeAtFocus = (value: string) => {
     const { activeInput } = this.state;
     const otp = this.getOtpValue();
     otp[activeInput] = value[0];
@@ -187,7 +245,7 @@ class OtpInput extends Component {
   };
 
   // Handle pasted OTP
-  handleOnPaste = (e) => {
+  handleOnPaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
 
     const { activeInput } = this.state;
@@ -209,7 +267,8 @@ class OtpInput extends Component {
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
       if (pos >= activeInput && pastedData.length > 0) {
-        otp[pos] = pastedData.shift();
+        const shifted = pastedData.shift();
+        otp[pos] = shifted || '';
         nextActiveInput++;
       }
     }
@@ -220,7 +279,7 @@ class OtpInput extends Component {
     });
   };
 
-  handleOnChange = (e) => {
+  handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     if (this.isInputValueValid(value)) {
@@ -229,7 +288,7 @@ class OtpInput extends Component {
   };
 
   // Handle cases of backspace, delete, left arrow, right arrow, space
-  handleOnKeyDown = (e) => {
+  handleOnKeyDown = (e: React.KeyboardEvent) => {
     if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
       e.preventDefault();
       this.changeCodeAtFocus('');
@@ -249,7 +308,7 @@ class OtpInput extends Component {
   };
 
   // The content may not have changed, but some input took place hence change the focus
-  handleOnInput = (e) => {
+  handleOnInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (this.isInputValueValid(e.target.value)) {
       this.focusNextInput();
     } else {
@@ -258,7 +317,10 @@ class OtpInput extends Component {
       if (!this.props.isInputNum) {
         const { nativeEvent } = e;
 
-        if (nativeEvent.data === null && nativeEvent.inputType === 'deleteContentBackward') {
+        if (
+          (nativeEvent as InputEvent).data === null &&
+          (nativeEvent as InputEvent).inputType === 'deleteContentBackward'
+        ) {
           e.preventDefault();
           this.changeCodeAtFocus('');
           this.focusPrevInput();
@@ -302,7 +364,7 @@ class OtpInput extends Component {
           onKeyDown={this.handleOnKeyDown}
           onInput={this.handleOnInput}
           onPaste={this.handleOnPaste}
-          onFocus={(e) => {
+          onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
             this.setState({ activeInput: i });
             e.target.select();
           }}

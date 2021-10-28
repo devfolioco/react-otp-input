@@ -2,7 +2,10 @@
   "env": {
     "browser": true
   },
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -15,11 +18,7 @@
     }
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:import/recommended",
-    "plugin:prettier/recommended",
+    "react-app",
     "prettier"
   ],
   "rules": {
