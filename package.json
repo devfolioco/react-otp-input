@@ -1,6 +1,6 @@
 {
   "name": "react-otp-input",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
@@ -24,8 +24,8 @@
     "component"
   ],
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.2.0 || ^17.0.0",
+    "react-dom": "^16.2.0 || ^17.0.0"
   },
   "typings": "typings/index.d.ts",
   "devDependencies": {
