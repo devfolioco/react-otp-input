@@ -294,7 +294,9 @@ class OtpInput extends Component {
 
     for (let i = 0; i < numInputs; i++) {
       const testAttr = {};
-      testAttr[customTestAttr] = customTestId && `${customTestId}-${i}`;
+      if (customTestAttr) {
+        testAttr[customTestAttr] = customTestId && `${customTestId}-${i}`;
+      }
 
       inputs.push(
         <SingleOtpInput

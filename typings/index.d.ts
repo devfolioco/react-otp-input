@@ -44,6 +44,8 @@ interface OtpInputProps {
   value?: string;
   'data-testid'?: string;
   'data-cy'?: string;
+  'custom-test-attr'?: string;
+  'custom-test-id'?: string;
 }
 
 interface OtpInputState {
