@@ -289,8 +289,13 @@ class OtpInput extends Component {
     const placeholder = this.getPlaceholderValue();
     const dataCy = this.props['data-cy'];
     const dataTestId = this.props['data-testid'];
+    const customTestAttr = this.props['custom-test-attr'];
+    const customTestId = this.props['custom-test-id'];
 
     for (let i = 0; i < numInputs; i++) {
+      const testAttr = {};
+      testAttr[customTestAttr] = customTestId && `${customTestId}-${i}`;
+
       inputs.push(
         <SingleOtpInput
           placeholder={placeholder && placeholder[i]}
@@ -321,6 +326,7 @@ class OtpInput extends Component {
           className={className}
           data-cy={dataCy && `${dataCy}-${i}`}
           data-testid={dataTestId && `${dataTestId}-${i}`}
+          {...testAttr}
         />
       );
     }
