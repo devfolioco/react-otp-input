@@ -282,6 +282,7 @@ class OtpInput extends Component {
       isInputNum,
       isInputSecure,
       className,
+      inputProps,
     } = this.props;
 
     const inputs = [];
@@ -291,6 +292,18 @@ class OtpInput extends Component {
     const dataTestId = this.props['data-testid'];
 
     for (let i = 0; i < numInputs; i++) {
+      let currentInputProps = {};
+
+      if (inputProps) {
+        if (Array.isArray(inputProps)) {
+          if (inputProps[i]) {
+            currentInputProps = inputProps[i];
+          }
+        } else {
+          currentInputProps = inputProps;
+        }
+      }
+
       inputs.push(
         <SingleOtpInput
           placeholder={placeholder && placeholder[i]}
@@ -321,6 +334,7 @@ class OtpInput extends Component {
           className={className}
           data-cy={dataCy && `${dataCy}-${i}`}
           data-testid={dataTestId && `${dataTestId}-${i}`}
+          {...currentInputProps}
         />
       );
     }

@@ -44,6 +44,7 @@ interface OtpInputProps {
   value?: string;
   'data-testid'?: string;
   'data-cy'?: string;
+  inputProps?: Partial<React.InputHTMLAttributes<HTMLInputElement>> | Partial<React.InputHTMLAttributes<HTMLInputElement>>[];
 }
 
 interface OtpInputState {
