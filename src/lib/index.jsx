@@ -101,7 +101,7 @@ class SingleOtpInput extends PureComponent {
             hasErrored && errorStyle
           )}
           type={this.getType()}
-          maxLength="1"
+          maxLength="4"
           ref={this.input}
           disabled={isDisabled}
           value={value ? value : ''}
@@ -157,6 +157,12 @@ class OtpInput extends Component {
     return isTypeValid && value.trim().length === 1;
   };
 
+  isPasteValid = (value) => {
+    const isTypeValid = this.props.isInputNum ? !isNaN(parseInt(value, 10)) : typeof value === 'string';
+
+    return isTypeValid;
+  };
+
   // Focus on input by index
   focusInput = (input) => {
     const { numInputs } = this.props;
@@ -186,25 +192,12 @@ class OtpInput extends Component {
     this.handleOtpChange(otp);
   };
 
-  // Handle pasted OTP
-  handleOnPaste = (e) => {
-    e.preventDefault();
-
+  pasteOtp = (pastedData) => {
     const { activeInput } = this.state;
-    const { numInputs, isDisabled } = this.props;
+    const { numInputs } = this.props;
 
-    if (isDisabled) {
-      return;
-    }
-
-    const otp = this.getOtpValue();
     let nextActiveInput = activeInput;
-
-    // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = e.clipboardData
-      .getData('text/plain')
-      .slice(0, numInputs - activeInput)
-      .split('');
+    const otp = this.getOtpValue();
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
@@ -218,6 +211,26 @@ class OtpInput extends Component {
       this.focusInput(nextActiveInput);
       this.handleOtpChange(otp);
     });
+  };
+
+  // Handle pasted OTP
+  handleOnPaste = (e) => {
+    e.preventDefault();
+
+    const { activeInput } = this.state;
+    const { numInputs, isDisabled } = this.props;
+
+    if (isDisabled) {
+      return;
+    }
+
+    // Get pastedData in an array of max size (num of inputs - current position)
+    const pastedData = e.clipboardData
+      .getData('text/plain')
+      .slice(0, numInputs - activeInput)
+      .split('');
+
+    this.pasteOtp(pastedData);
   };
 
   handleOnChange = (e) => {
@@ -250,8 +263,12 @@ class OtpInput extends Component {
 
   // The content may not have changed, but some input took place hence change the focus
   handleOnInput = (e) => {
-    if (this.isInputValueValid(e.target.value)) {
-      this.focusNextInput();
+    if (this.isPasteValid(e.target.value)) {
+      if (e.target.value.trim().length === 1) {
+        this.focusNextInput();
+      } else {
+        this.pasteOtp(e.target.value.split(''));
+      }
     } else {
       // This is a workaround for dealing with keyCode "229 Unidentified" on Android.
 

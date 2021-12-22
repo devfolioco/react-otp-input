@@ -32,5 +32,6 @@ module.exports = {
     contentBase: path.join(__dirname, 'demo'),
     port: 8080,
     stats: 'minimal',
+    disableHostCheck: true,
   },
 };
