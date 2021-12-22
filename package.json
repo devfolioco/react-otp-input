@@ -1,6 +1,6 @@
 {
   "name": "@keepertax/react-otp-input",
-  "version": "2.4.1",
+  "version": "2.4.2-alpha.1",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
