@@ -85,7 +85,7 @@ class SingleOtpInput extends PureComponent {
           aria-label={`${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${
             index + 1
           }`}
-          autoComplete="off"
+          autoComplete="one-time-code"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
             isStyleObject(inputStyle) && inputStyle,
@@ -101,6 +101,7 @@ class SingleOtpInput extends PureComponent {
             hasErrored && errorStyle
           )}
           type={this.getType()}
+          inputMode="numeric"
           maxLength="1"
           ref={this.input}
           disabled={isDisabled}
