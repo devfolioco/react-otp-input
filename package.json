@@ -24,8 +24,8 @@
     "component"
   ],
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "typings": "typings/index.d.ts",
   "devDependencies": {
