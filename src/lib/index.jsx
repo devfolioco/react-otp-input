@@ -58,6 +58,10 @@ class SingleOtpInput extends PureComponent {
     return 'text';
   };
 
+  blur = () => {
+    this.input.current.blur();
+  };
+
   render() {
     const {
       placeholder,

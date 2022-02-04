@@ -26,6 +26,10 @@ class Demo extends Component {
 
   handleOtpChange = (otp) => {
     this.setState({ otp });
+
+    if (otp.length === 4) {
+      this.otpRef.current.blurInput();
+    }
   };
 
   handleChange = (e) => {
@@ -47,10 +51,6 @@ class Demo extends Component {
 
   clearOtp = () => {
     this.setState({ otp: '' });
-  };
-
-  blurOtp = () => {
-    this.otpRef.blurInput();
   };
 
   handleCheck = (e) => {
@@ -200,9 +200,6 @@ class Demo extends Component {
                   onClick={this.clearOtp}
                 >
                   Clear
-                </button>
-                <button className="btn margin-top--large" type="button" onClick={this.blurOtp}>
-                  Blur
                 </button>
                 <button className="btn margin-top--large" disabled={otp.length < numInputs}>
                   Get OTP
