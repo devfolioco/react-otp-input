@@ -20,6 +20,8 @@ class Demo extends Component {
       maxLength: 40,
       placeholder: '',
     };
+
+    this.otpRef = React.createRef();
   }
 
   handleOtpChange = (otp) => {
@@ -45,6 +47,10 @@ class Demo extends Component {
 
   clearOtp = () => {
     this.setState({ otp: '' });
+  };
+
+  blurOtp = () => {
+    this.otpRef.blurInput();
   };
 
   handleCheck = (e) => {
@@ -144,6 +150,7 @@ class Demo extends Component {
                 type="checkbox"
                 checked={isInputNum}
                 onChange={this.handleCheck}
+                f
               />
               isInputNum
             </label>
@@ -170,6 +177,7 @@ class Demo extends Component {
               <p>Enter verification code</p>
               <div className="margin-top--small">
                 <OtpInput
+                  ref={this.otpRef}
                   inputStyle="inputStyle"
                   numInputs={numInputs}
                   isDisabled={isDisabled}
@@ -192,6 +200,9 @@ class Demo extends Component {
                   onClick={this.clearOtp}
                 >
                   Clear
+                </button>
+                <button className="btn margin-top--large" type="button" onClick={this.blurOtp}>
+                  Blur
                 </button>
                 <button className="btn margin-top--large" disabled={otp.length < numInputs}>
                   Get OTP
