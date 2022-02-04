@@ -58,6 +58,10 @@ class SingleOtpInput extends PureComponent {
     return 'text';
   };
 
+  blur = () => {
+    this.input.current.blur();
+  };
+
   render() {
     const {
       placeholder,
@@ -127,6 +131,8 @@ class OtpInput extends Component {
     activeInput: 0,
   };
 
+  inputRef = React.createRef();
+
   getOtpValue = () => (this.props.value ? this.props.value.toString().split('') : []);
 
   getPlaceholderValue = () => {
@@ -181,6 +187,12 @@ class OtpInput extends Component {
   focusPrevInput = () => {
     const { activeInput } = this.state;
     this.focusInput(activeInput - 1);
+  };
+
+  blurInput = () => {
+    if (this.inputRef.current) {
+      this.inputRef.current.blur();
+    }
   };
 
   // Change OTP value at focused input
@@ -314,6 +326,7 @@ class OtpInput extends Component {
           key={i}
           index={i}
           focus={activeInput === i}
+          ref={activeInput === i ? this.inputRef : null}
           value={otp && otp[i]}
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
