@@ -1,5 +1,5 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import React, { useState } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Chance from 'chance';
 
@@ -7,6 +7,16 @@ import OtpInput from '../../src/lib/index.jsx';
 
 const chance = new Chance();
 const randomDigit = (min = 0, max = 9) => chance.integer({ min, max }).toFixed();
+
+const OtpWrapped = (props) => {
+  const [value, setValue] = useState('');
+  const { onChange, ...rest } = props;
+  const handleChange = (v) => {
+    setValue(v);
+    onChange && onChange(v);
+  };
+  return <OtpInput {...rest} value={value} onChange={handleChange} />;
+};
 
 describe('OtpInput', () => {
   it('renders with minimal props', async () => {
@@ -31,8 +41,8 @@ describe('OtpInput', () => {
     });
 
     it('sets inputs corretly matching value', async () => {
-      const otp = [randomDigit(), randomDigit(), randomDigit(), randomDigit()];
-      const { container } = render(<OtpInput value={otp.join('')} />);
+      const otp = chance.string({ pool: '0123456789', length: 4 });
+      const { container } = render(<OtpInput value={otp} />);
 
       const inputs = container.querySelectorAll('input');
       inputs.forEach((input, i) => expect(input).toHaveValue(otp[i]));
@@ -73,7 +83,7 @@ describe('OtpInput', () => {
     });
 
     it('does set a placeholder when placeholder is set', async () => {
-      const placeholder = chance.string({ length: 5, alpha: true, casing: 'lower' });
+      const placeholder = chance.string({ pool: 'abcdefghijklmnopqrstuvwxyz', length: 5 });
       const { container } = render(<OtpInput numInputs={5} placeholder={placeholder} />);
 
       const inputs = container.querySelectorAll('input');
@@ -83,7 +93,7 @@ describe('OtpInput', () => {
     it('shows error when placeholder length not the same as numInputs', async () => {
       const log = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-      const placeholder = chance.string({ length: 5, alpha: true, casing: 'lower' });
+      const placeholder = chance.string({ pool: 'abcdefghijklmnopqrstuvwxyz', length: 5 });
       const numInputs = placeholder.length - 1;
       const { container } = render(<OtpInput numInputs={numInputs} placeholder={placeholder} />);
 
@@ -346,6 +356,140 @@ describe('OtpInput', () => {
       inputs.forEach((input, i) => {
         expect(input).toHaveAttribute('data-cy', `test-cy-${i}`);
       });
+    });
+  });
+
+  describe('typing otp values', () => {
+    it('accepts valid values and moves focus to next input', async () => {
+      const { container } = render(<OtpWrapped />);
+      const inputs = container.querySelectorAll('input');
+
+      inputs.forEach((input, i) => {
+        const char = chance.character();
+        userEvent.type(input, char);
+        expect(input).toHaveValue(char);
+
+        const nextInput = inputs[i + 1] ?? input;
+        expect(nextInput).toHaveFocus();
+      });
+    });
+
+    it('isInputNum: accepts valid values and moves focus to next input', async () => {
+      const { container } = render(<OtpWrapped isInputNum={true} />);
+      const inputs = container.querySelectorAll('input');
+
+      inputs.forEach((input, i) => {
+        let char = chance.character({ numeric: false });
+        // TODO: There seems to be a bug in chance. numeric:false still returns numbers on occasion
+        const buggy = ['[', ']'];
+        while (!Number.isNaN(Number(char)) || buggy.includes(char)) {
+          char = chance.character({ numeric: false });
+        }
+
+        // non numbers have not effect
+        userEvent.type(input, char);
+        expect(input).toHaveValue('');
+        expect(input).toHaveFocus();
+
+        // numbers are accepted
+        const digit = randomDigit();
+        userEvent.type(input, digit);
+        expect(input).toHaveValue(digit);
+
+        const nextInput = inputs[i + 1] ?? input;
+        expect(nextInput).toHaveFocus();
+      });
+    });
+  });
+
+  describe('onPaste', () => {
+    it('calls onChange with the pasted value', async () => {
+      const otp = chance.string({ pool: '0123456789', length: 4 });
+      const onChange = jest.fn();
+
+      const { container } = render(<OtpWrapped onChange={onChange} />);
+      const input = container.querySelector('input');
+
+      expect(onChange).toBeCalledTimes(0);
+      userEvent.paste(input, otp, { clipboardData: { getData: () => otp } });
+
+      expect(onChange).toBeCalledTimes(1);
+      expect(onChange).toBeCalledWith(otp);
+
+      const inputs = container.querySelectorAll('input');
+      inputs.forEach((input, i) => expect(input).toHaveValue(otp[i]));
+    });
+  });
+
+  describe('onKeyDown', () => {
+    it('Backspace: clears the input and focuses previous input when backspace is pressed', async () => {
+      const { container } = render(<OtpWrapped />);
+      const inputs = container.querySelectorAll('input');
+      const [first, second, third] = inputs;
+
+      userEvent.type(first, '1');
+      userEvent.type(second, '2');
+      userEvent.type(second, '{backspace}');
+
+      expect(second).toHaveValue('');
+      expect(first).toHaveValue('1');
+      expect(first).toHaveFocus();
+    });
+
+    it('Delete: clears the input and keeps focus when delete is pressed', async () => {
+      const { container } = render(<OtpWrapped />);
+      const inputs = container.querySelectorAll('input');
+      const [first, second, third] = inputs;
+
+      userEvent.type(first, '1');
+      userEvent.type(second, '2');
+      userEvent.type(second, '{delete}');
+
+      expect(second).toHaveValue('');
+      expect(second).toHaveFocus();
+    });
+
+    it('ArrowLeft: moves focus to prev input', async () => {
+      const { container } = render(<OtpWrapped numInputs={randomDigit(3, 9)} />);
+      const inputs = [...container.querySelectorAll('input')].reverse();
+
+      inputs.forEach((input, i) => {
+        userEvent.type(input, '{arrowleft}');
+        const nextInput = inputs[i + 1] ?? input;
+        expect(nextInput).toHaveFocus();
+      });
+    });
+
+    it('ArrowRight: moves focus to next input', async () => {
+      const { container } = render(<OtpWrapped numInputs={randomDigit(3, 9)} />);
+      const inputs = container.querySelectorAll('input');
+
+      inputs.forEach((input, i) => {
+        userEvent.type(input, '{arrowright}');
+        const nextInput = inputs[i + 1] ?? input;
+        expect(nextInput).toHaveFocus();
+      });
+    });
+
+    it('Space: input is not changed', async () => {
+      const otp = chance.string({ pool: '0123456789', length: 4 });
+      const onChange = jest.fn();
+
+      const { container } = render(<OtpWrapped onChange={onChange} />);
+      const inputs = container.querySelectorAll('input');
+
+      expect(onChange).toBeCalledTimes(0);
+      userEvent.paste(inputs[0], otp, { clipboardData: { getData: () => otp } });
+      expect(onChange).toBeCalledTimes(1);
+
+      inputs.forEach((input, i) => {
+        expect(input).toHaveValue(otp[i]);
+        userEvent.type(input, '{space}');
+        expect(input).toHaveValue(otp[i]);
+        expect(input).toHaveFocus();
+      });
+
+      expect(onChange).toBeCalledTimes(1);
     });
   });
 });
