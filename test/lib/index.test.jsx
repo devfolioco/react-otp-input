@@ -6,7 +6,7 @@ import Chance from 'chance';
 import OtpInput from '../../src/lib/index.jsx';
 
 const chance = new Chance();
-const randomDigit = (min = 0, max = 9) => chance.integer({ min, max }).toFixed();
+const digit = (min = 0, max = 9) => chance.integer({ min, max }).toFixed();
 
 const OtpWrapped = (props) => {
   const [value, setValue] = useState('');
@@ -41,7 +41,7 @@ describe('OtpInput', () => {
     });
 
     it('sets inputs corretly matching value', async () => {
-      const otp = chance.string({ pool: '0123456789', length: 4 });
+      const otp = chance.string({ numeric: true, length: 4 });
       const { container } = render(<OtpInput value={otp} />);
 
       const inputs = container.querySelectorAll('input');
@@ -51,7 +51,7 @@ describe('OtpInput', () => {
 
   describe('prop: onChange', () => {
     it('defaults onChange to console.log', async () => {
-      const char = randomDigit();
+      const char = chance.character({ alpha: true, numeric: true });
       const log = jest.spyOn(console, 'log').mockImplementation(() => {});
 
       const { container } = render(<OtpInput />);
@@ -67,7 +67,7 @@ describe('OtpInput', () => {
 
       const inputs = container.querySelectorAll('input');
       inputs.forEach((input) => {
-        const char = randomDigit();
+        const char = chance.character({ alpha: true, numeric: true });
         userEvent.type(input, char);
         expect(onChange).toBeCalledWith(char);
       });
@@ -83,7 +83,7 @@ describe('OtpInput', () => {
     });
 
     it('does set a placeholder when placeholder is set', async () => {
-      const placeholder = chance.string({ pool: 'abcdefghijklmnopqrstuvwxyz', length: 5 });
+      const placeholder = chance.string({ alpha: true, length: 5 });
       const { container } = render(<OtpInput numInputs={5} placeholder={placeholder} />);
 
       const inputs = container.querySelectorAll('input');
@@ -93,7 +93,7 @@ describe('OtpInput', () => {
     it('shows error when placeholder length not the same as numInputs', async () => {
       const log = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-      const placeholder = chance.string({ pool: 'abcdefghijklmnopqrstuvwxyz', length: 5 });
+      const placeholder = chance.string({ alpha: true, length: 5 });
       const numInputs = placeholder.length - 1;
       const { container } = render(<OtpInput numInputs={numInputs} placeholder={placeholder} />);
 
@@ -112,7 +112,7 @@ describe('OtpInput', () => {
     });
 
     it('handles inputStyle as style object', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px lavender`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px lavender`;
       const { container } = render(<OtpInput inputStyle={{ boxShadow }} />);
 
       const inputs = container.querySelectorAll('input');
@@ -131,7 +131,7 @@ describe('OtpInput', () => {
     });
 
     it('shows number of inputs equal to numInputs', async () => {
-      const len = +randomDigit(3, 9);
+      const len = +digit(3, 9);
       const { container } = render(<OtpInput numInputs={len} />);
 
       const inputs = container.querySelectorAll('input');
@@ -165,7 +165,7 @@ describe('OtpInput', () => {
     });
 
     it('does not apply disabledStyle when isDisabled is false', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px aliceblue`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px aliceblue`;
       const { container } = render(<OtpInput isDisabled={false} disabledStyle={{ boxShadow }} />);
 
       const inputs = container.querySelectorAll('input');
@@ -175,7 +175,7 @@ describe('OtpInput', () => {
     });
 
     it('does apply disabledStyle when isDisabled is true', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px aliceblue`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px aliceblue`;
       const { container } = render(<OtpInput isDisabled={true} disabledStyle={{ boxShadow }} />);
 
       const inputs = container.querySelectorAll('input');
@@ -210,7 +210,7 @@ describe('OtpInput', () => {
 
   describe('prop: separator', () => {
     it('creates the right separators', async () => {
-      const len = +randomDigit(3, 9);
+      const len = +digit(3, 9);
       const separator = <span data-testid="test-separator"></span>;
 
       render(<OtpInput numInputs={len} separator={separator} />);
@@ -241,7 +241,7 @@ describe('OtpInput', () => {
     });
 
     it.skip('[BUG] does not apply focusStyle when input is not focused', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px dodgerblue`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px dodgerblue`;
       const { container } = render(<OtpInput focusStyle={{ boxShadow }} />);
       const input = container.querySelector('input');
 
@@ -253,7 +253,7 @@ describe('OtpInput', () => {
     });
 
     it('does apply focusStyle when input is focused', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px dodgerblue`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px dodgerblue`;
       const { container } = render(<OtpInput focusStyle={{ boxShadow }} />);
       const inputs = container.querySelectorAll('input');
 
@@ -286,7 +286,7 @@ describe('OtpInput', () => {
     });
 
     it('handles containerStyle as style object', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px rebeccapurple`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px rebeccapurple`;
       const { container } = render(<OtpInput containerStyle={{ boxShadow }} />);
 
       const wrapper = container.children[0];
@@ -307,7 +307,7 @@ describe('OtpInput', () => {
 
   describe('prop: hasErrored', () => {
     it('does not apply errorStyle when hasErrored is unset', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px firebrick`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px firebrick`;
       const { container } = render(<OtpInput errorStyle={{ boxShadow }} />);
 
       const inputs = container.querySelectorAll('input');
@@ -317,7 +317,7 @@ describe('OtpInput', () => {
     });
 
     it('does not apply errorStyle when hasErrored is false', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px firebrick`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px firebrick`;
       const { container } = render(<OtpInput hasErrored={false} errorStyle={{ boxShadow }} />);
 
       const inputs = container.querySelectorAll('input');
@@ -327,7 +327,7 @@ describe('OtpInput', () => {
     });
 
     it('does apply errorStyle when hasErrored is true', async () => {
-      const boxShadow = `${randomDigit()}px ${randomDigit()}px ${randomDigit()}px firebrick`;
+      const boxShadow = `${digit()}px ${digit()}px ${digit()}px firebrick`;
       const { container } = render(<OtpInput hasErrored={true} errorStyle={{ boxShadow }} />);
 
       const inputs = container.querySelectorAll('input');
@@ -365,7 +365,7 @@ describe('OtpInput', () => {
       const inputs = container.querySelectorAll('input');
 
       inputs.forEach((input, i) => {
-        const char = chance.character();
+        const char = chance.character({ alpha: true, numeric: true });
         userEvent.type(input, char);
         expect(input).toHaveValue(char);
 
@@ -379,20 +379,14 @@ describe('OtpInput', () => {
       const inputs = container.querySelectorAll('input');
 
       inputs.forEach((input, i) => {
-        let char = chance.character({ numeric: false });
-        // TODO: There seems to be a bug in chance. numeric:false still returns numbers on occasion
-        const buggy = ['[', ']'];
-        while (!Number.isNaN(Number(char)) || buggy.includes(char)) {
-          char = chance.character({ numeric: false });
-        }
-
         // non numbers have not effect
-        userEvent.type(input, char);
+        const char = chance.character({ alpha: true, symbols: true });
+        userEvent.type(input, char === '[' ? '[[' : char); // see https://testing-library.com/docs/ecosystem-user-event/#keyboardtext-options
         expect(input).toHaveValue('');
         expect(input).toHaveFocus();
 
         // numbers are accepted
-        const digit = randomDigit();
+        const digit = chance.character({ numeric: true });
         userEvent.type(input, digit);
         expect(input).toHaveValue(digit);
 
@@ -404,7 +398,7 @@ describe('OtpInput', () => {
 
   describe('onPaste', () => {
     it('calls onChange with the pasted value', async () => {
-      const otp = chance.string({ pool: '0123456789', length: 4 });
+      const otp = chance.string({ numeric: true, length: 4 });
       const onChange = jest.fn();
 
       const { container } = render(<OtpWrapped onChange={onChange} />);
@@ -450,7 +444,7 @@ describe('OtpInput', () => {
     });
 
     it('ArrowLeft: moves focus to prev input', async () => {
-      const { container } = render(<OtpWrapped numInputs={randomDigit(3, 9)} />);
+      const { container } = render(<OtpWrapped numInputs={digit(3, 9)} />);
       const inputs = [...container.querySelectorAll('input')].reverse();
 
       inputs.forEach((input, i) => {
@@ -461,7 +455,7 @@ describe('OtpInput', () => {
     });
 
     it('ArrowRight: moves focus to next input', async () => {
-      const { container } = render(<OtpWrapped numInputs={randomDigit(3, 9)} />);
+      const { container } = render(<OtpWrapped numInputs={digit(3, 9)} />);
       const inputs = container.querySelectorAll('input');
 
       inputs.forEach((input, i) => {
@@ -472,7 +466,7 @@ describe('OtpInput', () => {
     });
 
     it('Space: input is not changed', async () => {
-      const otp = chance.string({ pool: '0123456789', length: 4 });
+      const otp = chance.string({ numeric: true, length: 4 });
       const onChange = jest.fn();
 
       const { container } = render(<OtpWrapped onChange={onChange} />);
