@@ -82,9 +82,8 @@ class SingleOtpInput extends PureComponent {
     return (
       <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
         <input
-          aria-label={`${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${
-            index + 1
-          }`}
+          aria-label={`${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${index + 1
+            }`}
           autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
@@ -220,11 +219,53 @@ class OtpInput extends Component {
     });
   };
 
+  convertEnglishNumber = (number) => {
+    const persianNumbers = [
+      /۰/g,
+      /۱/g,
+      /۲/g,
+      /۳/g,
+      /۴/g,
+      /۵/g,
+      /۶/g,
+      /۷/g,
+      /۸/g,
+      /۹/g
+    ];
+    const arabicNumbers = [
+      /٠/g,
+      /١/g,
+      /٢/g,
+      /٣/g,
+      /٤/g,
+      /٥/g,
+      /٦/g,
+      /٧/g,
+      /٨/g,
+      /٩/g
+    ];
+    if (typeof number === 'string') {
+      for (let i = 0; i < 10; i++) {
+        number = number
+          .replace(persianNumbers[i], i)
+          .replace(arabicNumbers[i], i);
+      }
+    } else {
+      number = `${number}`;
+      for (let i = 0; i < 10; i++) {
+        number = number
+          .replace(persianNumbers[i], i)
+          .replace(arabicNumbers[i], i);
+      }
+    }
+    return number;
+  }
+
   handleOnChange = (e) => {
     const { value } = e.target;
-
-    if (this.isInputValueValid(value)) {
-      this.changeCodeAtFocus(value);
+    const _value = this.convertEnglishNumber(value);
+    if (this.isInputValueValid(_value)) {
+      this.changeCodeAtFocus(_value);
     }
   };
 
@@ -250,7 +291,9 @@ class OtpInput extends Component {
 
   // The content may not have changed, but some input took place hence change the focus
   handleOnInput = (e) => {
-    if (this.isInputValueValid(e.target.value)) {
+    const { value } = e.target;
+    const _value = this.convertEnglishNumber(value);
+    if (this.isInputValueValid(_value)) {
       this.focusNextInput();
     } else {
       // This is a workaround for dealing with keyCode "229 Unidentified" on Android.
