@@ -26,6 +26,8 @@ declare class OtpInput extends React.Component<OtpInputProps, OtpInputState, any
 }
 
 interface OtpInputProps {
+  id?: string;
+  autoComplete?: string;
   className?: string;
   containerStyle?: Object;
   disabledStyle?: Object;

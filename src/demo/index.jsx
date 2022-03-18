@@ -167,9 +167,11 @@ class Demo extends Component {
         <div className="view">
           <div className="card">
             <form onSubmit={this.handleSubmit}>
-              <p>Enter verification code</p>
+              <label htmlFor="otp-input-0">Enter verification code</label>
               <div className="margin-top--small">
                 <OtpInput
+                  id="otp-input"
+                  autoComplete="one-time-code"
                   inputStyle="inputStyle"
                   numInputs={numInputs}
                   isDisabled={isDisabled}

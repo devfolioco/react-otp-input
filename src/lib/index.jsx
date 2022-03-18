@@ -85,7 +85,6 @@ class SingleOtpInput extends PureComponent {
           aria-label={`${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${
             index + 1
           }`}
-          autoComplete="off"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
             isStyleObject(inputStyle) && inputStyle,
@@ -270,6 +269,8 @@ class OtpInput extends Component {
   renderInputs = () => {
     const { activeInput } = this.state;
     const {
+      id,
+      autoComplete,
       numInputs,
       inputStyle,
       focusStyle,
@@ -293,6 +294,8 @@ class OtpInput extends Component {
     for (let i = 0; i < numInputs; i++) {
       inputs.push(
         <SingleOtpInput
+          id={id && `${id}-${i}`}
+          autoComplete={autoComplete ?? 'off'}
           placeholder={placeholder && placeholder[i]}
           key={i}
           index={i}
