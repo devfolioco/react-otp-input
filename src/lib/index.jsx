@@ -201,10 +201,11 @@ class OtpInput extends Component {
     let nextActiveInput = activeInput;
 
     // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = e.clipboardData
-      .getData('text/plain')
-      .slice(0, numInputs - activeInput)
-      .split('');
+    const rawPastedData = e.clipboardData.getData('text/plain');
+
+    const filteredData = this.props.isInputNum ? rawPastedData.replace(/\D/g, '') : rawPastedData;
+
+    const pastedData = filteredData.slice(0, numInputs - activeInput).split('');
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
