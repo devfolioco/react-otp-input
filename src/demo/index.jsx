@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import OtpInput from '../../lib';
 import './styles.css';
@@ -205,4 +205,6 @@ class Demo extends Component {
   }
 }
 
-render(<Demo />, document.getElementById('app'));
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<Demo />);
