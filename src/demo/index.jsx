@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
 import OtpInput from '../../lib';
 import './styles.css';
@@ -205,4 +206,12 @@ class Demo extends Component {
   }
 }
 
-render(<Demo />, document.getElementById('app'));
+// render(<Demo />, document.getElementById('app'));
+
+const app = ReactDOM.createRoot(document.getElementById('app'));
+app.render(
+  <React.StrictMode>
+    <Demo />
+  </React.StrictMode>
+);
+
