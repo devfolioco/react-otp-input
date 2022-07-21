@@ -222,7 +222,6 @@ class OtpInput extends Component {
 
   handleOnChange = (e) => {
     const { value } = e.target;
-
     if (this.isInputValueValid(value)) {
       this.changeCodeAtFocus(value);
     }
@@ -245,6 +244,8 @@ class OtpInput extends Component {
       this.focusNextInput();
     } else if (e.keyCode === SPACEBAR || e.key === ' ' || e.key === 'Spacebar' || e.key === 'Space') {
       e.preventDefault();
+    } else {
+      this.changeCodeAtFocus(e.key);
     }
   };
 
