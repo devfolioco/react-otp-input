@@ -121,6 +121,7 @@ class OtpInput extends Component {
     shouldAutoFocus: false,
     value: '',
     isInputSecure: false,
+    onSubmit: () => {}, // user can pass the function what they'd call for submitting the otp
   };
 
   state = {
@@ -245,6 +246,9 @@ class OtpInput extends Component {
       this.focusNextInput();
     } else if (e.keyCode === SPACEBAR || e.key === ' ' || e.key === 'Spacebar' || e.key === 'Space') {
       e.preventDefault();
+    } else if (e.keyCode === 13 || e.key === 'Enter') {
+      e.preventDefault();
+      this.checkIfLastInput();
     }
   };
 
@@ -264,6 +268,17 @@ class OtpInput extends Component {
           this.focusPrevInput();
         }
       }
+    }
+  };
+
+  checkIfLastInput = () => {
+    const { numInputs } = this.props;
+    const otp = this.getOtpValue();
+
+    //if all otp fields are filled , only then we will invoke the passed function
+    if (numInputs === otp.length) {
+      const { onSubmit } = this.props;
+      onSubmit();
     }
   };
 
