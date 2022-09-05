@@ -1,6 +1,6 @@
 {
-  "name": "react-otp-input",
-  "version": "2.4.0",
+  "name": "@enroly/react-otp-input",
+  "version": "2.4.5",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
@@ -24,8 +24,8 @@
     "component"
   ],
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "typings": "typings/index.d.ts",
   "devDependencies": {
@@ -47,8 +47,8 @@
     "gh-pages": "3.2.3",
     "html-webpack-plugin": "^4.5.2",
     "prettier": "2.3.0",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "style-loader": "^0.21.0",
     "webpack": "4.46.0",
     "webpack-cli": "3.3.12",

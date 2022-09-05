@@ -58,6 +58,10 @@ class SingleOtpInput extends PureComponent {
     return 'text';
   };
 
+  blur = () => {
+    this.input.current.blur();
+  };
+
   render() {
     const {
       placeholder,
@@ -85,7 +89,7 @@ class SingleOtpInput extends PureComponent {
           aria-label={`${index === 0 ? 'Please enter verification code. ' : ''}${isInputNum ? 'Digit' : 'Character'} ${
             index + 1
           }`}
-          autoComplete="off"
+          autoComplete="one-time-code"
           style={Object.assign(
             { width: '1em', textAlign: 'center' },
             isStyleObject(inputStyle) && inputStyle,
@@ -101,7 +105,7 @@ class SingleOtpInput extends PureComponent {
             hasErrored && errorStyle
           )}
           type={this.getType()}
-          maxLength="1"
+          maxLength="4"
           ref={this.input}
           disabled={isDisabled}
           value={value ? value : ''}
@@ -126,6 +130,8 @@ class OtpInput extends Component {
   state = {
     activeInput: 0,
   };
+
+  inputRef = React.createRef();
 
   getOtpValue = () => (this.props.value ? this.props.value.toString().split('') : []);
 
@@ -157,6 +163,12 @@ class OtpInput extends Component {
     return isTypeValid && value.trim().length === 1;
   };
 
+  isPasteValid = (value) => {
+    const isTypeValid = this.props.isInputNum ? !isNaN(parseInt(value, 10)) : typeof value === 'string';
+
+    return isTypeValid;
+  };
+
   // Focus on input by index
   focusInput = (input) => {
     const { numInputs } = this.props;
@@ -177,6 +189,12 @@ class OtpInput extends Component {
     this.focusInput(activeInput - 1);
   };
 
+  blurInput = () => {
+    if (this.inputRef.current) {
+      this.inputRef.current.blur();
+    }
+  };
+
   // Change OTP value at focused input
   changeCodeAtFocus = (value) => {
     const { activeInput } = this.state;
@@ -186,25 +204,12 @@ class OtpInput extends Component {
     this.handleOtpChange(otp);
   };
 
-  // Handle pasted OTP
-  handleOnPaste = (e) => {
-    e.preventDefault();
-
+  pasteOtp = (pastedData) => {
     const { activeInput } = this.state;
-    const { numInputs, isDisabled } = this.props;
+    const { numInputs } = this.props;
 
-    if (isDisabled) {
-      return;
-    }
-
-    const otp = this.getOtpValue();
     let nextActiveInput = activeInput;
-
-    // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = e.clipboardData
-      .getData('text/plain')
-      .slice(0, numInputs - activeInput)
-      .split('');
+    const otp = this.getOtpValue();
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
@@ -218,6 +223,26 @@ class OtpInput extends Component {
       this.focusInput(nextActiveInput);
       this.handleOtpChange(otp);
     });
+  };
+
+  // Handle pasted OTP
+  handleOnPaste = (e) => {
+    e.preventDefault();
+
+    const { activeInput } = this.state;
+    const { numInputs, isDisabled } = this.props;
+
+    if (isDisabled) {
+      return;
+    }
+
+    // Get pastedData in an array of max size (num of inputs - current position)
+    const pastedData = e.clipboardData
+      .getData('text/plain')
+      .slice(0, numInputs - activeInput)
+      .split('');
+
+    this.pasteOtp(pastedData);
   };
 
   handleOnChange = (e) => {
@@ -250,8 +275,12 @@ class OtpInput extends Component {
 
   // The content may not have changed, but some input took place hence change the focus
   handleOnInput = (e) => {
-    if (this.isInputValueValid(e.target.value)) {
-      this.focusNextInput();
+    if (this.isPasteValid(e.target.value)) {
+      if (e.target.value.trim().length === 1) {
+        this.focusNextInput();
+      } else {
+        this.pasteOtp(e.target.value.split(''));
+      }
     } else {
       // This is a workaround for dealing with keyCode "229 Unidentified" on Android.
 
@@ -297,6 +326,7 @@ class OtpInput extends Component {
           key={i}
           index={i}
           focus={activeInput === i}
+          ref={activeInput === i ? this.inputRef : null}
           value={otp && otp[i]}
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
