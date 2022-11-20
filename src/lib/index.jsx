@@ -186,6 +186,18 @@ class OtpInput extends Component {
     this.handleOtpChange(otp);
   };
 
+  //If the OTP value at focused input exists, it gets changed; else, the previous input is focused. 
+  focusPrevInputAndChangeCode = (value)=> {
+    const { activeInput } = this.state;
+    const otp = this.getOtpValue();
+    if (otp[activeInput] != value[0]) {
+      otp[activeInput] = value[0];
+    } else {
+      this.focusInput(activeInput - 1);
+    }
+    this.handleOtpChange(otp);
+  };
+
   // Handle pasted OTP
   handleOnPaste = (e) => {
     e.preventDefault();
@@ -232,8 +244,7 @@ class OtpInput extends Component {
   handleOnKeyDown = (e) => {
     if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
       e.preventDefault();
-      this.changeCodeAtFocus('');
-      this.focusPrevInput();
+      this.focusPrevInputAndChangeCode('');
     } else if (e.keyCode === DELETE || e.key === 'Delete') {
       e.preventDefault();
       this.changeCodeAtFocus('');
