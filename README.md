@@ -1,50 +1,50 @@
-# react-otp-input
+# react18-otp-input
 
-[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input) [![npm](https://img.shields.io/bundlephobia/minzip/react-otp-input)](https://www.npmjs.com/package/react-otp-input)
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/mahdimhqq/react18-otp-input?color=g)
+[![npm](https://img.shields.io/npm/dw/react18-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react18-otp-input) [![npm](https://img.shields.io/bundlephobia/minzip/react18-otp-input@latest)](https://img.shields.io/bundlephobia/minzip/react18-otp-input@latest)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-A fully customizable, one-time password input component for the web built with React.
+A fully customizable, one-time password input component for the web built with React. This package is based on great work of contributers of `react-otp-input`. But i needed this package and for unknown reasons the contributers of the original package does not accept the open PRs that solve the _REACT 18_ dependency problem. So based on The PR [here](https://github.com/devfolioco/react-otp-input/pull/347) i created this package for the others who need this.
+To see the original package [Click](https://github.com/devfolioco/react-otp-input)
 
-![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
-
-[Live Demo](https://devfolioco.github.io/react-otp-input)
-
-[CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52)
+[CodeSandbox & LiveDemo](https://codesandbox.io/s/react18-otp-input-demo-j7z0bk?file=/public/index.html)
 
 ## Installation
 
-[![NPM](https://nodei.co/npm/react-otp-input.png?compact=true)](https://nodei.co/npm/react-otp-input/)
+[![NPM](https://nodei.co/npm/react18-otp-input.png)](https://nodei.co/npm/react18-otp-input/)
 
 #### To install the latest stable version:
 
 ```
-npm install --save react-otp-input
+npm install --save react18-otp-input
 ```
 
 #### Basic usage:
 
 ```jsx
-import React, { Component } from 'react';
-import OtpInput from 'react-otp-input';
+import React, { useState } from 'react';
 
-export default class App extends Component {
-  state = { otp: '' };
+import OtpInput from 'react18-otp-input';
 
-  handleChange = (otp) => this.setState({ otp });
+function App() {
+  const [otp, setOtp] = useState('');
 
-  render() {
-    return (
-      <OtpInput
-        value={this.state.otp}
-        onChange={this.handleChange}
-        numInputs={6}
-        separator={<span>-</span>}
-      />
-    );
-  }
+  return (
+    <OtpInput
+      inputStyle="inputStyle"
+      numInputs={4}
+      onChange={(value) => setOtp(value)}
+      separator={<span>-</span>}
+      isInputNum={true}
+      shouldAutoFocus
+      value={otp}
+    />
+  );
 }
+
+export default App;
 ```
 
 ## API
@@ -178,10 +178,6 @@ export default class App extends Component {
   </tr>
 </table>
 
-## Breaking changes when porting to v1.0.0
-
-`react-otp-input` is now a controlled component to facilitate functionalities that weren't possible before from the application using it, such as clearing or pre-assigning values. For `v1.0.0` and above, a `value` prop needs to be passed in the component for it to function as expected.
-
 ## Development
 
 #### To run the development server:
@@ -190,24 +186,9 @@ export default class App extends Component {
 npm run dev
 ```
 
-## Checklist
-
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
-
-- [x] Add flowtypes
-- [x] Add ESLint, Prettier for code quality
-- [x] Add styling support for states including focus/disabled
-- [ ] Write tests
-
-## Contributing
-
-[![GitHub issues](https://img.shields.io/github/issues-raw/devfolioco/react-otp-input?logo=github)](https://github.com/devfolioco/react-otp-input/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/devfolioco/react-otp-input?logo=git)](https://github.com/devfolioco/react-otp-input/pulls)
-
-Feel free to open [issues](https://github.com/devfolioco/react-otp-input/issues/new/choose) and [pull requests](https://github.com/devfolioco/react-otp-input/pulls)!
-
 ## License
 
-[![NPM](https://img.shields.io/npm/l/react-otp-input)](https://github.com/devfolioco/react-otp-input/blob/master/LICENSE)
+[![NPM](https://img.shields.io/npm/l/react18-otp-input)](https://github.com/mahdimhqq/react18-otp-input/blob/master/LICENSE)
 
 ## Contributors ✨
 
@@ -218,16 +199,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/apollonian"><img src="https://avatars2.githubusercontent.com/u/2150306?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhishek Warokar</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=apollonian" title="Code">💻</a> <a href="#design-apollonian" title="Design">🎨</a> <a href="#maintenance-apollonian" title="Maintenance">🚧</a> <a href="#ideas-apollonian" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devfolioco/react-otp-input/pulls?q=is%3Apr+reviewed-by%3Aapollonian" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://ajayns.me"><img src="https://avatars0.githubusercontent.com/u/20743219?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aj</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ajayns" title="Code">💻</a> <a href="#design-ajayns" title="Design">🎨</a> <a href="#ideas-ajayns" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="http://aromalanil.me"><img src="https://avatars1.githubusercontent.com/u/49222186?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aromal Anil</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=aromalanil" title="Code">💻</a> <a href="#tool-aromalanil" title="Tools">🔧</a></td>
-    <td align="center"><a href="https://borntofrappe.github.io"><img src="https://avatars0.githubusercontent.com/u/33316703?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gabriele Corti</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=borntofrappe" title="Code">💻</a> <a href="#a11y-borntofrappe" title="Accessibility">️️️️♿️</a></td>
-    <td align="center"><a href="https://www.anoopms.me"><img src="https://avatars1.githubusercontent.com/u/46913894?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anoop</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=anoopmsivadas" title="Code">💻</a></td>
-    <td align="center"><a href="http://dewanshrawat.xyz"><img src="https://avatars0.githubusercontent.com/u/17003127?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dewansh Rawat</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/issues?q=author%3Adewanshrawat15" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="http://ishanchhabra.com"><img src="https://avatars3.githubusercontent.com/u/32290367?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ishan Chhabra</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ishan-chhabra" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="http://www.causztic.com"><img src="https://avatars.githubusercontent.com/u/2081441?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yaojie</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=causztic" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/MahdiMhqq"><img src="https://avatars.githubusercontent.com/u/90528664?v=4" width="100px;" alt="Mahdi Mohaqeq"/><br /><sub><b>Mahdi Mohaqeq</b></sub></a><br /><a href="https://github.com/mahdimhqq/react18-otp-input/commits?author=mahdimhqq" title="Code">💻</a><a href="#maintenance-mahdimhqq" title="Maintenance">🚧</a> <a href="#ideas-mahdimhqq" title="Ideas, Planning, & Feedback">🤔</a> <a href="" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 

@@ -1,38 +1,34 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom/client';
 
 import OtpInput from '../../lib';
 import './styles.css';
 
-class Demo extends Component {
-  constructor(props) {
-    super(props);
+function Demo() {
+  const [states, setStates] = useState({
+    otp: '',
+    numInputs: 4,
+    separator: '-',
+    isDisabled: false,
+    hasErrored: false,
+    isInputNum: false,
+    isInputSecure: false,
+    minLength: 0,
+    maxLength: 40,
+    placeholder: '',
+  });
 
-    this.state = {
-      otp: '',
-      numInputs: 4,
-      separator: '-',
-      isDisabled: false,
-      hasErrored: false,
-      isInputNum: false,
-      isInputSecure: false,
-      minLength: 0,
-      maxLength: 40,
-      placeholder: '',
-    };
-  }
-
-  handleOtpChange = (otp) => {
-    this.setState({ otp });
+  const handleOtpChange = (otp) => {
+    setStates((prev) => ({ ...prev, otp }));
   };
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setStates((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  handleNumInputsChange = (e) => {
+  const handleNumInputsChange = (e) => {
     let numInputs = e.target.value;
-    const { minLength, maxLength } = this.state;
+    const { minLength, maxLength } = states;
 
     if (numInputs < minLength || numInputs > maxLength) {
       numInputs = 4;
@@ -40,169 +36,166 @@ class Demo extends Component {
       console.error(`Please enter a value between ${minLength} and ${maxLength}`);
     }
 
-    this.setState({ [e.target.name]: parseInt(numInputs, 10) });
+    setStates((prev) => ({ ...prev, [e.target.name]: parseInt(numInputs, 10) }));
   };
 
-  clearOtp = () => {
-    this.setState({ otp: '' });
+  const clearOtp = () => {
+    setStates((prev) => ({ ...prev, otp: '' }));
   };
 
-  handleCheck = (e) => {
+  const handleCheck = (e) => {
     const { name } = e.target;
-    this.setState((prevState) => ({ [name]: !prevState[name] }));
+    setStates((prev) => ({ ...prev, [name]: !prev[name] }));
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    alert(this.state.otp);
+    alert(states.otp);
   };
 
-  render() {
-    const {
-      otp,
-      numInputs,
-      separator,
-      isDisabled,
-      hasErrored,
-      isInputNum,
-      isInputSecure,
-      minLength,
-      maxLength,
-      placeholder,
-    } = this.state;
-
-    return (
-      <div className="container">
-        <div className="side-bar">
-          <a href="https://github.com/devfolioco/react-otp-input" target="_blank" rel="noreferrer">
-            <div className="side-bar__segment side-bar__segment--header">
-              <h2>react-otp-input</h2>
-            </div>
-          </a>
-          <div className="side-bar__segment">
-            <label htmlFor="num-inputs">
-              numInputs
-              <input
-                id="num-inputs"
-                name="numInputs"
-                type="number"
-                value={numInputs}
-                onChange={this.handleNumInputsChange}
-                min={minLength}
-                max={maxLength}
-              />
-            </label>
+  return (
+    <div className="container">
+      <div className="side-bar">
+        <a href="https://github.com/mahdimhqq/react18-otp-input" target="_blank" rel="noreferrer">
+          <div className="side-bar__segment side-bar__segment--header">
+            <h2>react18-otp-input</h2>
           </div>
-          <div className="side-bar__segment">
-            <label htmlFor="separator">
-              separator
-              <input
-                id="separator"
-                maxLength={1}
-                name="separator"
-                type="text"
-                value={separator}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="value">
-              value
-              <input id="value" maxLength={numInputs} name="otp" type="text" value={otp} onChange={this.handleChange} />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="placeholder">
-              placeholder
-              <input id="placeholder" name="placeholder" type="text" value={placeholder} onChange={this.handleChange} />
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="disabled">
-              <input id="disabled" name="isDisabled" type="checkbox" checked={isDisabled} onChange={this.handleCheck} />
-              isDisabled
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="hasErrored">
-              <input
-                id="hasErrored"
-                name="hasErrored"
-                type="checkbox"
-                checked={hasErrored}
-                onChange={this.handleCheck}
-              />
-              hasErrored
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="isInputNum">
-              <input
-                id="isInputNum"
-                name="isInputNum"
-                type="checkbox"
-                checked={isInputNum}
-                onChange={this.handleCheck}
-              />
-              isInputNum
-            </label>
-          </div>
-          <div className="side-bar__segment">
-            <label htmlFor="isInputSecure">
-              <input
-                id="isInputSecure"
-                name="isInputSecure"
-                type="checkbox"
-                checked={isInputSecure}
-                onChange={this.handleCheck}
-              />
-              isInputSecure
-            </label>
-          </div>
-          <div className="side-bar__segment side-bar__segment--bottom">
-            <a href="https://github.com/devfolioco/react-otp-input">Documentation and Source</a>
-          </div>
+        </a>
+        <div className="side-bar__segment side-bar__segment--bottom">
+          <a href="https://github.com/mahdimhqq/react18-otp-input">Documentation and Source</a>
         </div>
-        <div className="view">
-          <div className="card">
-            <form onSubmit={this.handleSubmit}>
-              <p>Enter verification code</p>
-              <div className="margin-top--small">
-                <OtpInput
-                  inputStyle="inputStyle"
-                  numInputs={numInputs}
-                  isDisabled={isDisabled}
-                  hasErrored={hasErrored}
-                  errorStyle="error"
-                  onChange={this.handleOtpChange}
-                  separator={<span>{separator}</span>}
-                  isInputNum={isInputNum}
-                  isInputSecure={isInputSecure}
-                  shouldAutoFocus
-                  value={otp}
-                  placeholder={placeholder}
-                />
-              </div>
-              <div className="btn-row">
-                <button
-                  className="btn margin-top--large"
-                  type="button"
-                  disabled={isDisabled || otp.trim() === ''}
-                  onClick={this.clearOtp}
-                >
-                  Clear
-                </button>
-                <button className="btn margin-top--large" disabled={otp.length < numInputs}>
-                  Get OTP
-                </button>
-              </div>
-            </form>
-          </div>
+        <div className="side-bar__segment">
+          <label htmlFor="num-inputs">
+            numInputs
+            <input
+              id="num-inputs"
+              name="numInputs"
+              type="number"
+              value={states.numInputs}
+              onChange={handleNumInputsChange}
+              min={states.minLength}
+              max={states.maxLength}
+            />
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="separator">
+            separator
+            <input
+              id="separator"
+              maxLength={1}
+              name="separator"
+              type="text"
+              value={states.separator}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="value">
+            value
+            <input
+              id="value"
+              maxLength={states.numInputs}
+              name="otp"
+              type="text"
+              value={states.otp}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="placeholder">
+            placeholder
+            <input id="placeholder" name="placeholder" type="text" value={states.placeholder} onChange={handleChange} />
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="disabled">
+            <input id="disabled" name="isDisabled" type="checkbox" checked={states.isDisabled} onChange={handleCheck} />
+            isDisabled
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="hasErrored">
+            <input
+              id="hasErrored"
+              name="hasErrored"
+              type="checkbox"
+              checked={states.hasErrored}
+              onChange={handleCheck}
+            />
+            hasErrored
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="isInputNum">
+            <input
+              id="isInputNum"
+              name="isInputNum"
+              type="checkbox"
+              checked={states.isInputNum}
+              onChange={handleCheck}
+            />
+            isInputNum
+          </label>
+        </div>
+        <div className="side-bar__segment">
+          <label htmlFor="isInputSecure">
+            <input
+              id="isInputSecure"
+              name="isInputSecure"
+              type="checkbox"
+              checked={states.isInputSecure}
+              onChange={handleCheck}
+            />
+            isInputSecure
+          </label>
         </div>
       </div>
-    );
-  }
+      <div className="view">
+        <div className="card">
+          <form onSubmit={handleSubmit}>
+            <p>Enter verification code</p>
+            <div className="margin-top--small">
+              <OtpInput
+                inputStyle="inputStyle"
+                numInputs={states.numInputs}
+                isDisabled={states.isDisabled}
+                hasErrored={states.hasErrored}
+                errorStyle="error"
+                onChange={handleOtpChange}
+                separator={<span>{states.separator}</span>}
+                isInputNum={states.isInputNum}
+                isInputSecure={states.isInputSecure}
+                shouldAutoFocus
+                value={states.otp}
+                placeholder={states.placeholder}
+              />
+            </div>
+            <div className="btn-row">
+              <button
+                className="btn margin-top--large"
+                type="button"
+                disabled={states.isDisabled || states.otp.trim() === ''}
+                onClick={clearOtp}
+              >
+                Clear
+              </button>
+              <button className="btn margin-top--large" disabled={states.otp.length < states.numInputs}>
+                Get OTP
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-render(<Demo />, document.getElementById('app'));
+const app = ReactDOM.createRoot(document.getElementById('app'));
+app.render(
+  <React.StrictMode>
+    <Demo />
+  </React.StrictMode>
+);
