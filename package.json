@@ -1,6 +1,6 @@
 {
   "name": "@mvp-rockets/react-otp-input",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.2",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "scripts": {
