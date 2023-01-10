@@ -1,7 +1,7 @@
-# react18-otp-input
+# @mvp-rockets/react-otp-input
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/mahdimhqq/react18-otp-input?color=g)
-[![npm](https://img.shields.io/npm/dw/react18-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react18-otp-input) [![npm](https://img.shields.io/bundlephobia/minzip/react18-otp-input@latest)](https://img.shields.io/bundlephobia/minzip/react18-otp-input@latest)
+[![npm](https://img.shields.io/npm/dw/react18-otp-input.svg?logo=npm)](https://www.npmjs.com/package/@mvp-rockets/react-otp-input) [![npm](https://img.shields.io/bundlephobia/minzip/@mvp-rockets/react-otp-input@latest)](https://img.shields.io/bundlephobia/minzip/@mvp-rockets/react-otp-input@latest)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -13,12 +13,12 @@ To see the original package [Click](https://github.com/devfolioco/react-otp-inpu
 
 ## Installation
 
-[![NPM](https://nodei.co/npm/react18-otp-input.png)](https://nodei.co/npm/react18-otp-input/)
+[![NPM](https://nodei.co/npm/@mvp-rockets/react-otp-input.png)](https://nodei.co/npm/@mvp-rockets/react-otp-input/)
 
 #### To install the latest stable version:
 
 ```
-npm install --save react18-otp-input
+npm install --save @mvp-rockets/react-otp-input
 ```
 
 #### Basic usage:
@@ -26,7 +26,7 @@ npm install --save react18-otp-input
 ```jsx
 import React, { useState } from 'react';
 
-import OtpInput from 'react18-otp-input';
+import OtpInput from '@mvp-rockets/react-otp-input';
 
 function App() {
   const [otp, setOtp] = useState('');
