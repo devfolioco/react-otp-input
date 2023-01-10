@@ -99,8 +99,12 @@ a {
 
 .side-bar__segment--bottom {
   font-weight: bold;
-  position: absolute;
-  bottom: 2rem;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .view {
