@@ -2,20 +2,21 @@ import React from 'react';
 import OTPInput from '../../src';
 
 function App() {
-  const [{ otp, numInputs, separator, minLength, maxLength, placeholder }, setConfig] = React.useState({
+  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = React.useState({
     otp: '',
     numInputs: 4,
     separator: '-',
     minLength: 0,
     maxLength: 40,
     placeholder: '',
+    inputType: 'text',
   });
 
   const handleOTPChange = (otp: string) => {
     setConfig((prevConfig) => ({ ...prevConfig, otp }));
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     setConfig((prevConfig) => ({ ...prevConfig, [name]: value }));
   };
@@ -88,6 +89,14 @@ function App() {
             <input id="placeholder" name="placeholder" type="text" value={placeholder} onChange={handleChange} />
           </label>
         </div>
+        <div className="side-bar__segment">
+          <label htmlFor="inputType">inputType</label>
+          <select id="inputType" name="inputType" value={inputType} onChange={handleChange}>
+            <option value="text">text</option>
+            <option value="number">number</option>
+            <option value="password">password</option>
+          </select>
+        </div>
         <div className="side-bar__segment side-bar__segment--bottom">
           <a href="https://github.com/devfolioco/react-otp-input">Documentation and Source</a>
         </div>
@@ -104,6 +113,7 @@ function App() {
                 renderSeparator={<span>{separator}</span>}
                 value={otp}
                 placeholder={placeholder}
+                inputType={inputType}
                 renderInput={(props) => <input {...props} />}
                 shouldAutoFocus
               />

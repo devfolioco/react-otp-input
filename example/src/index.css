@@ -162,6 +162,14 @@ input[type='number'] {
   appearance: textfield;
 }
 
+select {
+  border-radius: 4px;
+  display: block;
+  border: 1px solid lightgrey;
+  margin-top: 0.5rem;
+  height: 1.5rem;
+}
+
 .btn-row {
   display: flex;
   flex-direction: row;
