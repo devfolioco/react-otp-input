@@ -106,6 +106,7 @@ function App() {
                 placeholder={placeholder}
                 inputType="number"
                 renderInput={(props) => <input {...props} />}
+                shouldAutoFocus
               />
             </div>
             <div className="btn-row">

@@ -10,8 +10,8 @@ A fully customizable, one-time password input component for the web built with R
 ![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
 
 [Live Demo](https://devfolioco.github.io/react-otp-input)
-
-[CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52)
+<!-- 
+[CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52) -->
 
 ## Installation
 
@@ -23,27 +23,27 @@ A fully customizable, one-time password input component for the web built with R
 npm install --save react-otp-input
 ```
 
+### Still using v2?
+No problem! You can find the documentation for v2 [here](https://github.com/devfolioco/react-otp-input/tree/v2.4.0)
+
 #### Basic usage:
 
 ```jsx
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import OtpInput from 'react-otp-input';
 
-export default class App extends Component {
-  state = { otp: '' };
+export default function App() {
+  const [otp, setOtp] = useState('');
 
-  handleChange = (otp) => this.setState({ otp });
-
-  render() {
-    return (
-      <OtpInput
-        value={this.state.otp}
-        onChange={this.handleChange}
-        numInputs={6}
-        separator={<span>-</span>}
-      />
-    );
-  }
+  return (
+    <OtpInput
+      value={otp}
+      onChange={setOtp}
+      numInputs={4}
+      renderSeparator={<span>-</span>}
+      renderInput={(props) => <input {...props} />}
+    />
+  );
 }
 ```
 
@@ -63,6 +63,15 @@ export default class App extends Component {
     <td>true</td>
     <td>4</td>
     <td>Number of OTP inputs to be rendered.</td>
+  </tr>
+  <tr>
+    <td>renderInput</td>
+    <td>function</td>
+    <td>true</td>
+    <td>none</td>
+    <td>A function that returns the input that is supposed to be rendered for each of the input fields. 
+      The function will get two arguments: <code>inputProps</code> and <code>index</code>. <code>inputProps</code> is an object that contains all the props <b>that should be passed to the input being rendered</b> (Overriding these props is not recommended because it might lead to some unexpected behaviour). <code>index</code> is the index of the input being rendered.
+    </td>
   </tr>
   <tr>
     <td>onChange</td>
@@ -86,11 +95,11 @@ export default class App extends Component {
      <td>Specify an expected value of each input. The length of this string should be equal to <code>numInputs</code>.</td>
    </tr>
   <tr>
-    <td>separator</td>
-    <td>component<br/></td>
+    <td>renderSeparator</td>
+    <td>component / function<br/></td>
     <td>false</td>
     <td>none</td>
-    <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input.</td>
+    <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input.</td> You can also pass a function that returns a component, where the function will get the index of the separator being rendered as an argument.
   </tr>
   <tr>
     <td>containerStyle</td>
@@ -107,39 +116,11 @@ export default class App extends Component {
     <td>Style applied or class passed to each input.</td>
   </tr>
   <tr>
-    <td>focusStyle</td>
-    <td>style (object) / className (string)</td>
+    <td>inputType</td>
+    <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#input_types">&lt;input&gt; type<a></td>
     <td>false</td>
-    <td>none</td>
-    <td>Style applied or class passed to inputs on focus.</td>
-  </tr>
-  <tr>
-    <td>isDisabled</td>
-    <td>boolean</td>
-    <td>false</td>
-    <td>false</td>
-    <td>Disables all the inputs.</td>
-  </tr>
-  <tr>
-    <td>disabledStyle</td>
-    <td>style (object) / className (string)</td>
-    <td>false</td>
-    <td>none</td>
-    <td>Style applied or class passed to each input when disabled.</td>
-  </tr>
-  <tr>
-    <td>hasErrored</td>
-    <td>boolean</td>
-    <td>false</td>
-    <td>false</td>
-    <td>Indicates there is an error in the inputs.</td>
-  </tr>
-  <tr>
-    <td>errorStyle</td>
-    <td>style (object) / className (string)</td>
-    <td>false</td>
-    <td>none</td>
-    <td>Style applied or class passed to each input when errored.</td>
+    <td>number</td>
+    <td>The type of the input that will be passed to the input element being rendered</td>
   </tr>
   <tr>
     <td>shouldAutoFocus</td>
@@ -148,45 +129,28 @@ export default class App extends Component {
     <td>false</td>
     <td>Auto focuses input on initial page load.</td>
   </tr>
-  <tr>
-    <td>isInputNum</td>
-    <td>boolean</td>
-    <td>false</td>
-    <td>false</td>
-    <td>Restrict input to only numbers.</td>
-  </tr>
-  <tr>
-    <td>isInputSecure</td>
-    <td>boolean</td>
-    <td>false</td>
-    <td>false</td>
-    <td>Masks input characters.</td>
-  </tr>
-  <tr>
-    <td>data-cy</td>
-    <td>string</td>
-    <td>false</td>
-    <td>-</td>
-    <td>Test attribute passed to the inputs.</td>
-  </tr>
-  <tr>
-    <td>data-testid</td>
-    <td>string</td>
-    <td>false</td>
-    <td>-</td>
-    <td>Test attribute passed to the inputs.</td>
-  </tr>
 </table>
 
-## Breaking changes when porting to v1.0.0
+## Migrating from v2
+
+The v3 of `react-otp-input` is a complete rewrite of the library. Apart from making the API more customizable and flexible, this version is a complete rewrite of the library using TypeScript and React Hooks. Here are the breaking changes that you need to be aware of:
+
+- You now need to pass your own custom input component that will be rendered for each of the input fields via `renderInput` prop. This gives you the flexibility to customize the input fields as you desire. This also means that props like `focusStyle`, `isDisabled`, `disabledStyle`, `hasErrored`, `errorStyle`, `isInputNum`, `isInputSecure`, `data-cy` and `data-testid` are no longer supported. You can achieve the same functionality and more by passing the relevant props directly to the input component that you return from the `renderInput` prop.
+
+- The `separator` prop has now been renamed to `renderSeparator`. This prop now apart from accepting a component that will be rendered as a separator between inputs like it used to, now also accepts a function that returns a component. The function will get the index of the separator being rendered as an argument.
+
+- A new prop called `inputType` has been added to the component. This prop can be used to specify the type of the input that will be passed to the input element being rendered. The default value of this prop is `number`.
+
+## Migrating from v1
 
 `react-otp-input` is now a controlled component to facilitate functionalities that weren't possible before from the application using it, such as clearing or pre-assigning values. For `v1.0.0` and above, a `value` prop needs to be passed in the component for it to function as expected.
 
 ## Development
 
-#### To run the development server:
+#### To run the vite example:
 
 ```
+cd example
 npm run dev
 ```
 
@@ -194,10 +158,8 @@ npm run dev
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
 
-- [x] Add flowtypes
-- [x] Add ESLint, Prettier for code quality
-- [x] Add styling support for states including focus/disabled
 - [ ] Write tests
+- [ ] Add actions for lint checks and tests
 
 ## Contributing
 

@@ -23,9 +23,9 @@ type InputProps = Required<
 
 interface OTPInputProps {
   /** Value of the OTP input */
-  value: string;
-  /** Number of inputs to be rendered */
-  numInputs: number;
+  value?: string;
+  /** Number of OTP inputs to be rendered */
+  numInputs?: number;
   /** Callback to be called when the OTP value changes */
   onChange: (otp: string) => void;
   /** Function to render the input */
@@ -47,11 +47,11 @@ interface OTPInputProps {
 const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
 
 const OTPInput = ({
-  value,
-  numInputs,
+  value = '',
+  numInputs = 4,
   onChange,
   renderInput,
-  shouldAutoFocus = true,
+  shouldAutoFocus = false,
   inputType = 'number',
   renderSeparator,
   placeholder,
