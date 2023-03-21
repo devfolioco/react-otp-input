@@ -3,9 +3,18 @@ import React from 'react';
 type InputProps = Required<
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
-    'value' | 'onChange' | 'onFocus' | 'onBlur' | 'onKeyDown' | 'onPaste' | 'aria-label' | 'maxLength' | 'autoComplete' | 'style'
+    | 'value'
+    | 'onChange'
+    | 'onFocus'
+    | 'onBlur'
+    | 'onKeyDown'
+    | 'onPaste'
+    | 'aria-label'
+    | 'maxLength'
+    | 'autoComplete'
+    | 'style'
+    | 'type'
   > & {
-    key: number;
     ref: React.RefCallback<HTMLInputElement>;
     placeholder: string | undefined;
     className: string | undefined;
@@ -13,15 +22,26 @@ type InputProps = Required<
 >;
 
 interface OTPInputProps {
+  /** Value of the OTP input */
   value: string;
+  /** Number of inputs to be rendered */
   numInputs: number;
+  /** Callback to be called when the OTP value changes */
   onChange: (otp: string) => void;
+  /** Function to render the input */
   renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
+  /** Whether the first input should be auto focused */
   shouldAutoFocus?: boolean;
+  /** Placeholder for the inputs */
   placeholder?: string;
-  renderSeparator?: (index: number) => React.ReactNode | React.ReactNode;
+  /** Function to render the separator */
+  renderSeparator?: ((index: number) => React.ReactNode) | React.ReactNode;
+  /** Style for the container */
   containerStyle?: React.CSSProperties | string;
+  /** Style for the input */
   inputStyle?: React.CSSProperties | string;
+  /** The type that will be passed to the input being rendered */
+  inputType?: React.InputHTMLAttributes<HTMLInputElement>['type'];
 }
 
 const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
@@ -32,6 +52,7 @@ const OTPInput = ({
   onChange,
   renderInput,
   shouldAutoFocus = true,
+  inputType = 'number',
   renderSeparator,
   placeholder,
   containerStyle,
@@ -163,15 +184,14 @@ const OTPInput = ({
 
   return (
     <div
-      style={Object.assign({ display: 'flex' }, isStyleObject(containerStyle) && containerStyle)}
+      style={Object.assign({ display: 'flex', alignItems: 'center' }, isStyleObject(containerStyle) && containerStyle)}
       className={typeof containerStyle === 'string' ? containerStyle : undefined}
     >
-      {Array.from({ length }, (_, index) => index).map((index) => (
-        <>
+      {Array.from({ length: numInputs }, (_, index) => index).map((index) => (
+        <React.Fragment key={index}>
           {renderInput(
             {
               value: getOTPValue()[index] ?? '',
-              key: index,
               placeholder: getPlaceholderValue()?.[index] ?? undefined,
               ref: (element) => (inputRefs.current[index] = element),
               onChange: handleChange,
@@ -184,14 +204,15 @@ const OTPInput = ({
               'aria-label': `Please enter OTP character ${index + 1}`,
               style: Object.assign(
                 { width: '1em', textAlign: 'center' } as const,
-                isStyleObject(inputStyle) && inputStyle,
+                isStyleObject(inputStyle) && inputStyle
               ),
               className: typeof inputStyle === 'string' ? inputStyle : undefined,
+              type: inputType,
             },
             index
           )}
-          {index < numInputs - 1 && typeof renderSeparator === 'function' ? renderSeparator(index) : renderSeparator}
-        </>
+          {index < numInputs - 1 && (typeof renderSeparator === 'function' ? renderSeparator(index) : renderSeparator)}
+        </React.Fragment>
       ))}
     </div>
   );
