@@ -52,7 +52,7 @@ const OTPInput = ({
   onChange,
   renderInput,
   shouldAutoFocus = false,
-  inputType = 'number',
+  inputType = 'text',
   renderSeparator,
   placeholder,
   containerStyle,

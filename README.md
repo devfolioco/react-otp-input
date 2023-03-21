@@ -119,7 +119,7 @@ export default function App() {
     <td>inputType</td>
     <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#input_types">&lt;input&gt; type<a></td>
     <td>false</td>
-    <td>number</td>
+    <td>text</td>
     <td>The type of the input that will be passed to the input element being rendered</td>
   </tr>
   <tr>

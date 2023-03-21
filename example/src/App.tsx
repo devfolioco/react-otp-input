@@ -104,7 +104,6 @@ function App() {
                 renderSeparator={<span>{separator}</span>}
                 value={otp}
                 placeholder={placeholder}
-                inputType="number"
                 renderInput={(props) => <input {...props} />}
                 shouldAutoFocus
               />
