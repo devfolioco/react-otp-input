@@ -1,5 +1,5 @@
 import React from 'react';
-import OTPInput from '../../src/lib';
+import OTPInput from '../../src';
 
 function App() {
   const [{ otp, numInputs, separator, minLength, maxLength, placeholder }, setConfig] = React.useState({
