@@ -9,7 +9,7 @@ function App() {
     minLength: 0,
     maxLength: 40,
     placeholder: '',
-    inputType: 'text',
+    inputType: 'text' as const,
   });
 
   const handleOTPChange = (otp: string) => {
