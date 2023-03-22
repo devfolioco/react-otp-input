@@ -119,6 +119,7 @@ const OTPInput = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const otp = getOTPValue();
     if (event.code === 'Backspace') {
       event.preventDefault();
       changeCodeAtFocus('');
@@ -132,7 +133,18 @@ const OTPInput = ({
     } else if (event.code === 'ArrowRight') {
       event.preventDefault();
       focusInput(activeInput + 1);
-    } else if (event.code === 'Spacebar' || event.code === 'Space') {
+    }
+    // React does not trigger onChange when the same value is entered
+    // again. So we need to focus the next input manually in this case.
+    else if (event.key === otp[activeInput]) {
+      event.preventDefault();
+      focusInput(activeInput + 1);
+    } else if (
+      event.code === 'Spacebar' ||
+      event.code === 'Space' ||
+      event.code === 'ArrowUp' ||
+      event.code === 'ArrowDown'
+    ) {
       event.preventDefault();
     }
   };
@@ -169,6 +181,11 @@ const OTPInput = ({
       .getData('text/plain')
       .slice(0, numInputs - activeInput)
       .split('');
+
+    // Prevent pasting if the clipboard data contains non-numeric values
+    if (inputType === 'number' && pastedData.some((value) => isNaN(Number(value)))) {
+      return;
+    }
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
