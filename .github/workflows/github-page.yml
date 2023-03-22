@@ -2,7 +2,7 @@ name: Build Example Site
 on: 
   push:
     branches:
-      - master
+      - main
       
 jobs:
   build-and-deploy:
@@ -15,13 +15,14 @@ jobs:
 
       - name: Install and Build 🔧 
         run: |
+          cd example
           npm install
-          npm run demo:prod
+          npm run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages 
-          FOLDER: demo 
+          FOLDER: example/dist 
           CLEAN: true 
