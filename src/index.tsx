@@ -65,6 +65,8 @@ const OTPInput = ({
 
   const getOTPValue = () => (value ? value.toString().split('') : []);
 
+  const isInputNum = inputType === 'number' || inputType === 'tel';
+
   React.useEffect(() => {
     inputRefs.current = inputRefs.current.slice(0, numInputs);
   }, [numInputs]);
@@ -89,8 +91,7 @@ const OTPInput = ({
   };
 
   const isInputValueValid = (value: string) => {
-    const isTypeValid =
-      inputType === 'number' || inputType === 'tel' ? !isNaN(Number(value)) : typeof value === 'string';
+    const isTypeValid = isInputNum ? !isNaN(Number(value)) : typeof value === 'string';
     return isTypeValid && value.trim().length === 1;
   };
 
@@ -186,8 +187,8 @@ const OTPInput = ({
       .slice(0, numInputs - activeInput)
       .split('');
 
-    // Prevent pasting if the clipboard data contains non-numeric values
-    if (inputType === 'number' && pastedData.some((value) => isNaN(Number(value)))) {
+    // Prevent pasting if the clipboard data contains non-numeric values for number inputs
+    if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) {
       return;
     }
 
