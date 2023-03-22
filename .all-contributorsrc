@@ -84,6 +84,19 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "prateek3255",
+      "name": "Prateek Surana",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21277179?v=4",
+      "profile": "http://prateeksurana.me",
+      "contributions": [
+        "code",
+        "maintenance",
+        "ideas",
+        "doc",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -91,5 +104,6 @@
   "projectOwner": "devfolioco",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
