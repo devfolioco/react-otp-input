@@ -11,7 +11,7 @@
     "lint": "eslint 'src/**/*.{js,jsx}' --quiet",
     "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix",
     "prepublishOnly": "rm -rf dist && npm run build",
-    "demo:prod": "cd example && npm run build"
+    "example:build": "cd example && yarn && yarn build"
   },
   "keywords": [
     "otp",
