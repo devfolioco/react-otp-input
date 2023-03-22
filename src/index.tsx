@@ -1,5 +1,7 @@
 import React from 'react';
 
+type AllowedInputTypes = 'password' | 'text' | 'number' | 'tel';
+
 type InputProps = Required<
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -13,11 +15,11 @@ type InputProps = Required<
     | 'maxLength'
     | 'autoComplete'
     | 'style'
-    | 'type'
   > & {
     ref: React.RefCallback<HTMLInputElement>;
     placeholder: string | undefined;
     className: string | undefined;
+    type: AllowedInputTypes;
   }
 >;
 
@@ -41,7 +43,7 @@ interface OTPInputProps {
   /** Style for the input */
   inputStyle?: React.CSSProperties | string;
   /** The type that will be passed to the input being rendered */
-  inputType?: React.InputHTMLAttributes<HTMLInputElement>['type'];
+  inputType?: AllowedInputTypes;
 }
 
 const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
@@ -87,7 +89,9 @@ const OTPInput = ({
   };
 
   const isInputValueValid = (value: string) => {
-    return typeof value === 'string' && value.trim().length === 1;
+    const isTypeValid =
+      inputType === 'number' || inputType === 'tel' ? !isNaN(Number(value)) : typeof value === 'string';
+    return isTypeValid && value.trim().length === 1;
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

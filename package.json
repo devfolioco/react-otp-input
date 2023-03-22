@@ -1,7 +1,6 @@
 {
   "name": "react-otp-input",
-  "version": "2.4.0",
-  "type": "module",
+  "version": "3.0.0",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -11,7 +10,7 @@
     "format": "prettier --write \"**/*.{html,css,js,jsx}\"",
     "lint": "eslint 'src/**/*.{js,jsx}' --quiet",
     "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix",
-    "prepublish": "npm run build",
+    "prepublishOnly": "rm -rf dist && npm run build",
     "demo:prod": "cd example && npm run build"
   },
   "keywords": [
@@ -43,7 +42,7 @@
     "prettier": "2.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "rollup": "3.20.0",
+    "rollup": "2.79.1",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "typescript": "5.0.2"
   },
