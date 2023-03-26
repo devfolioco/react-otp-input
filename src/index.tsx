@@ -125,7 +125,7 @@ const OTPInput = ({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const otp = getOTPValue();
-    if (event.code === 'Backspace') {
+    if ([event.code, event.key].includes('Backspace')) {
       event.preventDefault();
       changeCodeAtFocus('');
       focusInput(activeInput - 1);
