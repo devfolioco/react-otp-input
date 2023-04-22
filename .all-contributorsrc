@@ -97,6 +97,15 @@
         "doc",
         "design"
       ]
+    },
+    {
+      "login": "suleymanbariseser",
+      "name": "Süleyman Barış Eser",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50797736?v=4",
+      "profile": "https://github.com/suleymanbariseser",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
