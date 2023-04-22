@@ -192,6 +192,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://www.causztic.com"><img src="https://avatars.githubusercontent.com/u/2081441?v=4?s=100" width="100px;" alt="yaojie"/><br /><sub><b>yaojie</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=causztic" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://prateeksurana.me"><img src="https://avatars.githubusercontent.com/u/21277179?v=4?s=100" width="100px;" alt="Prateek Surana"/><br /><sub><b>Prateek Surana</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=prateek3255" title="Code">💻</a> <a href="#maintenance-prateek3255" title="Maintenance">🚧</a> <a href="#ideas-prateek3255" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devfolioco/react-otp-input/commits?author=prateek3255" title="Documentation">📖</a> <a href="#design-prateek3255" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/suleymanbariseser"><img src="https://avatars.githubusercontent.com/u/50797736?v=4?s=100" width="100px;" alt="Süleyman Barış Eser"/><br /><sub><b>Süleyman Barış Eser</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/issues?q=author%3Asuleymanbariseser" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
