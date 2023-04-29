@@ -151,6 +151,8 @@ const OTPInput = ({
       event.code === 'ArrowDown'
     ) {
       event.preventDefault();
+    } else if (isInputNum && !isInputValueValid(event.key)) {
+      event.preventDefault();
     }
   };
 
