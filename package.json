@@ -1,6 +1,6 @@
 {
   "name": "react-otp-input",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A fully customizable, one-time password input component for the web built with React",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
