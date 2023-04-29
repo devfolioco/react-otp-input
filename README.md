@@ -131,6 +131,17 @@ export default function App() {
   </tr>
 </table>
 
+### ⚠️ Warning
+Do not override the following props on the input component that you return from the `renderInput` prop. Doing so might lead to unexpected behaviour.
+- `ref`
+- `value`
+- `onChange`
+- `onFocus`
+- `onBlur`
+- `onKeyDown`
+- `onPaste`
+- `type`
+
 ## Migrating from v2
 
 The v3 of `react-otp-input` is a complete rewrite of the library. Apart from making the API more customizable and flexible, this version is a complete rewrite of the library using TypeScript and React Hooks. Here are the breaking changes that you need to be aware of:
