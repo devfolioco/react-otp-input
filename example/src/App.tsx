@@ -116,6 +116,7 @@ function App() {
                 inputType={inputType}
                 renderInput={(props) => <input {...props} />}
                 shouldAutoFocus
+                shouldRemoveWhiteSpaceOnPaste
               />
             </div>
             <div className="btn-row">

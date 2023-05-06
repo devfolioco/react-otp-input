@@ -44,6 +44,8 @@ interface OTPInputProps {
   inputStyle?: React.CSSProperties | string;
   /** The type that will be passed to the input being rendered */
   inputType?: AllowedInputTypes;
+  /** Boolean to consider spaces as valid OTP values */
+  shouldRemoveWhiteSpaceOnPaste?: boolean;
 }
 
 const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
@@ -59,6 +61,7 @@ const OTPInput = ({
   placeholder,
   containerStyle,
   inputStyle,
+  shouldRemoveWhiteSpaceOnPaste = false,
 }: OTPInputProps) => {
   const [activeInput, setActiveInput] = React.useState(0);
   const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);
@@ -184,10 +187,14 @@ const OTPInput = ({
     let nextActiveInput = activeInput;
 
     // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = event.clipboardData
+    let pastedData = event.clipboardData
       .getData('text/plain')
       .slice(0, numInputs - activeInput)
       .split('');
+
+    if(shouldRemoveWhiteSpaceOnPaste) {
+      pastedData = pastedData.filter((character) => character !== ' ');
+    }
 
     // Prevent pasting if the clipboard data contains non-numeric values for number inputs
     if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) {
