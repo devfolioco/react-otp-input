@@ -186,15 +186,16 @@ const OTPInput = ({
     const otp = getOTPValue();
     let nextActiveInput = activeInput;
 
+    let pastedString = event.clipboardData.getData('text/plain');
+
+    if (shouldRemoveWhiteSpaceOnPaste) {
+      pastedString = pastedString.replace(/\s/g, '');
+    }
+
     // Get pastedData in an array of max size (num of inputs - current position)
-    let pastedData = event.clipboardData
-      .getData('text/plain')
+    const pastedData = pastedString
       .slice(0, numInputs - activeInput)
       .split('');
-
-    if(shouldRemoveWhiteSpaceOnPaste) {
-      pastedData = pastedData.filter((character) => character !== ' ');
-    }
 
     // Prevent pasting if the clipboard data contains non-numeric values for number inputs
     if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) {
