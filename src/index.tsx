@@ -151,7 +151,7 @@ const OTPInput = ({
       event.code === 'ArrowDown'
     ) {
       event.preventDefault();
-    } else if (isInputNum && !isInputValueValid(event.key)) {
+    } else if (isInputNum && !isInputValueValid(event.key) && event.code !== 'KeyV' && event.code !== 'Insert') {
       event.preventDefault();
     }
   };
