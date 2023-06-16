@@ -28,6 +28,10 @@ interface OTPInputProps {
   value?: string;
   /** Number of OTP inputs to be rendered */
   numInputs?: number;
+  /** Callback to be called when the OTP has lost focus */
+  onBlur?: () => void;
+  /** Callback to be called when the OTP has received focued */
+  onFocus?: (index: number) => void;
   /** Callback to be called when the OTP value changes */
   onChange: (otp: string) => void;
   /** Function to render the input */
@@ -51,6 +55,8 @@ const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
 const OTPInput = ({
   value = '',
   numInputs = 4,
+  onBlur,
+  onFocus,
   onChange,
   renderInput,
   shouldAutoFocus = false,
@@ -117,10 +123,18 @@ const OTPInput = ({
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => (index: number) => {
     setActiveInput(index);
     event.target.select();
+
+    if (!inputRefs.current.includes(event.relatedTarget as HTMLInputElement)) {
+      onFocus?.(index);
+    }
   };
 
-  const handleBlur = () => {
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     setActiveInput(activeInput - 1);
+
+    if (!inputRefs.current.includes(event.relatedTarget as HTMLInputElement)) {
+      onBlur?.();
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
