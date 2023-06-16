@@ -73,6 +73,21 @@ export default function App() {
       The function will get two arguments: <code>inputProps</code> and <code>index</code>. <code>inputProps</code> is an object that contains all the props <b>that should be passed to the input being rendered</b> (Overriding these props is not recommended because it might lead to some unexpected behaviour). <code>index</code> is the index of the input being rendered.
     </td>
   </tr>
+    <tr>
+    <td>onBlur</td>
+    <td>function</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Called when OTP has lost focus</td>
+  </tr>
+  </tr>
+    <tr>
+    <td>onFocus</td>
+    <td>function</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Called when OTP has received focus. The <code>index</code> of the input gaining focus is passed as the first argument</td>
+  </tr>
   <tr>
     <td>onChange</td>
     <td>function</td>

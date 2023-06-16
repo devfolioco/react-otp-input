@@ -107,6 +107,8 @@ function App() {
             <p>Enter verification code</p>
             <div className="margin-top--small">
               <OTPInput
+                onFocus={() => console.log('OTP gained focus!')}
+                onBlur={() => console.log('OTP lost Focus!')}
                 inputStyle="inputStyle"
                 numInputs={numInputs}
                 onChange={handleOTPChange}
