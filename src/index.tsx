@@ -15,6 +15,8 @@ type InputProps = Required<
     | 'maxLength'
     | 'autoComplete'
     | 'style'
+    | 'inputMode'
+    | 'onInput'
   > & {
     ref: React.RefCallback<HTMLInputElement>;
     placeholder: string | undefined;
@@ -101,8 +103,12 @@ const OTPInput = ({
     if (isInputValueValid(value)) {
       changeCodeAtFocus(value);
       focusInput(activeInput + 1);
-    } else {
-      const { nativeEvent } = event;
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { nativeEvent } = event;
+    if (!isInputValueValid(event.target.value)) {
       // @ts-expect-error - This was added previosly to handle and edge case
       // for dealing with keyCode "229 Unidentified" on Android. Check if this is
       // still needed.
@@ -111,6 +117,9 @@ const OTPInput = ({
         changeCodeAtFocus('');
         focusInput(activeInput - 1);
       }
+      // Clear the input if it's not valid value because firefox allows
+      // pasting non-numeric characters in a number type input
+      event.target.value = '';
     }
   };
 
@@ -150,8 +159,6 @@ const OTPInput = ({
       event.code === 'ArrowUp' ||
       event.code === 'ArrowDown'
     ) {
-      event.preventDefault();
-    } else if (isInputNum && !isInputValueValid(event.key)) {
       event.preventDefault();
     }
   };
@@ -232,6 +239,8 @@ const OTPInput = ({
               ),
               className: typeof inputStyle === 'string' ? inputStyle : undefined,
               type: inputType,
+              inputMode: isInputNum ? 'numeric' : 'text',
+              onInput: handleInputChange,
             },
             index
           )}
