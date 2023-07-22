@@ -140,7 +140,9 @@ Do not override the following props on the input component that you return from 
 - `onBlur`
 - `onKeyDown`
 - `onPaste`
+- `onInput`
 - `type`
+- `inputMode`
 
 ## Migrating from v2
 

@@ -95,6 +95,7 @@ function App() {
             <option value="text">text</option>
             <option value="number">number</option>
             <option value="password">password</option>
+            <option value="tel">tel</option>
           </select>
         </div>
         <div className="side-bar__segment side-bar__segment--bottom">
