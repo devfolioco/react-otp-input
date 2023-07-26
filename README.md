@@ -129,6 +129,13 @@ export default function App() {
     <td>false</td>
     <td>Auto focuses input on initial page load.</td>
   </tr>
+  <tr>
+    <td>shouldRemoveWhiteSpaceOnPaste</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Removes white spaces from pasted OTP characters.</td>
+  </tr>
 </table>
 
 ### ⚠️ Warning
@@ -151,6 +158,8 @@ The v3 of `react-otp-input` is a complete rewrite of the library. Apart from mak
 - The `separator` prop has now been renamed to `renderSeparator`. This prop now apart from accepting a component that will be rendered as a separator between inputs like it used to, now also accepts a function that returns a component. The function will get the index of the separator being rendered as an argument.
 
 - A new prop called `inputType` has been added to the component. This prop can be used to specify the type of the input that will be passed to the input element being rendered. The default value of this prop is `number`.
+
+- An new prop called `shouldRemoveWhiteSpaceOnPaste` has been added to the component. This prop can be used to disallow spaces as valid OTP characters. This is default set to `false`.
 
 ## Migrating from v1
 
