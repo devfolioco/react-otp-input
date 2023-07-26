@@ -44,7 +44,7 @@ interface OTPInputProps {
   inputStyle?: React.CSSProperties | string;
   /** The type that will be passed to the input being rendered */
   inputType?: AllowedInputTypes;
-  /** Boolean to consider spaces as valid OTP values */
+  /** Boolean to not consider spaces as valid OTP values */
   shouldRemoveWhiteSpaceOnPaste?: boolean;
 }
 
