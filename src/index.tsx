@@ -33,7 +33,7 @@ interface OTPInputProps {
   /** Callback to be called when the OTP value changes */
   onChange: (otp: string) => void;
   /** Callback to be called when pasting content into the component */
-  onPaste?: () => void;
+  onPaste?: (event: ClipboardEvent) => void;
   /** Function to render the input */
   renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
   /** Whether the first input should be auto focused */
