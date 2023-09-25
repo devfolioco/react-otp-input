@@ -32,6 +32,8 @@ interface OTPInputProps {
   numInputs?: number;
   /** Callback to be called when the OTP value changes */
   onChange: (otp: string) => void;
+  /** Callback to be called when pasting content into the component */
+  onPaste?: () => void;
   /** Function to render the input */
   renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
   /** Whether the first input should be auto focused */
@@ -54,6 +56,7 @@ const OTPInput = ({
   value = '',
   numInputs = 4,
   onChange,
+  onPaste,
   renderInput,
   shouldAutoFocus = false,
   inputType = 'text',
@@ -217,6 +220,7 @@ const OTPInput = ({
     <div
       style={Object.assign({ display: 'flex', alignItems: 'center' }, isStyleObject(containerStyle) && containerStyle)}
       className={typeof containerStyle === 'string' ? containerStyle : undefined}
+      onPaste={onPaste}
     >
       {Array.from({ length: numInputs }, (_, index) => index).map((index) => (
         <React.Fragment key={index}>
