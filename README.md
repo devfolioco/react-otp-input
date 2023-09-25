@@ -89,12 +89,10 @@ export default function App() {
     </br></br>
     Example:
     <pre>
-const handlePaste = (event) => {
+const handlePaste: ClipboardEventHandler<HTMLDivElement> = (event) => {
   const data = event.clipboardData.getData('text');
   console.log(data)
 };</pre>
-
-  > Note: The function type for Typescript is: `ClipboardEventHandler<HTMLDivElement>`
 
   </td>
   </tr>
