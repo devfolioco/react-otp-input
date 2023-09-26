@@ -81,6 +81,22 @@ export default function App() {
     <td>Returns OTP code typed in inputs.</td>
   </tr>
   <tr>
+    <td>onPaste</td>
+    <td>function</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Provide a custom onPaste event handler scoped to the OTP inputs container. Executes when content is pasted into any OTP field.
+    </br></br>
+    Example:
+    <pre>
+const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
+  const data = event.clipboardData.getData('text');
+  console.log(data)
+};</pre>
+
+  </td>
+  </tr>
+  <tr>
     <td>value</td>
     <td>string / number</td>
     <td>true</td>
