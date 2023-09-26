@@ -106,6 +106,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "sdomino",
+      "name": "Steve Domino",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28181?v=4",
+      "profile": "https://medium.com/@skdomino",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -114,5 +123,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
