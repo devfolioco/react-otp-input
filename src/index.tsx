@@ -46,6 +46,8 @@ interface OTPInputProps {
   inputStyle?: React.CSSProperties | string;
   /** The type that will be passed to the input being rendered */
   inputType?: AllowedInputTypes;
+  /** Do not apply the default styles to the inputs, will be removed in future versions */
+  skipDefaultStyles?: boolean; // TODO: Remove in next major release
 }
 
 const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
@@ -61,6 +63,7 @@ const OTPInput = ({
   placeholder,
   containerStyle,
   inputStyle,
+  skipDefaultStyles = false,
 }: OTPInputProps) => {
   const [activeInput, setActiveInput] = React.useState(0);
   const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);
@@ -234,8 +237,8 @@ const OTPInput = ({
               maxLength: 1,
               'aria-label': `Please enter OTP character ${index + 1}`,
               style: Object.assign(
-                { width: '1em', textAlign: 'center' } as const,
-                isStyleObject(inputStyle) && inputStyle
+                !skipDefaultStyles ? ({ width: '1em', textAlign: 'center' } as const) : {},
+                isStyleObject(inputStyle) ? inputStyle : {}
               ),
               className: typeof inputStyle === 'string' ? inputStyle : undefined,
               type: inputType,

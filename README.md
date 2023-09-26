@@ -129,6 +129,13 @@ export default function App() {
     <td>false</td>
     <td>Auto focuses input on initial page load.</td>
   </tr>
+  <tr>
+    <td>skipDefaultStyles</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>The component comes with default styles for legacy reasons. Pass <code>true</code> to skip those styles. This prop will be removed in the next major release.</td>
+  </tr>
 </table>
 
 ### ⚠️ Warning
