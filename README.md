@@ -89,7 +89,7 @@ export default function App() {
     </br></br>
     Example:
     <pre>
-const handlePaste: ClipboardEventHandler<HTMLDivElement> = (event) => {
+const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
   const data = event.clipboardData.getData('text');
   console.log(data)
 };</pre>
