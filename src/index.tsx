@@ -103,8 +103,14 @@ const OTPInput = ({
     return isTypeValid && value.trim().length === 1;
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => (index: number) => {
     const { value } = event.target;
+
+    // Auto Fill fix
+    if (index === 0 && value.length === numInputs) {
+      handleOTPChange(value.split(''));
+      return;
+    }
 
     if (isInputValueValid(value)) {
       changeCodeAtFocus(value);
@@ -232,7 +238,7 @@ const OTPInput = ({
               value: getOTPValue()[index] ?? '',
               placeholder: getPlaceholderValue()?.[index] ?? undefined,
               ref: (element) => (inputRefs.current[index] = element),
-              onChange: handleChange,
+              onChange: (event) => handleChange(event)(index),
               onFocus: (event) => handleFocus(event)(index),
               onBlur: handleBlur,
               onKeyDown: handleKeyDown,
