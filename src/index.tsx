@@ -12,7 +12,6 @@ type InputProps = Required<
     | 'onKeyDown'
     | 'onPaste'
     | 'aria-label'
-    | 'maxLength'
     | 'autoComplete'
     | 'style'
     | 'inputMode'
@@ -114,8 +113,21 @@ const OTPInput = ({
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { nativeEvent } = event;
-    if (!isInputValueValid(event.target.value)) {
-      // @ts-expect-error - This was added previosly to handle and edge case
+    const value = event.target.value;
+
+    if (!isInputValueValid(value)) {
+      // Pasting from the native autofill suggestion on a mobile device can pass
+      // the pasted string as one long input to one of the cells. This ensures
+      // that we handle the full input and not just the first character.
+      if (value.length === numInputs) {
+        const hasInvalidInput = value.split('').some((cellInput) => !isInputValueValid(cellInput));
+        if (!hasInvalidInput) {
+          handleOTPChange(value.split(''));
+          focusInput(numInputs - 1);
+        }
+      }
+
+      // @ts-expect-error - This was added previously to handle and edge case
       // for dealing with keyCode "229 Unidentified" on Android. Check if this is
       // still needed.
       if (nativeEvent.data === null && nativeEvent.inputType === 'deleteContentBackward') {
@@ -123,6 +135,7 @@ const OTPInput = ({
         changeCodeAtFocus('');
         focusInput(activeInput - 1);
       }
+
       // Clear the input if it's not valid value because firefox allows
       // pasting non-numeric characters in a number type input
       event.target.value = '';
@@ -238,7 +251,6 @@ const OTPInput = ({
               onKeyDown: handleKeyDown,
               onPaste: handlePaste,
               autoComplete: 'off',
-              maxLength: 1,
               'aria-label': `Please enter OTP character ${index + 1}`,
               style: Object.assign(
                 !skipDefaultStyles ? ({ width: '1em', textAlign: 'center' } as const) : {},
