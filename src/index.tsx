@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-type AllowedInputTypes = 'password' | 'text' | 'number' | 'tel';
+type AllowedInputTypes = "password" | "text" | "number" | "tel";
 
 type InputProps = Required<
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
-    | 'value'
-    | 'onChange'
-    | 'onFocus'
-    | 'onBlur'
-    | 'onKeyDown'
-    | 'onPaste'
-    | 'aria-label'
-    | 'autoComplete'
-    | 'style'
-    | 'inputMode'
-    | 'onInput'
+    | "value"
+    | "onChange"
+    | "onFocus"
+    | "onBlur"
+    | "onKeyDown"
+    | "onPaste"
+    | "aria-label"
+    | "autoComplete"
+    | "style"
+    | "inputMode"
+    | "onInput"
   > & {
     ref: React.RefCallback<HTMLInputElement>;
     placeholder: string | undefined;
@@ -51,68 +51,68 @@ interface OTPInputProps {
   skipDefaultStyles?: boolean; // TODO: Remove in next major release
 }
 
-const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
+const isStyleObject = (obj: unknown) => typeof obj === "object" && obj !== null;
 
 const OTPInput = ({
-  value = '',
+  value = "",
   numInputs = 4,
   onChange,
   onPaste,
   renderInput,
   shouldAutoFocus = false,
-  inputType = 'text',
+  inputType = "text",
   renderSeparator,
   placeholder,
   containerStyle,
   inputStyle,
   skipDefaultStyles = false,
 }: OTPInputProps) => {
-  const [activeInput, setActiveInput] = React.useState(0);
-  const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);
+  const [activeInput, setActiveInput] = useState<number>(0);
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
-  const getOTPValue = () => (value ? value.toString().split('') : []);
+  /** this will return our expected OTP value as Array */
+  const getOTPValue = (): string[] => (value ? value.toString()?.split("") : []);
+  const isInputNum = inputType === "number" || inputType === "tel";
 
-  const isInputNum = inputType === 'number' || inputType === 'tel';
-
-  React.useEffect(() => {
+  useEffect(() => {
     inputRefs.current = inputRefs.current.slice(0, numInputs);
   }, [numInputs]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (shouldAutoFocus) {
       inputRefs.current[0]?.focus();
     }
   }, [shouldAutoFocus]);
 
-  const getPlaceholderValue = () => {
-    if (typeof placeholder === 'string') {
+  /** this method will return us either placeholder or nothing (undefined) */
+  const getPlaceholderValue = (): string | undefined => {
+    if (typeof placeholder === "string") {
       if (placeholder.length === numInputs) {
         return placeholder;
       }
 
       if (placeholder.length > 0) {
-        console.error('Length of the placeholder should be equal to the number of inputs.');
+        console.error("Length of the placeholder should be equal to the number of inputs.");
       }
     }
     return undefined;
   };
 
-  const isInputValueValid = (value: string) => {
-    const isTypeValid = isInputNum ? !isNaN(Number(value)) : typeof value === 'string';
-    return isTypeValid && value.trim().length === 1;
+  const isInputValueValid = (value: string): boolean => {
+    const isTypeValid = isInputNum ? !isNaN(Number(value)) : typeof value === "string";
+    return isTypeValid && value?.trim().length === 1;
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    if (isInputValueValid(value)) {
-      changeCodeAtFocus(value);
+    if (isInputValueValid(event.target.value)) {
+      changeCodeAtFocus(event.target.value);
       focusInput(activeInput + 1);
     }
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { nativeEvent } = event;
+    console.log("native event", nativeEvent);
     const value = event.target.value;
 
     if (!isInputValueValid(value)) {
@@ -120,9 +120,9 @@ const OTPInput = ({
       // the pasted string as one long input to one of the cells. This ensures
       // that we handle the full input and not just the first character.
       if (value.length === numInputs) {
-        const hasInvalidInput = value.split('').some((cellInput) => !isInputValueValid(cellInput));
+        const hasInvalidInput = value?.split("")?.some((cellInput) => !isInputValueValid(cellInput));
         if (!hasInvalidInput) {
-          handleOTPChange(value.split(''));
+          handleOTPChange(value.split(""));
           focusInput(numInputs - 1);
         }
       }
@@ -130,15 +130,15 @@ const OTPInput = ({
       // @ts-expect-error - This was added previously to handle and edge case
       // for dealing with keyCode "229 Unidentified" on Android. Check if this is
       // still needed.
-      if (nativeEvent.data === null && nativeEvent.inputType === 'deleteContentBackward') {
+      if (nativeEvent.data === null && nativeEvent.inputType === "deleteContentBackward") {
         event.preventDefault();
-        changeCodeAtFocus('');
+        changeCodeAtFocus("");
         focusInput(activeInput - 1);
       }
 
       // Clear the input if it's not valid value because firefox allows
       // pasting non-numeric characters in a number type input
-      event.target.value = '';
+      event.target.value = "";
     }
   };
 
@@ -151,19 +151,22 @@ const OTPInput = ({
     setActiveInput(activeInput - 1);
   };
 
+  const keyboardKeyHandle = (event: React.KeyboardEvent<HTMLInputElement>, isDelete: boolean = false) => {
+    if (!isDelete) focusInput(activeInput - 1);
+    event.preventDefault();
+    changeCodeAtFocus("");
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const otp = getOTPValue();
-    if ([event.code, event.key].includes('Backspace')) {
-      event.preventDefault();
-      changeCodeAtFocus('');
-      focusInput(activeInput - 1);
-    } else if (event.code === 'Delete') {
-      event.preventDefault();
-      changeCodeAtFocus('');
-    } else if (event.code === 'ArrowLeft') {
+    if ([event.code, event.key].includes("Backspace")) {
+      keyboardKeyHandle(event, false);
+    } else if (event.code === "Delete") {
+      keyboardKeyHandle(event, true);
+    } else if (event.code === "ArrowLeft") {
       event.preventDefault();
       focusInput(activeInput - 1);
-    } else if (event.code === 'ArrowRight') {
+    } else if (event.code === "ArrowRight") {
       event.preventDefault();
       focusInput(activeInput + 1);
     }
@@ -173,10 +176,10 @@ const OTPInput = ({
       event.preventDefault();
       focusInput(activeInput + 1);
     } else if (
-      event.code === 'Spacebar' ||
-      event.code === 'Space' ||
-      event.code === 'ArrowUp' ||
-      event.code === 'ArrowDown'
+      event.code === "Spacebar" ||
+      event.code === "Space" ||
+      event.code === "ArrowUp" ||
+      event.code === "ArrowDown"
     ) {
       event.preventDefault();
     }
@@ -187,7 +190,8 @@ const OTPInput = ({
 
     if (inputRefs.current[activeInput]) {
       inputRefs.current[activeInput]?.focus();
-      inputRefs.current[activeInput]?.select();
+      /** removed select option based on issue (#427) */
+      // inputRefs.current[activeInput]?.select();
       setActiveInput(activeInput);
     }
   };
@@ -199,7 +203,7 @@ const OTPInput = ({
   };
 
   const handleOTPChange = (otp: Array<string>) => {
-    const otpValue = otp.join('');
+    const otpValue = otp.join("");
     onChange(otpValue);
   };
 
@@ -211,19 +215,17 @@ const OTPInput = ({
 
     // Get pastedData in an array of max size (num of inputs - current position)
     const pastedData = event.clipboardData
-      .getData('text/plain')
+      .getData("text/plain")
       .slice(0, numInputs - activeInput)
-      .split('');
+      .split("");
 
     // Prevent pasting if the clipboard data contains non-numeric values for number inputs
-    if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) {
-      return;
-    }
+    if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) return;
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
       if (pos >= activeInput && pastedData.length > 0) {
-        otp[pos] = pastedData.shift() ?? '';
+        otp[pos] = pastedData.shift() ?? "";
         nextActiveInput++;
       }
     }
@@ -234,15 +236,15 @@ const OTPInput = ({
 
   return (
     <div
-      style={Object.assign({ display: 'flex', alignItems: 'center' }, isStyleObject(containerStyle) && containerStyle)}
-      className={typeof containerStyle === 'string' ? containerStyle : undefined}
+      style={Object.assign({ display: "flex", alignItems: "center" }, isStyleObject(containerStyle) && containerStyle)}
+      className={typeof containerStyle === "string" ? containerStyle : undefined}
       onPaste={onPaste}
     >
       {Array.from({ length: numInputs }, (_, index) => index).map((index) => (
         <React.Fragment key={index}>
           {renderInput(
             {
-              value: getOTPValue()[index] ?? '',
+              value: getOTPValue()[index] ?? "",
               placeholder: getPlaceholderValue()?.[index] ?? undefined,
               ref: (element) => (inputRefs.current[index] = element),
               onChange: handleChange,
@@ -250,20 +252,20 @@ const OTPInput = ({
               onBlur: handleBlur,
               onKeyDown: handleKeyDown,
               onPaste: handlePaste,
-              autoComplete: 'off',
-              'aria-label': `Please enter OTP character ${index + 1}`,
+              autoComplete: "off",
+              "aria-label": `Please enter OTP character ${index + 1}`,
               style: Object.assign(
-                !skipDefaultStyles ? ({ width: '1em', textAlign: 'center' } as const) : {},
+                !skipDefaultStyles ? ({ width: "1em", textAlign: "center" } as const) : {},
                 isStyleObject(inputStyle) ? inputStyle : {}
               ),
-              className: typeof inputStyle === 'string' ? inputStyle : undefined,
+              className: typeof inputStyle === "string" ? inputStyle : undefined,
               type: inputType,
-              inputMode: isInputNum ? 'numeric' : 'text',
+              inputMode: isInputNum ? "numeric" : "text",
               onInput: handleInputChange,
             },
             index
           )}
-          {index < numInputs - 1 && (typeof renderSeparator === 'function' ? renderSeparator(index) : renderSeparator)}
+          {index < numInputs - 1 && (typeof renderSeparator === "function" ? renderSeparator(index) : renderSeparator)}
         </React.Fragment>
       ))}
     </div>
