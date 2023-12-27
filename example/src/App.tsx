@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { TConfig } from './utils'
 import OTPInput from '../../src';
 
 function App() {
-  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = React.useState({
+  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = useState<TConfig>({
     otp: '',
     numInputs: 4,
     separator: '-',
     minLength: 0,
     maxLength: 40,
     placeholder: '',
-    inputType: 'text' as const,
+    inputType: 'text',
   });
 
   const handleOTPChange = (otp: string) => {
@@ -22,11 +23,10 @@ function App() {
   };
 
   const handleNumInputsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let numInputs = event.target.valueAsNumber;
+    let numInputs = Number(event.target.value);
 
     if (numInputs < minLength || numInputs > maxLength) {
       numInputs = 4;
-
       console.error(`Please enter a value between ${minLength} and ${maxLength}`);
     }
 

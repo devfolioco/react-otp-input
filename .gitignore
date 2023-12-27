@@ -1,6 +1,9 @@
 node_modules
 /lib
 /demo
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
 
 # Editor config
 .vscode
