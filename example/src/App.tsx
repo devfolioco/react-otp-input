@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import OTPInput from '../../src';
 
 function App() {
-  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = React.useState({
+  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = useState({
     otp: '',
     numInputs: 4,
     separator: '-',
@@ -17,6 +17,9 @@ function App() {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(event.target.name)
+    console.log(event.target.value)
+    
     const { name, value } = event.target;
     setConfig((prevConfig) => ({ ...prevConfig, [name]: value }));
   };
