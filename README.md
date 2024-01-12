@@ -146,6 +146,13 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
     <td>Auto focuses input on initial page load.</td>
   </tr>
   <tr>
+    <td>lastInputFocused</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Auto focuses the last input element on initial page load. <code>shouldAutoFocus</code> has higher priority if two auto focus props are set.</td>
+  </tr>
+  <tr>
     <td>skipDefaultStyles</td>
     <td>boolean</td>
     <td>false</td>
