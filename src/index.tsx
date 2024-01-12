@@ -37,6 +37,8 @@ interface OTPInputProps {
   renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
   /** Whether the first input should be auto focused */
   shouldAutoFocus?: boolean;
+  /** Whether the last input should be auto focused */
+  lastInputFocused?: boolean;
   /** Placeholder for the inputs */
   placeholder?: string;
   /** Function to render the separator */
@@ -60,6 +62,7 @@ const OTPInput = ({
   onPaste,
   renderInput,
   shouldAutoFocus = false,
+  lastInputFocused = false,
   inputType = 'text',
   renderSeparator,
   placeholder,
@@ -81,8 +84,10 @@ const OTPInput = ({
   React.useEffect(() => {
     if (shouldAutoFocus) {
       inputRefs.current[0]?.focus();
+    } else if (lastInputFocused) {
+      focusInput(numInputs - 1);
     }
-  }, [shouldAutoFocus]);
+  }, [shouldAutoFocus, lastInputFocused]);
 
   const getPlaceholderValue = () => {
     if (typeof placeholder === 'string') {
