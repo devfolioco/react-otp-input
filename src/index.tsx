@@ -29,10 +29,14 @@ interface OTPInputProps {
   value?: string;
   /** Number of OTP inputs to be rendered */
   numInputs?: number;
+  /** Callback to be called when the OTP has received focued */
+  onFocus?: (index: number) => void;
   /** Callback to be called when the OTP value changes */
   onChange: (otp: string) => void;
   /** Callback to be called when pasting content into the component */
   onPaste?: (event: React.ClipboardEvent<HTMLDivElement>) => void;
+  /** Callback to be called when the OTP has lost focus */
+  onBlur?: (index: number) => void;
   /** Function to render the input */
   renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
   /** Whether the first input should be auto focused */
@@ -56,8 +60,10 @@ const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
 const OTPInput = ({
   value = '',
   numInputs = 4,
+  onFocus,
   onChange,
   onPaste,
+  onBlur,
   renderInput,
   shouldAutoFocus = false,
   inputType = 'text',
@@ -145,10 +151,17 @@ const OTPInput = ({
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => (index: number) => {
     setActiveInput(index);
     event.target.select();
+
+    if (!inputRefs.current.includes(event.relatedTarget as HTMLInputElement)) {
+      onFocus?.(index);
+    }
   };
 
-  const handleBlur = () => {
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => (index: number) => {
     setActiveInput(activeInput - 1);
+    if (!inputRefs.current.includes(event.relatedTarget as HTMLInputElement)) {
+      onBlur?.(index);
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -247,7 +260,7 @@ const OTPInput = ({
               ref: (element) => (inputRefs.current[index] = element),
               onChange: handleChange,
               onFocus: (event) => handleFocus(event)(index),
-              onBlur: handleBlur,
+              onBlur: (event) => handleBlur(event)(index),
               onKeyDown: handleKeyDown,
               onPaste: handlePaste,
               autoComplete: 'off',

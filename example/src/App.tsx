@@ -110,7 +110,9 @@ function App() {
               <OTPInput
                 inputStyle="inputStyle"
                 numInputs={numInputs}
+                onFocus={(index) => console.log(`OTP: Input #${index + 1} has gained focus!`)}
                 onChange={handleOTPChange}
+                onBlur={(index) => console.log(`OTP: Input #${index + 1} has lost focus!`)}
                 renderSeparator={<span>{separator}</span>}
                 value={otp}
                 placeholder={placeholder}
