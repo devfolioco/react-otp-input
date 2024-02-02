@@ -10,7 +10,8 @@ A fully customizable, one-time password input component for the web built with R
 ![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
 
 [Live Demo](https://devfolioco.github.io/react-otp-input)
-<!-- 
+
+<!--
 [CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52) -->
 
 ## Installation
@@ -24,6 +25,7 @@ npm install --save react-otp-input
 ```
 
 ### Still using v2?
+
 No problem! You can find the documentation for v2 [here](https://github.com/devfolioco/react-otp-input/tree/v2.4.0)
 
 #### Basic usage:
@@ -74,6 +76,13 @@ export default function App() {
     </td>
   </tr>
   <tr>
+    <td>onFocus</td>
+    <td>function</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Called when OTP has received focus. The <code>index</code> of the input gaining focus is passed as the first argument</td>
+  </tr>
+  <tr>
     <td>onChange</td>
     <td>function</td>
     <td>true</td>
@@ -95,6 +104,13 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
 };</pre>
 
   </td>
+  </tr>
+  <tr>
+    <td>onBlur</td>
+    <td>function</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Called when OTP has lost focus.</td>
   </tr>
   <tr>
     <td>value</td>
@@ -155,7 +171,9 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
 </table>
 
 ### ⚠️ Warning
+
 Do not override the following props on the input component that you return from the `renderInput` prop. Doing so might lead to unexpected behaviour.
+
 - `ref`
 - `value`
 - `onChange`
