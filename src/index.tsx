@@ -53,6 +53,12 @@ interface OTPInputProps {
 
 const isStyleObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
 
+const en = '01234567890123456789'.split('');
+const ar = '٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'.split('');
+const toEnglishNumber = (strNum: string) => {
+  return strNum.replace(/[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹]/g, (x) => en[ar.indexOf(x)]).replace(/\D/g, '');
+};
+
 const OTPInput = ({
   value = '',
   numInputs = 4,
@@ -104,16 +110,17 @@ const OTPInput = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    const translatedValue = isInputNum ? toEnglishNumber(value) : value;
 
-    if (isInputValueValid(value)) {
-      changeCodeAtFocus(value);
+    if (isInputValueValid(translatedValue)) {
+      changeCodeAtFocus(translatedValue);
       focusInput(activeInput + 1);
     }
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { nativeEvent } = event;
-    const value = event.target.value;
+    const value = isInputNum ? toEnglishNumber(event.target.value) : event.target.value;
 
     if (!isInputValueValid(value)) {
       // Pasting from the native autofill suggestion on a mobile device can pass
@@ -210,20 +217,19 @@ const OTPInput = ({
     let nextActiveInput = activeInput;
 
     // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = event.clipboardData
-      .getData('text/plain')
-      .slice(0, numInputs - activeInput)
-      .split('');
+    const pastedData = event.clipboardData.getData('text/plain').slice(0, numInputs - activeInput);
+
+    const pastedDataArray = (isInputNum ? toEnglishNumber(pastedData) : pastedData).split('');
 
     // Prevent pasting if the clipboard data contains non-numeric values for number inputs
-    if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) {
+    if (isInputNum && pastedDataArray.some((value) => isNaN(Number(value)))) {
       return;
     }
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
-      if (pos >= activeInput && pastedData.length > 0) {
-        otp[pos] = pastedData.shift() ?? '';
+      if (pos >= activeInput && pastedDataArray.length > 0) {
+        otp[pos] = pastedDataArray.shift() ?? '';
         nextActiveInput++;
       }
     }
