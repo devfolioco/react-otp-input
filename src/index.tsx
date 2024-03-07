@@ -250,7 +250,7 @@ const OTPInput = ({
               onBlur: handleBlur,
               onKeyDown: handleKeyDown,
               onPaste: handlePaste,
-              autoComplete: 'off',
+              autoComplete: 'one-time-code',
               'aria-label': `Please enter OTP character ${index + 1}`,
               style: Object.assign(
                 !skipDefaultStyles ? ({ width: '1em', textAlign: 'center' } as const) : {},
