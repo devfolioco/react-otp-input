@@ -70,7 +70,7 @@ const OTPInput = ({
   const [activeInput, setActiveInput] = React.useState(0);
   const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);
 
-  const getOTPValue = () => (value ? value.toString().split('') : []);
+  const getOTPValue = () => (value ? value.toString().split('') : Array(numInputs).fill(' '));
 
   const isInputNum = inputType === 'number' || inputType === 'tel';
 
