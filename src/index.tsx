@@ -70,7 +70,8 @@ const OTPInput = ({
   const [activeInput, setActiveInput] = React.useState(0);
   const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);
 
-  const getOTPValue = () => (value ? value.toString().split('') : []);
+  // Save Otp value in a ref to persist it between rerenders to update the value in the current focused input
+  const otpValueRef = React.useRef(value ? value.toString().split('') : Array(numInputs));
 
   const isInputNum = inputType === 'number' || inputType === 'tel';
 
@@ -83,6 +84,11 @@ const OTPInput = ({
       inputRefs.current[0]?.focus();
     }
   }, [shouldAutoFocus]);
+
+  // On each Rerender check if the value is an empty string we reset the otpValueRef value
+  if (value.trim() === '') {
+    otpValueRef.current = Array(numInputs);
+  }
 
   const getPlaceholderValue = () => {
     if (typeof placeholder === 'string') {
@@ -114,16 +120,18 @@ const OTPInput = ({
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { nativeEvent } = event;
     const value = event.target.value;
-
     if (!isInputValueValid(value)) {
       // Pasting from the native autofill suggestion on a mobile device can pass
       // the pasted string as one long input to one of the cells. This ensures
       // that we handle the full input and not just the first character.
-      if (value.length === numInputs) {
-        const hasInvalidInput = value.split('').some((cellInput) => !isInputValueValid(cellInput));
+
+      if (value.length > 1) {
+        const valueArr = value.split('', numInputs);
+        const hasInvalidInput = valueArr.some((cellInput) => !isInputValueValid(cellInput));
         if (!hasInvalidInput) {
-          handleOTPChange(value.split(''));
-          focusInput(numInputs - 1);
+          handleOTPChange(valueArr);
+          focusInput(value.length - 1);
+          otpValueRef.current = valueArr;
         }
       }
 
@@ -152,7 +160,8 @@ const OTPInput = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const otp = getOTPValue();
+    const currentOtpValue = otpValueRef.current;
+
     if ([event.code, event.key].includes('Backspace')) {
       event.preventDefault();
       changeCodeAtFocus('');
@@ -169,7 +178,7 @@ const OTPInput = ({
     }
     // React does not trigger onChange when the same value is entered
     // again. So we need to focus the next input manually in this case.
-    else if (event.key === otp[activeInput]) {
+    else if (event.key === currentOtpValue[activeInput]) {
       event.preventDefault();
       focusInput(activeInput + 1);
     } else if (
@@ -193,9 +202,10 @@ const OTPInput = ({
   };
 
   const changeCodeAtFocus = (value: string) => {
-    const otp = getOTPValue();
-    otp[activeInput] = value[0];
-    handleOTPChange(otp);
+    const currentOtpValue = otpValueRef.current;
+    currentOtpValue[activeInput] = value[0];
+
+    handleOTPChange(currentOtpValue);
   };
 
   const handleOTPChange = (otp: Array<string>) => {
@@ -206,14 +216,11 @@ const OTPInput = ({
   const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    const otp = getOTPValue();
+    const currentOtpValue = otpValueRef.current;
     let nextActiveInput = activeInput;
 
     // Get pastedData in an array of max size (num of inputs - current position)
-    const pastedData = event.clipboardData
-      .getData('text/plain')
-      .slice(0, numInputs - activeInput)
-      .split('');
+    const pastedData = event.clipboardData.getData('text/plain').slice(0, numInputs).split('');
 
     // Prevent pasting if the clipboard data contains non-numeric values for number inputs
     if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) {
@@ -222,14 +229,14 @@ const OTPInput = ({
 
     // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
-      if (pos >= activeInput && pastedData.length > 0) {
-        otp[pos] = pastedData.shift() ?? '';
+      if (pastedData.length > 0) {
+        currentOtpValue[pos] = pastedData.shift() ?? '';
         nextActiveInput++;
       }
     }
 
     focusInput(nextActiveInput);
-    handleOTPChange(otp);
+    handleOTPChange(currentOtpValue);
   };
 
   return (
@@ -242,7 +249,7 @@ const OTPInput = ({
         <React.Fragment key={index}>
           {renderInput(
             {
-              value: getOTPValue()[index] ?? '',
+              value: otpValueRef.current[index] ?? '',
               placeholder: getPlaceholderValue()?.[index] ?? undefined,
               ref: (element) => (inputRefs.current[index] = element),
               onChange: handleChange,
