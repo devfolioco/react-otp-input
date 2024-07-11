@@ -124,10 +124,11 @@ const OTPInput = ({
       // Pasting from the native autofill suggestion on a mobile device can pass
       // the pasted string as one long input to one of the cells. This ensures
       // that we handle the full input and not just the first character.
-      if (value.length === numInputs) {
-        const hasInvalidInput = value.split('').some((cellInput) => !isInputValueValid(cellInput));
+      if (value.length >= numInputs) {
+        const valueArr = value.split('', numInputs);
+        const hasInvalidInput = valueArr.some((cellInput) => !isInputValueValid(cellInput));
         if (!hasInvalidInput) {
-          handleOTPChange(value.split(''));
+          handleOTPChange(valueArr);
           focusInput(numInputs - 1);
           otpValueRef.current = valueArr;
         }
