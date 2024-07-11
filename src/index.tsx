@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 type AllowedInputTypes = 'password' | 'text' | 'number' | 'tel';
 
