@@ -68,6 +68,9 @@ const OTPInput = ({
   skipDefaultStyles = false,
 }: OTPInputProps) => {
   const [activeInput, setActiveInput] = React.useState(0);
+  const latestActiveInput = React.useRef(activeInput);
+  latestActiveInput.current = activeInput;
+
   const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);
 
   const getOTPValue = () => (value ? value.toString().split('') : []);
@@ -195,6 +198,11 @@ const OTPInput = ({
   const changeCodeAtFocus = (value: string) => {
     const otp = getOTPValue();
     otp[activeInput] = value[0];
+    const lastValueIndex = otp.join('').length - 1;
+    if (lastValueIndex < activeInput) {
+      setActiveInput(lastValueIndex);
+      latestActiveInput.current = lastValueIndex;
+    }
     handleOTPChange(otp);
   };
 
