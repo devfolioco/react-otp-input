@@ -2,7 +2,9 @@ import React from 'react';
 import OTPInput from '../../src';
 
 function App() {
-  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = React.useState({
+  const [{
+    otp, numInputs, separator, minLength, maxLength, placeholder, inputType, inputColor, companyName, logoFile
+  }, setConfig] = React.useState({
     otp: '',
     numInputs: 4,
     separator: '-',
@@ -10,6 +12,9 @@ function App() {
     maxLength: 40,
     placeholder: '',
     inputType: 'text' as const,
+    inputColor: '#ffffff', // Default color for the OTP input container
+    companyName: '', // New state for Company Name
+    logoFile: null // New state for Logo file
   });
 
   const handleOTPChange = (otp: string) => {
@@ -21,12 +26,16 @@ function App() {
     setConfig((prevConfig) => ({ ...prevConfig, [name]: value }));
   };
 
+  const handleLogoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files[0];
+    setConfig((prevConfig) => ({ ...prevConfig, logoFile: file }));
+  };
+
   const handleNumInputsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let numInputs = event.target.valueAsNumber;
 
     if (numInputs < minLength || numInputs > maxLength) {
       numInputs = 4;
-
       console.error(`Please enter a value between ${minLength} and ${maxLength}`);
     }
 
@@ -79,8 +88,7 @@ function App() {
         </div>
         <div className="side-bar__segment">
           <label htmlFor="value">
-            value
-            <input id="value" maxLength={numInputs} name="otp" type="text" value={otp} onChange={handleChange} />
+            <input id="value" placeholder='Your OTP Value' maxLength={numInputs} name="otp" type="text" value={otp} onChange={handleChange} />
           </label>
         </div>
         <div className="side-bar__segment">
@@ -98,17 +106,63 @@ function App() {
             <option value="tel">tel</option>
           </select>
         </div>
+        <div className="side-bar__segment">
+          <label htmlFor="inputColor">
+            Color
+            <input id="inputColor" name="inputColor" type="color" value={inputColor} onChange={handleChange} />
+          </label>
+        </div>
+        {/* Add Company Name Input */}
+        <div className="side-bar__segment">
+          <label htmlFor="companyName">
+            Company Name
+            <input id="companyName" name="companyName" type="text" value={companyName} onChange={handleChange} />
+          </label>
+        </div>
+        {/* Add Logo Input */}
+        <div className="side-bar__segment">
+          <label htmlFor="logoFile">
+            Logo
+            <input id="logoFile" name="logoFile" type="file" accept="image/*" onChange={handleLogoChange} />
+          </label>
+          {/* Display message if logo is uploaded */}
+          {logoFile && (
+            <p style={{ fontSize: '12px', color: '#555', marginTop: '5px' }}>
+              Logo uploaded
+            </p>
+          )}
+        </div>
         <div className="side-bar__segment side-bar__segment--bottom">
           <a href="https://github.com/devfolioco/react-otp-input">Documentation and Source</a>
         </div>
       </div>
       <div className="view">
-        <div className="card">
+        <div className="card" style={{ backgroundColor: inputColor, width: '400px', height: 'auto', padding: '20px', position: 'relative' }}>
           <form onSubmit={handleSubmit}>
+            {/* Display the Logo if uploaded */}
+            {logoFile && (
+              <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+                <img
+                  src={URL.createObjectURL(logoFile)}
+                  alt="Logo"
+                  style={{ width: '50px' }}
+                />
+              </div>
+            )}
+            {/* Display the Company Name if entered */}
+            {companyName && <h3 style={{ textAlign: 'center' }}>{companyName}</h3>}
+            
             <p>Enter verification code</p>
             <div className="margin-top--small">
               <OTPInput
-                inputStyle="inputStyle"
+                inputStyle={{
+                  width: '50px',
+                  height: '50px',
+                  border: '1px solid #000',
+                  borderRadius: '5px',
+                  textAlign: 'center',
+                  margin: '0 5px',
+                }}
                 numInputs={numInputs}
                 onChange={handleOTPChange}
                 renderSeparator={<span>{separator}</span>}
