@@ -1,4 +1,4 @@
-# react-otp-input
+# react-otp-input -- OTP Wow its an amazing project you can enjoy it
 
 [![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input) [![npm](https://img.shields.io/bundlephobia/minzip/react-otp-input)](https://www.npmjs.com/package/react-otp-input)
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
