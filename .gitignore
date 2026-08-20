@@ -3,7 +3,6 @@ node_modules
 /demo
 
 # Editor config
-.vscode
 
 
 # docz
@@ -12,3 +11,7 @@ node_modules
 .nyc_output
 coverage
 *.lcov
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+branch_structure.json
