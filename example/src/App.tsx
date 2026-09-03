@@ -2,7 +2,7 @@ import React from 'react';
 import OTPInput from '../../src';
 
 function App() {
-  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = React.useState({
+  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType, overrideInputMode }, setConfig] = React.useState({
     otp: '',
     numInputs: 4,
     separator: '-',
@@ -10,6 +10,7 @@ function App() {
     maxLength: 40,
     placeholder: '',
     inputType: 'text' as const,
+    overrideInputMode: 'numeric' as const,
   });
 
   const handleOTPChange = (otp: string) => {
@@ -98,6 +99,14 @@ function App() {
             <option value="tel">tel</option>
           </select>
         </div>
+        <div className="side-bar__segment">
+          <label htmlFor="overrideInputMode">overrideInputMode</label>
+          <select id="overrideInputMode" name="overrideInputMode" value={overrideInputMode} onChange={handleChange}>
+            <option value="numeric">numeric (default — shows number pad on mobile)</option>
+            <option value="text">text — avoids screenreader stepper announcement</option>
+            <option value="none">none — disables inputMode attribute</option>
+          </select>
+        </div>
         <div className="side-bar__segment side-bar__segment--bottom">
           <a href="https://github.com/devfolioco/react-otp-input">Documentation and Source</a>
         </div>
@@ -115,6 +124,7 @@ function App() {
                 value={otp}
                 placeholder={placeholder}
                 inputType={inputType}
+                overrideInputMode={overrideInputMode}
                 renderInput={(props) => <input {...props} />}
                 shouldAutoFocus
               />

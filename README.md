@@ -139,6 +139,13 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
     <td>The type of the input that will be passed to the input element being rendered. In v2 <code>isInputNum</code> used to set the input type as <code>tel</code> and prevented non numerical entries, so as to avoid the spin buttons added to the inputs with input type <code>number</code>. That behaviour is still supported if you pass <code>tel</code> to the inputType prop.</td>
   </tr>
   <tr>
+    <td>overrideInputMode</td>
+    <td>string</td>
+    <td>false</td>
+    <td>input-type-driven</td>
+    <td>Override the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">inputMode</a> attribute applied to each input. When <code>inputType</code> is <code>number</code> or <code>tel</code>, the default <code>inputMode</code> is <code>numeric</code>, which causes screenreaders to announce the field as "stepper" or "telephone". Pass <code>text</code> to avoid this, or <code>none</code> to omit the attribute entirely. Accepts: <code>numeric</code>, <code>text</code>, <code>none</code>, <code>tel</code>, <code>email</code>, <code>url</code>, <code>decimal</code>, <code>search</code>.</td>
+  </tr>
+  <tr>
     <td>shouldAutoFocus</td>
     <td>boolean</td>
     <td>false</td>
@@ -165,7 +172,7 @@ Do not override the following props on the input component that you return from 
 - `onPaste`
 - `onInput`
 - `type`
-- `inputMode`
+- `inputMode` (use the `overrideInputMode` prop instead)
 
 ## Migrating from v2
 

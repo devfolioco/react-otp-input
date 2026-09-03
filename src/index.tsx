@@ -24,6 +24,8 @@ type InputProps = Required<
   }
 >;
 
+type AllowedInputMode = 'none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 'decimal' | 'search';
+
 interface OTPInputProps {
   /** Value of the OTP input */
   value?: string;
@@ -47,6 +49,13 @@ interface OTPInputProps {
   inputStyle?: React.CSSProperties | string;
   /** The type that will be passed to the input being rendered */
   inputType?: AllowedInputTypes;
+  /**
+   * Override the inputMode attribute applied to each input.
+   * When inputType is 'number' or 'tel', the default inputMode is 'numeric',
+   * which causes screenreaders to announce the field as "stepper" or "telephone".
+   * Set this to 'text' to avoid that, or to 'none' to disable the attribute entirely.
+   */
+  overrideInputMode?: AllowedInputMode;
   /** Do not apply the default styles to the inputs, will be removed in future versions */
   skipDefaultStyles?: boolean; // TODO: Remove in next major release
 }
@@ -65,6 +74,7 @@ const OTPInput = ({
   placeholder,
   containerStyle,
   inputStyle,
+  overrideInputMode,
   skipDefaultStyles = false,
 }: OTPInputProps) => {
   const [activeInput, setActiveInput] = React.useState(0);
@@ -258,7 +268,7 @@ const OTPInput = ({
               ),
               className: typeof inputStyle === 'string' ? inputStyle : undefined,
               type: inputType,
-              inputMode: isInputNum ? 'numeric' : 'text',
+              inputMode: overrideInputMode ?? (isInputNum ? 'numeric' : 'text'),
               onInput: handleInputChange,
             },
             index
@@ -270,5 +280,5 @@ const OTPInput = ({
   );
 };
 
-export type { OTPInputProps, InputProps, AllowedInputTypes };
+export type { OTPInputProps, InputProps, AllowedInputTypes, AllowedInputMode };
 export default OTPInput;
