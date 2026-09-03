@@ -6,7 +6,8 @@ type AllowedInputMode = 'none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 
 
 // Widened inputMode: allows undefined so the 'none'→undefined mapping in renderInput is type-safe.
 // Consumers who always pass inputMode (as the existing contract requires) are unaffected.
-export type InputProps = Required<
+// inputMode is optional — the library may omit the attribute when overrideInputMode is 'none'.
+type InputProps = Required<
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
     | 'value'
@@ -25,8 +26,7 @@ export type InputProps = Required<
   placeholder: string | undefined;
   className: string | undefined;
   type: AllowedInputTypes;
-  // inputMode is required from the consumer side but this library maps 'none'→undefined internally.
-  inputMode: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
+  inputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
 };
 
 interface OTPInputProps {
@@ -289,5 +289,5 @@ const OTPInput = ({
   );
 };
 
-export type { OTPInputProps, AllowedInputTypes, AllowedInputMode };
+export type { OTPInputProps, InputProps, AllowedInputTypes, AllowedInputMode };
 export default OTPInput;

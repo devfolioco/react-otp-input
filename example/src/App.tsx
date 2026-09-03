@@ -1,5 +1,6 @@
 import React from 'react';
-import OTPInput, { AllowedInputMode } from '../../src';
+import OTPInput from '../../src';
+import type { AllowedInputMode } from '../../src';
 
 interface PlaygroundConfig {
   otp: string;
@@ -31,7 +32,12 @@ function App() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target as HTMLInputElement | HTMLSelectElement;
-    setConfig((prevConfig) => ({ ...prevConfig, [name as keyof PlaygroundConfig]: value }));
+    setConfig((prevConfig) => {
+      if (name === 'numInputs') {
+        return { ...prevConfig, numInputs: Number(value) };
+      }
+      return { ...prevConfig, [name as keyof PlaygroundConfig]: value };
+    });
   };
 
   const handleNumInputsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
