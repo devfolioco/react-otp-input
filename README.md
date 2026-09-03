@@ -139,6 +139,13 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
     <td>The type of the input that will be passed to the input element being rendered. In v2 <code>isInputNum</code> used to set the input type as <code>tel</code> and prevented non numerical entries, so as to avoid the spin buttons added to the inputs with input type <code>number</code>. That behaviour is still supported if you pass <code>tel</code> to the inputType prop.</td>
   </tr>
   <tr>
+    <td>overrideInputMode</td>
+    <td><code>"none"</code> | <code>"text"</code> | <code>"numeric"</code> | <code>"tel"</code> | <code>"email"</code> | <code>"url"</code> | <code>"decimal"</code> | <code>"search"</code></td>
+    <td>false</td>
+    <td>derived from <code>inputType</code> (<code>"numeric"</code> for <code>"number"</code>/<code>"tel"</code>, otherwise <code>"text"</code>; pass <code>"none"</code> to omit the attribute)</td>
+    <td>Override the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">inputMode</a> attribute applied to each input. When <code>inputType</code> is <code>number</code> or <code>tel</code>, the default <code>inputMode</code> is <code>numeric</code>, which causes screenreaders to announce the field as "stepper" or "telephone". Pass <code>"text"</code> to avoid this while keeping numeric validation, or <code>"none"</code> to omit the attribute entirely (note: <code>"none"</code> intentionally omits the attribute rather than setting <code>inputMode="none"</code> — React renders <code>inputMode="none"</code> as a text input on some browsers, which is not the intended behaviour). Omit this prop to use the input-type-driven default.</td>
+  </tr>
+  <tr>
     <td>shouldAutoFocus</td>
     <td>boolean</td>
     <td>false</td>
@@ -165,7 +172,20 @@ Do not override the following props on the input component that you return from 
 - `onPaste`
 - `onInput`
 - `type`
-- `inputMode`
+- `inputMode` (use the `overrideInputMode` prop instead)
+
+**Example — avoid screenreader "stepper" announcement while keeping numeric input:**
+
+```tsx
+<OTPInput
+  value={otp}
+  onChange={setOtp}
+  numInputs={4}
+  inputType="number"
+  overrideInputMode="text"
+  renderInput={(props) => <input {...props} />}
+/>
+```
 
 ## Migrating from v2
 

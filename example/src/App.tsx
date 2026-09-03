@@ -1,24 +1,43 @@
 import React from 'react';
 import OTPInput from '../../src';
+import type { AllowedInputMode } from '../../src';
+
+interface PlaygroundConfig {
+  otp: string;
+  numInputs: number;
+  separator: string;
+  minLength: number;
+  maxLength: number;
+  placeholder: string;
+  inputType: 'text' | 'number' | 'password' | 'tel';
+  overrideInputMode: AllowedInputMode | undefined;
+}
 
 function App() {
-  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType }, setConfig] = React.useState({
-    otp: '',
-    numInputs: 4,
-    separator: '-',
-    minLength: 0,
-    maxLength: 40,
-    placeholder: '',
-    inputType: 'text' as const,
-  });
+  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType, overrideInputMode }, setConfig] =
+    React.useState<PlaygroundConfig>({
+      otp: '',
+      numInputs: 4,
+      separator: '-',
+      minLength: 0,
+      maxLength: 40,
+      placeholder: '',
+      inputType: 'text',
+      overrideInputMode: undefined,
+    });
 
   const handleOTPChange = (otp: string) => {
     setConfig((prevConfig) => ({ ...prevConfig, otp }));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    setConfig((prevConfig) => ({ ...prevConfig, [name]: value }));
+    const { name, value } = event.target as HTMLInputElement | HTMLSelectElement;
+    setConfig((prevConfig) => {
+      if (name === 'numInputs') {
+        return { ...prevConfig, numInputs: Number(value) };
+      }
+      return { ...prevConfig, [name as keyof PlaygroundConfig]: value };
+    });
   };
 
   const handleNumInputsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,6 +117,31 @@ function App() {
             <option value="tel">tel</option>
           </select>
         </div>
+        <div className="side-bar__segment">
+          <label htmlFor="overrideInputMode">overrideInputMode</label>
+          <select
+            id="overrideInputMode"
+            name="overrideInputMode"
+            value={overrideInputMode ?? ''}
+            onChange={(e) => {
+              const val = e.target.value;
+              setConfig((prev) => ({
+                ...prev,
+                overrideInputMode: val === '' ? undefined : (val as AllowedInputMode),
+              }));
+            }}
+          >
+            <option value="">auto (input-type-driven — recommended)</option>
+            <option value="text">text — avoids screenreader stepper announcement</option>
+            <option value="numeric">numeric — shows number pad on mobile</option>
+            <option value="none">none — omits the attribute entirely</option>
+            <option value="tel">tel</option>
+            <option value="email">email</option>
+            <option value="url">url</option>
+            <option value="decimal">decimal</option>
+            <option value="search">search</option>
+          </select>
+        </div>
         <div className="side-bar__segment side-bar__segment--bottom">
           <a href="https://github.com/devfolioco/react-otp-input">Documentation and Source</a>
         </div>
@@ -115,6 +159,7 @@ function App() {
                 value={otp}
                 placeholder={placeholder}
                 inputType={inputType}
+                overrideInputMode={overrideInputMode}
                 renderInput={(props) => <input {...props} />}
                 shouldAutoFocus
               />

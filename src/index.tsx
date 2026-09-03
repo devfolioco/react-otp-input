@@ -2,6 +2,11 @@ import React from 'react';
 
 type AllowedInputTypes = 'password' | 'text' | 'number' | 'tel';
 
+type AllowedInputMode = 'none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 'decimal' | 'search';
+
+// Widened inputMode: allows undefined so the 'none'→undefined mapping in renderInput is type-safe.
+// Consumers who always pass inputMode (as the existing contract requires) are unaffected.
+// inputMode is optional — the library may omit the attribute when overrideInputMode is 'none'.
 type InputProps = Required<
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -14,15 +19,15 @@ type InputProps = Required<
     | 'aria-label'
     | 'autoComplete'
     | 'style'
-    | 'inputMode'
     | 'onInput'
-  > & {
-    ref: React.RefCallback<HTMLInputElement>;
-    placeholder: string | undefined;
-    className: string | undefined;
-    type: AllowedInputTypes;
-  }
->;
+  >
+> & {
+  ref: React.RefCallback<HTMLInputElement>;
+  placeholder: string | undefined;
+  className: string | undefined;
+  type: AllowedInputTypes;
+  inputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
+};
 
 interface OTPInputProps {
   /** Value of the OTP input */
@@ -47,6 +52,18 @@ interface OTPInputProps {
   inputStyle?: React.CSSProperties | string;
   /** The type that will be passed to the input being rendered */
   inputType?: AllowedInputTypes;
+  /**
+   * Override the inputMode attribute applied to each input.
+   * Accepts the same values as the HTML inputMode attribute
+   * ('none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 'decimal' | 'search').
+   *
+   * When inputType is 'number' or 'tel', the default inputMode is 'numeric',
+   * which causes screenreaders to announce the field as "stepper" or "telephone".
+   * Set this to 'text' to avoid that, or to 'none' to omit the attribute entirely.
+   *
+   * Omit or pass undefined to use the input-type-driven default.
+   */
+  overrideInputMode?: AllowedInputMode;
   /** Do not apply the default styles to the inputs, will be removed in future versions */
   skipDefaultStyles?: boolean; // TODO: Remove in next major release
 }
@@ -65,6 +82,7 @@ const OTPInput = ({
   placeholder,
   containerStyle,
   inputStyle,
+  overrideInputMode,
   skipDefaultStyles = false,
 }: OTPInputProps) => {
   const [activeInput, setActiveInput] = React.useState(0);
@@ -258,7 +276,8 @@ const OTPInput = ({
               ),
               className: typeof inputStyle === 'string' ? inputStyle : undefined,
               type: inputType,
-              inputMode: isInputNum ? 'numeric' : 'text',
+              inputMode:
+                overrideInputMode === 'none' ? undefined : overrideInputMode ?? (isInputNum ? 'numeric' : 'text'),
               onInput: handleInputChange,
             },
             index
@@ -270,5 +289,5 @@ const OTPInput = ({
   );
 };
 
-export type { OTPInputProps, InputProps, AllowedInputTypes };
+export type { OTPInputProps, InputProps, AllowedInputTypes, AllowedInputMode };
 export default OTPInput;
