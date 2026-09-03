@@ -143,7 +143,7 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
     <td><code>"none"</code> | <code>"text"</code> | <code>"numeric"</code> | <code>"tel"</code> | <code>"email"</code> | <code>"url"</code> | <code>"decimal"</code> | <code>"search"</code></td>
     <td>false</td>
     <td>input-type-driven</td>
-    <td>Override the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">inputMode</a> attribute applied to each input. When <code>inputType</code> is <code>number</code> or <code>tel</code>, the default <code>inputMode</code> is <code>numeric</code>, which causes screenreaders to announce the field as "stepper" or "telephone". Pass <code>"text"</code> to avoid this while keeping numeric validation, or <code>"none"</code> to omit the attribute entirely. Omit this prop to use the input-type-driven default.</td>
+    <td>Override the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">inputMode</a> attribute applied to each input. When <code>inputType</code> is <code>number</code> or <code>tel</code>, the default <code>inputMode</code> is <code>numeric</code>, which causes screenreaders to announce the field as "stepper" or "telephone". Pass <code>"text"</code> to avoid this while keeping numeric validation, or <code>"none"</code> to omit the attribute entirely (note: <code>"none"</code> intentionally omits the attribute rather than setting <code>inputMode="none"</code> — React renders <code>inputMode="none"</code> as a text input on some browsers, which is not the intended behaviour). Omit this prop to use the input-type-driven default.</td>
   </tr>
   <tr>
     <td>shouldAutoFocus</td>

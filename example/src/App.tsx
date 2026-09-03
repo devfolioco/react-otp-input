@@ -30,8 +30,8 @@ function App() {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    setConfig((prevConfig) => ({ ...prevConfig, [name]: value }));
+    const { name, value } = event.target as HTMLInputElement | HTMLSelectElement;
+    setConfig((prevConfig) => ({ ...prevConfig, [name as keyof PlaygroundConfig]: value }));
   };
 
   const handleNumInputsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,9 +126,14 @@ function App() {
             }}
           >
             <option value="">auto (input-type-driven — recommended)</option>
-            <option value="numeric">numeric — shows number pad on mobile</option>
             <option value="text">text — avoids screenreader stepper announcement</option>
-            <option value="none">none — disables inputMode attribute</option>
+            <option value="numeric">numeric — shows number pad on mobile</option>
+            <option value="none">none — omits the attribute entirely</option>
+            <option value="tel">tel</option>
+            <option value="email">email</option>
+            <option value="url">url</option>
+            <option value="decimal">decimal</option>
+            <option value="search">search</option>
           </select>
         </div>
         <div className="side-bar__segment side-bar__segment--bottom">
