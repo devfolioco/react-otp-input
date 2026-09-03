@@ -2,27 +2,32 @@ import React from 'react';
 
 type AllowedInputTypes = 'password' | 'text' | 'number' | 'tel';
 
-type InputModeValue = 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search' | undefined;
+type AllowedInputMode = 'none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 'decimal' | 'search';
 
-type InputProps = {
-  value: React.InputHTMLAttributes<HTMLInputElement>['value'];
-  onChange: React.InputHTMLAttributes<HTMLInputElement>['onChange'];
-  onFocus: React.InputHTMLAttributes<HTMLInputElement>['onFocus'];
-  onBlur: React.InputHTMLAttributes<HTMLInputElement>['onBlur'];
-  onKeyDown: React.InputHTMLAttributes<HTMLInputElement>['onKeyDown'];
-  onPaste: React.InputHTMLAttributes<HTMLInputElement>['onPaste'];
-  'aria-label': React.InputHTMLAttributes<HTMLInputElement>['aria-label'];
-  autoComplete: React.InputHTMLAttributes<HTMLInputElement>['autoComplete'];
-  style: React.InputHTMLAttributes<HTMLInputElement>['style'];
-  onInput: React.InputHTMLAttributes<HTMLInputElement>['onInput'];
+// Widened inputMode: allows undefined so the 'none'→undefined mapping in renderInput is type-safe.
+// Consumers who always pass inputMode (as the existing contract requires) are unaffected.
+export type InputProps = Required<
+  Pick<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    | 'value'
+    | 'onChange'
+    | 'onFocus'
+    | 'onBlur'
+    | 'onKeyDown'
+    | 'onPaste'
+    | 'aria-label'
+    | 'autoComplete'
+    | 'style'
+    | 'onInput'
+  >
+> & {
   ref: React.RefCallback<HTMLInputElement>;
   placeholder: string | undefined;
   className: string | undefined;
   type: AllowedInputTypes;
-  inputMode: InputModeValue;
+  // inputMode is required from the consumer side but this library maps 'none'→undefined internally.
+  inputMode: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
 };
-
-type AllowedInputMode = 'none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 'decimal' | 'search';
 
 interface OTPInputProps {
   /** Value of the OTP input */
@@ -49,9 +54,14 @@ interface OTPInputProps {
   inputType?: AllowedInputTypes;
   /**
    * Override the inputMode attribute applied to each input.
+   * Accepts the same values as the HTML inputMode attribute
+   * ('none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 'decimal' | 'search').
+   *
    * When inputType is 'number' or 'tel', the default inputMode is 'numeric',
    * which causes screenreaders to announce the field as "stepper" or "telephone".
-   * Set this to 'text' to avoid that, or to 'none' to disable the attribute entirely.
+   * Set this to 'text' to avoid that, or to 'none' to omit the attribute entirely.
+   *
+   * Omit or pass undefined to use the input-type-driven default.
    */
   overrideInputMode?: AllowedInputMode;
   /** Do not apply the default styles to the inputs, will be removed in future versions */
@@ -279,5 +289,5 @@ const OTPInput = ({
   );
 };
 
-export type { OTPInputProps, InputProps, AllowedInputTypes, AllowedInputMode };
+export type { OTPInputProps, AllowedInputTypes, AllowedInputMode };
 export default OTPInput;

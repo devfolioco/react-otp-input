@@ -140,10 +140,10 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
   </tr>
   <tr>
     <td>overrideInputMode</td>
-    <td>string</td>
+    <td><code>"none"</code> | <code>"text"</code> | <code>"numeric"</code> | <code>"tel"</code> | <code>"email"</code> | <code>"url"</code> | <code>"decimal"</code> | <code>"search"</code></td>
     <td>false</td>
     <td>input-type-driven</td>
-    <td>Override the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">inputMode</a> attribute applied to each input. When <code>inputType</code> is <code>number</code> or <code>tel</code>, the default <code>inputMode</code> is <code>numeric</code>, which causes screenreaders to announce the field as "stepper" or "telephone". Pass <code>text</code> to avoid this, or <code>none</code> to omit the attribute entirely. Accepts: <code>numeric</code>, <code>text</code>, <code>none</code>, <code>tel</code>, <code>email</code>, <code>url</code>, <code>decimal</code>, <code>search</code>.</td>
+    <td>Override the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">inputMode</a> attribute applied to each input. When <code>inputType</code> is <code>number</code> or <code>tel</code>, the default <code>inputMode</code> is <code>numeric</code>, which causes screenreaders to announce the field as "stepper" or "telephone". Pass <code>"text"</code> to avoid this while keeping numeric validation, or <code>"none"</code> to omit the attribute entirely. Omit this prop to use the input-type-driven default.</td>
   </tr>
   <tr>
     <td>shouldAutoFocus</td>
@@ -173,6 +173,19 @@ Do not override the following props on the input component that you return from 
 - `onInput`
 - `type`
 - `inputMode` (use the `overrideInputMode` prop instead)
+
+**Example — avoid screenreader "stepper" announcement while keeping numeric input:**
+
+```tsx
+<OTPInput
+  value={otp}
+  onChange={setOtp}
+  numInputs={4}
+  inputType="number"
+  overrideInputMode="text"
+  renderInput={(props) => <input {...props} />}
+/>
+```
 
 ## Migrating from v2
 

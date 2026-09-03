@@ -1,17 +1,29 @@
 import React from 'react';
-import OTPInput from '../../src';
+import OTPInput, { AllowedInputMode } from '../../src';
+
+interface PlaygroundConfig {
+  otp: string;
+  numInputs: number;
+  separator: string;
+  minLength: number;
+  maxLength: number;
+  placeholder: string;
+  inputType: 'text' | 'number' | 'password' | 'tel';
+  overrideInputMode: AllowedInputMode | undefined;
+}
 
 function App() {
-  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType, overrideInputMode }, setConfig] = React.useState({
-    otp: '',
-    numInputs: 4,
-    separator: '-',
-    minLength: 0,
-    maxLength: 40,
-    placeholder: '',
-    inputType: 'text' as const,
-    overrideInputMode: undefined as unknown as string,
-  });
+  const [{ otp, numInputs, separator, minLength, maxLength, placeholder, inputType, overrideInputMode }, setConfig] =
+    React.useState<PlaygroundConfig>({
+      otp: '',
+      numInputs: 4,
+      separator: '-',
+      minLength: 0,
+      maxLength: 40,
+      placeholder: '',
+      inputType: 'text',
+      overrideInputMode: undefined,
+    });
 
   const handleOTPChange = (otp: string) => {
     setConfig((prevConfig) => ({ ...prevConfig, otp }));
@@ -101,8 +113,20 @@ function App() {
         </div>
         <div className="side-bar__segment">
           <label htmlFor="overrideInputMode">overrideInputMode</label>
-          <select id="overrideInputMode" name="overrideInputMode" value={overrideInputMode} onChange={handleChange}>
-            <option value="numeric">numeric (default — shows number pad on mobile)</option>
+          <select
+            id="overrideInputMode"
+            name="overrideInputMode"
+            value={overrideInputMode ?? ''}
+            onChange={(e) => {
+              const val = e.target.value;
+              setConfig((prev) => ({
+                ...prev,
+                overrideInputMode: val === '' ? undefined : (val as AllowedInputMode),
+              }));
+            }}
+          >
+            <option value="">auto (input-type-driven — recommended)</option>
+            <option value="numeric">numeric — shows number pad on mobile</option>
             <option value="text">text — avoids screenreader stepper announcement</option>
             <option value="none">none — disables inputMode attribute</option>
           </select>
