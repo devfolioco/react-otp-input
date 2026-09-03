@@ -2,27 +2,25 @@ import React from 'react';
 
 type AllowedInputTypes = 'password' | 'text' | 'number' | 'tel';
 
-type InputProps = Required<
-  Pick<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    | 'value'
-    | 'onChange'
-    | 'onFocus'
-    | 'onBlur'
-    | 'onKeyDown'
-    | 'onPaste'
-    | 'aria-label'
-    | 'autoComplete'
-    | 'style'
-    | 'inputMode'
-    | 'onInput'
-  > & {
-    ref: React.RefCallback<HTMLInputElement>;
-    placeholder: string | undefined;
-    className: string | undefined;
-    type: AllowedInputTypes;
-  }
->;
+type InputModeValue = 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search' | undefined;
+
+type InputProps = {
+  value: React.InputHTMLAttributes<HTMLInputElement>['value'];
+  onChange: React.InputHTMLAttributes<HTMLInputElement>['onChange'];
+  onFocus: React.InputHTMLAttributes<HTMLInputElement>['onFocus'];
+  onBlur: React.InputHTMLAttributes<HTMLInputElement>['onBlur'];
+  onKeyDown: React.InputHTMLAttributes<HTMLInputElement>['onKeyDown'];
+  onPaste: React.InputHTMLAttributes<HTMLInputElement>['onPaste'];
+  'aria-label': React.InputHTMLAttributes<HTMLInputElement>['aria-label'];
+  autoComplete: React.InputHTMLAttributes<HTMLInputElement>['autoComplete'];
+  style: React.InputHTMLAttributes<HTMLInputElement>['style'];
+  onInput: React.InputHTMLAttributes<HTMLInputElement>['onInput'];
+  ref: React.RefCallback<HTMLInputElement>;
+  placeholder: string | undefined;
+  className: string | undefined;
+  type: AllowedInputTypes;
+  inputMode: InputModeValue;
+};
 
 type AllowedInputMode = 'none' | 'text' | 'numeric' | 'tel' | 'email' | 'url' | 'decimal' | 'search';
 
@@ -268,7 +266,8 @@ const OTPInput = ({
               ),
               className: typeof inputStyle === 'string' ? inputStyle : undefined,
               type: inputType,
-              inputMode: overrideInputMode ?? (isInputNum ? 'numeric' : 'text'),
+              inputMode:
+                overrideInputMode === 'none' ? undefined : overrideInputMode ?? (isInputNum ? 'numeric' : 'text'),
               onInput: handleInputChange,
             },
             index
